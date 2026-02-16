@@ -603,17 +603,6 @@
             </div>
         </div>
 
-        <!-- Admin Tab -->
-        <div id="admin-tab" class="tab-content">
-            <div class="form-section">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                    <h2 style="margin: 0;">Booking Requests</h2>
-                    <button class="btn btn-secondary" onclick="backToBooking()">← Back to Booking Form</button>
-                </div>
-                <div id="bookingsList" class="bookings-list"></div>
-                <button class="btn btn-secondary export-btn" onclick="exportToCSV()">📥 Export to CSV</button>
-            </div>
-        </div>
     </div>
 
     <!-- Success Modal -->
@@ -628,27 +617,16 @@
 
     <script>
         let selectedPackage = '';
-        let adminUnlocked = false;
 
         function accessAdmin() {
-            if (!adminUnlocked) {
-                const password = prompt('Enter admin password:');
-                if (password !== 'JBR2026') {
-                    alert('Incorrect password');
-                    return;
-                }
-                adminUnlocked = true;
+            const password = prompt('Enter admin password:');
+            if (password !== 'JBR2026') {
+                alert('Incorrect password');
+                return;
             }
             
-            // Hide booking form, show admin panel
-            document.getElementById('booking-tab').classList.remove('active');
-            document.getElementById('admin-tab').classList.add('active');
-            loadBookings();
-        }
-
-        function backToBooking() {
-            document.getElementById('booking-tab').classList.add('active');
-            document.getElementById('admin-tab').classList.remove('active');
+            // Redirect to Formspree dashboard
+            window.open('https://formspree.io/forms/xojnerpq/submissions', '_blank');
         }
 
 function selectPackage(pkg) {
@@ -668,24 +646,6 @@ function selectPackage(pkg) {
         document.getElementById('bookingForm').addEventListener('submit', async function(e) {
             e.preventDefault();
 
-            const formData = {
-                id: Date.now().toString(),
-                timestamp: new Date().toISOString(),
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value,
-                package: document.getElementById('package').value,
-                preferredDates: document.getElementById('preferredDates').value,
-                preferredTimes: document.getElementById('preferredTimes').value,
-                addons: Array.from(document.querySelectorAll('.addon input[type="checkbox"]:checked')).map(cb => cb.value),
-                hearAbout: document.getElementById('hearAbout').value,
-                specialRequests: document.getElementById('specialRequests').value,
-                status: 'pending'
-            };
-
-            // Save to localStorage as backup
-            await saveBooking(formData);
-
             // Submit to Formspree
             try {
                 const form = e.target;
@@ -704,167 +664,32 @@ function selectPackage(pkg) {
                     this.reset();
                     document.querySelectorAll('.package').forEach(p => p.classList.remove('selected'));
                 } else {
-                    alert('Oops! There was a problem submitting your form. Please try again or email directly.');
+                    alert('Oops! There was a problem submitting your form. Please try again or email directly at JBRphotos3650@gmail.com');
                 }
             } catch (error) {
                 console.error('Form submission error:', error);
-                alert('Booking saved locally but could not send. Please email JBRphotos3650@gmail.com with your details.');
+                alert('Could not send booking. Please email JBRphotos3650@gmail.com with your details.');
             }
         });
-
-        async function saveBooking(booking) {
-            try {
-                console.log('Attempting to save booking:', booking);
-                
-                // Get existing bookings from localStorage
-                let bookings = [];
-                const stored = localStorage.getItem('bookings');
-                if (stored) {
-                    bookings = JSON.parse(stored);
-                    console.log('Existing bookings found:', bookings.length);
-                }
-                
-                // Add new booking
-                bookings.push(booking);
-                console.log('Total bookings after add:', bookings.length);
-                
-                // Save back to localStorage
-                localStorage.setItem('bookings', JSON.stringify(bookings));
-                console.log('Booking saved to localStorage');
-                
-            } catch (error) {
-                console.error('Error saving booking:', error);
-                alert('ERROR saving booking: ' + error.message);
-            }
-        }
-
-        async function loadBookings() {
-            try {
-                console.log('Loading bookings from localStorage...');
-                const stored = localStorage.getItem('bookings');
-                const bookings = stored ? JSON.parse(stored) : [];
-                console.log('Found bookings:', bookings.length);
-                
-                const container = document.getElementById('bookingsList');
-                
-                if (bookings.length === 0) {
-                    container.innerHTML = '<p style="text-align: center; color: #666;">No bookings yet.</p>';
-                    return;
-                }
-
-                container.innerHTML = bookings.reverse().map(booking => `
-                    <div class="booking-card">
-                        <div class="booking-header">
-                            <div class="booking-name">${booking.name}</div>
-                            <div class="booking-date">${new Date(booking.timestamp).toLocaleDateString()}</div>
-                        </div>
-                        <div class="booking-details">
-                            <div>📧 ${booking.email}</div>
-                            <div>📱 ${booking.phone}</div>
-                            <div>📅 Preferred: ${booking.preferredDates}</div>
-                            <div>⏰ Times: ${booking.preferredTimes}</div>
-                            ${booking.hearAbout ? `<div>💡 Source: ${booking.hearAbout}</div>` : ''}
-                            ${booking.specialRequests ? `<div>📝 Notes: ${booking.specialRequests}</div>` : ''}
-                            ${booking.addons && booking.addons.length > 0 ? `<div>➕ Add-ons: ${booking.addons.join(', ')}</div>` : ''}
-                        </div>
-                        <div class="booking-package">${booking.package}</div>
-                    </div>
-                `).join('');
-            } catch (error) {
-                console.error('Error loading bookings:', error);
-                document.getElementById('bookingsList').innerHTML = '<p style="color: red;">Error loading bookings: ' + error.message + '</p>';
-            }
-        }
-
-        function generateEmail(booking) {
-            // Silent email composition - data saved for admin view only
-            const emailBody = `To: JBRphotos3650@gmail.com
-Subject: New Headshot Booking - ${booking.name}
-
-New booking request received!
-
-CLIENT INFORMATION:
-Name: ${booking.name}
-Email: ${booking.email}
-Phone: ${booking.phone}
-
-BOOKING DETAILS:
-Package: ${booking.package}
-Preferred Dates: ${booking.preferredDates}
-Preferred Times: ${booking.preferredTimes}
-
-${booking.addons.length > 0 ? `ADD-ONS REQUESTED:\n${booking.addons.map(a => '• ' + a).join('\n')}\n\n` : ''}${booking.hearAbout ? `How they heard about you: ${booking.hearAbout}\n\n` : ''}${booking.specialRequests ? `SPECIAL REQUESTS:\n${booking.specialRequests}\n\n` : ''}---
-Submitted: ${new Date(booking.timestamp).toLocaleString()}`;
-
-            return emailBody;
-        }
-
-        function sendEmailNotification(booking) {
-            // Silently generate email data for backend processing
-            // Email details are stored with the booking for admin review
-            booking.emailNotification = generateEmail(booking);
-        }
 
         function closeModal() {
             document.getElementById('successModal').classList.remove('active');
         }
 
-        async function exportToCSV() {
-            try {
-                const stored = localStorage.getItem('bookings');
-                const bookings = stored ? JSON.parse(stored) : [];
-                
-                if (bookings.length === 0) {
-                    alert('No bookings to export');
-                    return;
-                }
-
-                const headers = ['Date', 'Name', 'Email', 'Phone', 'Package', 'Preferred Dates', 'Preferred Times', 'Add-ons', 'Source', 'Special Requests'];
-                const csvRows = [
-                    headers.join(','),
-                    ...bookings.map(b => {
-                        return [
-                            new Date(b.timestamp).toLocaleDateString(),
-                            `"${b.name}"`,
-                            `"${b.email}"`,
-                            `"${b.phone}"`,
-                            `"${b.package}"`,
-                            `"${b.preferredDates}"`,
-                            `"${b.preferredTimes}"`,
-                            `"${(b.addons || []).join('; ')}"`,
-                            `"${b.hearAbout || ''}"`,
-                            `"${b.specialRequests || ''}"`
-                        ].join(',');
-                    })
-                ];
-                
-                const csv = csvRows.join('\n');
-                const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-                const link = document.createElement('a');
-                const url = URL.createObjectURL(blob);
-                
-                link.setAttribute('href', url);
-                link.setAttribute('download', `bookings_${new Date().toISOString().split('T')[0]}.csv`);
-                link.style.visibility = 'hidden';
-                
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-                
-                URL.revokeObjectURL(url);
-            } catch (error) {
-                console.error('Error exporting:', error);
-                alert('Error exporting bookings: ' + error.message);
-            }
+        // Package selection functionality
+        function selectPackage(pkg) {
+            document.querySelectorAll('.package').forEach(p => p.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+            
+            const packageSelect = document.getElementById('package');
+            const packageMap = {
+                'mini': 'Mini Session - $175',
+                'standard': 'Standard Session - $250',
+                'signature': 'Signature Session - $375'
+            };
+            packageSelect.value = packageMap[pkg];
+            selectedPackage = pkg;
         }
-                alert('Error exporting bookings. Please try again.');
-            }
-        }
-
-        // No automatic admin access on load
-        window.addEventListener('load', () => {
-            // Admin is accessed via button only
-        });
     </script>
 </body>
 </html>
