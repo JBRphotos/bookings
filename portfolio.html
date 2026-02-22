@@ -482,7 +482,24 @@
                     <div class="header-image-overlay" id="creative-overlay"></div>
                 </div>
                 <div class="accordion-content">
-                    <div class="photo-grid" id="creative-grid"></div>
+                    <div class="albums">
+                        <div class="album-card" onclick="openAlbum('animals')">
+                            <img src="images/creative/photo4.jpg" alt="Animals" onerror="this.src='images/placeholder.jpg'">
+                            <h3>Animals</h3>
+                        </div>
+                        <div class="album-card" onclick="openAlbum('travel')">
+                            <img src="images/creative/photo3.jpg" alt="Travel" onerror="this.src='images/placeholder.jpg'">
+                            <h3>Travel</h3>
+                        </div>
+                        <div class="album-card" onclick="openAlbum('lifestyle')">
+                            <img src="images/creative/photo5.jpg" alt="Lifestyle" onerror="this.src='images/placeholder.jpg'">
+                            <h3>Lifestyle</h3>
+                        </div>
+                        <div class="album-card" onclick="openAlbum('still-life')">
+                            <img src="images/creative/photo4.jpg" alt="Still Life" onerror="this.src='images/placeholder.jpg'">
+                            <h3>Still Life</h3>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -511,20 +528,6 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             
-            // Photo arrays for each category
-            const creativePhotos = [
-                'images/creative/photo1.jpg',
-                'images/creative/photo2.jpg',
-                'images/creative/photo3.jpg',
-                'images/creative/photo4.jpg',
-                'images/creative/photo5.jpg',
-                'images/creative/photo6.jpg',
-                'images/creative/photo7.jpg',
-                'images/creative/photo8.jpg',
-                'images/creative/photo9.jpg',
-                'images/creative/photo10.jpg'
-            ];
-
             // Sports album photos
             const hiveAthleticsPhotos = [
                 'images/sports/photo1.jpg',
@@ -554,8 +557,23 @@
                 'images/portraits/photo4.jpg'
             ];
 
-            // Render grids
-            renderGrid('creative-grid', creativePhotos);
+            // Creative album photos
+            const animalsPhotos = [
+                'images/creative/photo4.jpg'
+            ];
+
+            const travelPhotos = [
+                'images/creative/photo1.jpg',
+                'images/creative/photo3.jpg'
+            ];
+
+            const lifestylePhotos = [
+                'images/creative/photo5.jpg'
+            ];
+
+            const stillLifePhotos = [
+                'images/creative/photo4.jpg'
+            ];
 
             function renderGrid(gridId, photos) {
                 const grid = document.getElementById(gridId);
@@ -606,6 +624,18 @@
                 } else if (albumName === 'family') {
                     photos = familyPhotos;
                     title = 'Family';
+                } else if (albumName === 'animals') {
+                    photos = animalsPhotos;
+                    title = 'Animals';
+                } else if (albumName === 'travel') {
+                    photos = travelPhotos;
+                    title = 'Travel';
+                } else if (albumName === 'lifestyle') {
+                    photos = lifestylePhotos;
+                    title = 'Lifestyle';
+                } else if (albumName === 'still-life') {
+                    photos = stillLifePhotos;
+                    title = 'Still Life';
                 }
                 
                 // Create album view
