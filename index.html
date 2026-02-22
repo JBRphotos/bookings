@@ -1,363 +1,284 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Jesse Reilly Photography</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jesse Reilly Photography | Professional Sports & Portrait Photographer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* CSS REMAINS CLAUDE'S PREMIUM STYLING */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #0a1628;
+            --secondary: #1e3a5f;
+            --accent: #c9a45c;
+            --light: #f8f9fb;
+            --white: #ffffff;
+            --navy: #14213d;
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Work Sans', sans-serif; color: var(--primary); line-height: 1.6; overflow-x: hidden; }
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 22, 40, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 20px 0;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+        nav .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo-nav {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: var(--white);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+        .logo-nav img { width: 50px; height: 50px; }
+        nav ul { display: flex; list-style: none; gap: 40px; }
+        nav a { color: var(--white); text-decoration: none; font-weight: 500; transition: color 0.3s; font-size: 0.95rem; }
+        nav a:hover { color: var(--accent); }
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+        /* Dropdown */
+        .dropdown { position: relative; }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: rgba(10, 22, 40, 0.98);
+            min-width: 180px;
+            padding: 10px 0;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        .dropdown:hover .dropdown-menu { display: block; }
+        .dropdown-menu a { display: block; padding: 12px 20px; }
 
-    :root {
-      --primary: #0a1628;
-      --secondary: #1e3a5f;
-      --accent: #c9a45c;
-      --light: #f8f9fb;
-      --white: #ffffff;
-    }
+        /* Hero */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(rgba(10,22,40,0.7), rgba(10,22,40,0.7)), url('images/hero.jpg') center/cover;
+            color: var(--white);
+            text-align: center;
+        }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: 4.5rem; font-weight: 900; margin-bottom: 20px; }
+        
+        /* Buttons */
+        .cta-button {
+            display: inline-block;
+            padding: 18px 45px;
+            background: linear-gradient(135deg, var(--accent) 0%, #daa520 100%);
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s;
+        }
+        .cta-button:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(201, 164, 92, 0.4); }
 
-    body {
-      font-family: 'Work Sans', sans-serif;
-      color: var(--primary);
-      line-height: 1.6;
-    }
+        /* Carousel Styles */
+        .carousel-container { overflow: hidden; width: 100%; margin: 40px 0; }
+        .carousel-track { display: flex; gap: 25px; animation: scroll 40s linear infinite; }
+        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        .carousel-item { flex: 0 0 400px; height: 300px; border-radius: 15px; overflow: hidden; }
+        .carousel-item img { width: 100%; height: 100%; object-fit: cover; }
 
-    /* Navigation */
-    nav {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background: rgba(10,22,40,0.95);
-      padding: 20px 0;
-      z-index: 1000;
-    }
+        /* Grid Styles */
+        .photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 25px; margin-top: 40px; }
+        .photo-item { position: relative; border-radius: 15px; overflow: hidden; aspect-ratio: 4/3; }
+        .photo-item img { width: 100%; height: 100%; object-fit: cover; }
+        .photo-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(10, 22, 40, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        .photo-item:hover .photo-overlay { opacity: 1; }
+        .buy-print-btn { background: var(--accent); color: var(--primary); padding: 10px 20px; border-radius: 20px; text-decoration: none; font-weight: 600; }
 
-    nav .container {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 0 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+        /* Sections */
+        section { padding: 100px 20px; }
+        .container { max-width: 1400px; margin: 0 auto; }
+        .section-header { text-align: center; margin-bottom: 60px; }
+        #about { background: var(--light); }
+        .about-content { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+        .about-image { width: 100%; border-radius: 20px; }
+        #gallery { background: var(--primary); color: var(--white); }
+        #contact { background: var(--navy); color: var(--white); text-align: center; }
+        footer { background: var(--primary); color: var(--white); padding: 30px; text-align: center; }
 
-    .logo-nav {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      color: var(--white);
-      text-decoration: none;
-      font-family: 'Playfair Display', serif;
-      font-weight: 700;
-      font-size: 1.4rem;
-    }
-
-    .logo-nav img {
-      width: 45px;
-      height: 45px;
-    }
-
-    nav ul {
-      display: flex;
-      gap: 30px;
-      list-style: none;
-    }
-
-    nav a {
-      color: var(--white);
-      text-decoration: none;
-      font-size: 0.95rem;
-    }
-
-    /* Hero */
-    .hero {
-      height: 100vh;
-      background:
-        linear-gradient(rgba(10,22,40,0.85), rgba(10,22,40,0.85)),
-        url("images/hero.jpg") center / cover no-repeat;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      color: var(--white);
-      padding: 0 20px;
-    }
-
-    .hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 4rem;
-      margin-bottom: 20px;
-    }
-
-    .hero p {
-      font-size: 1.2rem;
-      margin-bottom: 40px;
-    }
-
-    .cta-button {
-      padding: 15px 40px;
-      background: var(--accent);
-      color: var(--primary);
-      text-decoration: none;
-      border-radius: 40px;
-      font-weight: 600;
-    }
-
-    section {
-      padding: 100px 20px;
-    }
-
-    .container {
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    .section-header {
-      text-align: center;
-      margin-bottom: 60px;
-    }
-
-    .section-header h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.8rem;
-      margin-bottom: 15px;
-    }
-
-    /* About */
-    #about {
-      background: var(--light);
-    }
-
-    .about-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
-    }
-
-    .about-image {
-      width: 100%;
-      height: 500px;
-      object-fit: cover;
-      border-radius: 20px;
-    }
-
-    /* Carousel */
-    .carousel-container {
-      overflow: hidden;
-      margin-top: 40px;
-    }
-
-    .carousel-track {
-      display: flex;
-      gap: 25px;
-      animation: scroll 30s linear infinite;
-    }
-
-    @keyframes scroll {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-
-    .carousel-item {
-      flex: 0 0 380px;
-      height: 260px;
-      overflow: hidden;
-      border-radius: 15px;
-    }
-
-    .carousel-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    /* Photo Grid */
-    .photo-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 25px;
-      margin-top: 60px;
-    }
-
-    .photo-item {
-      position: relative;
-      overflow: hidden;
-      border-radius: 15px;
-    }
-
-    .photo-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .photo-overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: rgba(10,22,40,0.8);
-      padding: 20px;
-      text-align: center;
-    }
-
-    .buy-print-btn {
-      background: var(--accent);
-      color: var(--primary);
-      padding: 10px 25px;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    /* Footer */
-    footer {
-      background: var(--primary);
-      color: var(--white);
-      text-align: center;
-      padding: 30px 20px;
-    }
-
-    @media (max-width: 768px) {
-      .about-content {
-        grid-template-columns: 1fr;
-      }
-
-      .hero h1 {
-        font-size: 2.5rem;
-      }
-    }
-  </style>
+        @media (max-width: 768px) {
+            .about-content { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 3rem; }
+        }
+    </style>
 </head>
-
 <body>
 
-  <!-- NAV -->
-  <nav>
-    <div class="container">
-      <a href="#" class="logo-nav">
-        <img src="images/logo.png" alt="Logo">
-        JBR Photos
-      </a>
-      <ul>
-        <li><a href="#about">About</a></li>
-        <li><a href="#portfolio">Portfolio</a></li>
-        <li><a href="#gallery">Shop</a></li>
-      </ul>
-    </div>
-  </nav>
-
-  <!-- HERO -->
-  <section class="hero">
-    <div>
-      <h1>Jesse Reilly</h1>
-      <p>Sports & Portrait Photography</p>
-      <a href="booking.html" class="cta-button">Book a Session</a>
-    </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="container">
-      <div class="section-header">
-        <h2>About Me</h2>
-      </div>
-      <div class="about-content">
-        <div>
-          <p>Photographer based in the NYC area specializing in sports and portrait work.</p>
-        </div>
-        <img src="images/about.jpg" alt="About" class="about-image">
-      </div>
-    </div>
-  </section>
-
-  <!-- PORTFOLIO -->
-  <section id="portfolio">
-    <div class="container">
-      <div class="section-header">
-        <h2>Portfolio Preview</h2>
-      </div>
-      <div class="carousel-container">
-        <div class="carousel-track" id="portfolio-carousel"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- GALLERY / SHOP -->
-  <section id="gallery">
-    <div class="container">
-      <div class="section-header">
-        <h2>Shop Prints</h2>
-      </div>
-      <div class="photo-grid" id="gallery-grid"></div>
-    </div>
-  </section>
-
-  <footer>
-    © 2026 Jesse Reilly Photography
-  </footer>
-
-  <!-- SCRIPT -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-
-      const carousel = document.getElementById('portfolio-carousel');
-      const carouselImages = [
-        'images/sports/photo1.jpg',
-        'images/sports/photo2.jpg',
-        'images/sports/photo3.jpg',
-        'images/sports/photo4.jpg',
-        'images/portraits/photo1.jpg',
-        'images/portraits/photo2.jpg',
-        'images/portraits/photo3.jpg',
-        'images/creative/photo1.jpg',
-        'images/creative/photo2.jpg',
-        'images/creative/photo3.jpg'
-      ];
-
-      const doubledCarousel = carouselImages.concat(carouselImages);
-
-      doubledCarousel.forEach(src => {
-        const div = document.createElement('div');
-        div.className = 'carousel-item';
-        div.innerHTML = `<img src="${src}" alt="">`;
-        carousel.appendChild(div);
-      });
-
-      const gallery = document.getElementById('gallery-grid');
-      const galleryImages = [
-        'images/gallery/photo1.jpg',
-        'images/gallery/photo2.jpg',
-        'images/gallery/photo3.jpg',
-        'images/gallery/photo4.jpg',
-        'images/gallery/photo5.jpg',
-        'images/gallery/photo6.jpg'
-      ];
-
-      galleryImages.forEach(src => {
-        const div = document.createElement('div');
-        div.className = 'photo-item';
-        div.innerHTML = `
-          <img src="${src}" alt="">
-          <div class="photo-overlay">
-            <a href="https://jbrphotos.darkroom.com" target="_blank" class="buy-print-btn">
-              Buy Print
+    <nav>
+        <div class="container">
+            <a href="#home" class="logo-nav">
+                <img src="images/logo.png" alt="JBR Photos Logo">
+                <span>JBR Photos</span>
             </a>
-          </div>
-        `;
-        gallery.appendChild(div);
-      });
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li class="dropdown">
+                    <a href="portfolio.html">Portfolio ▾</a>
+                    <div class="dropdown-menu">
+                        <a href="portfolio.html#sports">Sports</a>
+                        <a href="portfolio.html#portraits">Portraits</a>
+                        <a href="portfolio.html#creative">Creative</a>
+                    </div>
+                </li>
+                <li><a href="#gallery">Shop</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
 
-    });
-  </script>
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Jesse Reilly</h1>
+            <p>Sports & Portrait Photography | Capturing Moments That Matter</p>
+            <br>
+            <a href="booking.html" class="cta-button">Book a Session</a>
+        </div>
+    </section>
 
+    <section id="about">
+        <div class="container">
+            <div class="section-header">
+                <h2>About Me</h2>
+                <p>Photographer based in the NYC area</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Hi, I'm Jesse</h3>
+                    <p>I'm a photographer specializing in sports photography and portrait work, with a passion for capturing authentic moments and dynamic action.</p>
+                    <p>From high-energy sports events to intimate portrait sessions, I bring a creative eye and professional approach to every shoot.</p>
+                    <p>Currently working with local sports leagues and offering graduation portrait sessions. Let's create something memorable together.</p>
+                </div>
+                <img src="images/about.jpg" alt="Jesse Reilly" class="about-image">
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio">
+        <div class="container">
+            <div class="section-header">
+                <h2>Portfolio</h2>
+                <p>Explore my work across sports, portraits, and creative photography</p>
+            </div>
+            <div class="carousel-container">
+                <div class="carousel-track" id="portfolio-carousel">
+                    </div>
+            </div>
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="portfolio.html" class="cta-button">View Full Portfolio</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery">
+        <div class="container">
+            <div class="section-header">
+                <h2 style="color:white">Shop Prints</h2>
+                <p style="color:white">Available as high-quality prints</p>
+            </div>
+            <div class="photo-grid" id="gallery-grid">
+                </div>
+            <div style="text-align: center; margin-top: 50px;">
+                <a href="https://jbrphotos.darkroom.com" target="_blank" class="cta-button">Visit Full Shop</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 style="color:white">Get In Touch</h2>
+                <p style="color:white">Ready to work together?</p>
+            </div>
+            <div style="margin-bottom: 40px;">
+                <p>Email: <a href="mailto:jbrphotos3650@gmail.com" style="color:var(--accent); text-decoration:none; font-size:1.2rem;">jbrphotos3650@gmail.com</a></p>
+                <p style="margin-top:20px;">📸 <a href="https://www.instagram.com/jbrphotos" target="_blank" style="color:white; text-decoration:none;">Follow on Instagram</a></p>
+            </div>
+            <a href="booking.html" class="cta-button">Book a Session</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Jesse Reilly Photography. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            // 1. CAROUSEL LOGIC
+            const carousel = document.getElementById('portfolio-carousel');
+            const carouselImages = [
+                'images/sports/photo1.jpg', 'images/sports/photo2.jpg',
+                'images/sports/photo3.jpg', 'images/sports/photo4.jpg',
+                'images/portraits/photo1.jpg', 'images/portraits/photo2.jpg',
+                'images/portraits/photo3.jpg', 'images/creative/photo1.jpg',
+                'images/creative/photo2.jpg', 'images/creative/photo3.jpg'
+            ];
+
+            // Double the images for infinite scroll
+            const doubledCarousel = carouselImages.concat(carouselImages);
+
+            doubledCarousel.forEach(src => {
+                const div = document.createElement('div');
+                div.className = 'carousel-item';
+                div.innerHTML = `<img src="${src}" alt="Portfolio" onerror="this.style.display='none'">`;
+                carousel.appendChild(div);
+            });
+
+            // 2. SHOP GRID LOGIC
+            const gallery = document.getElementById('gallery-grid');
+            const galleryImages = [
+                'images/gallery/photo1.jpg', 'images/gallery/photo2.jpg',
+                'images/gallery/photo3.jpg', 'images/gallery/photo4.jpg',
+                'images/gallery/photo5.jpg', 'images/gallery/photo6.jpg'
+            ];
+
+            galleryImages.forEach(src => {
+                const div = document.createElement('div');
+                div.className = 'photo-item';
+                div.innerHTML = `
+                    <img src="${src}" alt="Print for sale" onerror="this.parentElement.style.display='none'">
+                    <div class="photo-overlay">
+                        <a href="https://jbrphotos.darkroom.com" target="_blank" class="buy-print-btn">Buy Print</a>
+                    </div>
+                `;
+                gallery.appendChild(div);
+            });
+        });
+    </script>
 </body>
 </html>
