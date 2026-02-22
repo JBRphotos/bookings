@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- auto-merge test -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -522,7 +521,7 @@
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li class="dropdown">
-                    <a href="portfolio.html">Portfolio &#9662;</a>
+                    <a href="portfolio.html">Portfolio ▾</a>
                     <div class="dropdown-menu">
                         <a href="portfolio.html#sports">Sports</a>
                         <a href="portfolio.html#portraits">Portraits</a>
@@ -540,8 +539,8 @@
         <img src="images/hero.jpg" alt="Photography" class="hero-bg">
         <div class="hero-content">
             <h1>Jesse Reilly</h1>
-            <p>Sports &amp; Portrait Photography | Capturing Moments That Matter</p>
-            <a href="#contact" class="cta-button">Book a Session</a>
+            <p>Sports & Portrait Photography | Capturing Moments That Matter</p>
+            <a href="booking.html" class="cta-button">Book a Session</a>
         </div>
     </section>
 
@@ -606,8 +605,8 @@
             <div class="contact-info">
                 <p>Email: <a href="mailto:jbrphotos3650@gmail.com">jbrphotos3650@gmail.com</a></p>
                 <div class="social-links">
-                    <a href="https://www.instagram.com/jbrphotos" target="_blank">&#128248; Instagram</a>
-                    <a href="https://jbrphotos.darkroom.com" target="_blank">&#128444; Shop</a>
+                    <a href="https://www.instagram.com/jbrphotos" target="_blank">📸 Instagram</a>
+                    <a href="https://jbrphotos.darkroom.com" target="_blank">🖼️ Shop</a>
                 </div>
             </div>
             <a href="booking.html" class="cta-button">Book a Session</a>
@@ -625,7 +624,7 @@
         <img src="" alt="" id="lightbox-img">
     </div>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // Photo data structure - automatically loads from folders
         const photoFolders = {
             sports: 'images/sports/',
@@ -644,7 +643,7 @@
 
             // Gallery/Shop photos only for homepage
             const galleryPhotos = [
-                'photo1.jpg', 'photo2.jpg', 'photo3.jpg',
+                'photo1.jpg', 'photo2.jpg', 'photo3.jpg', 
                 'photo4.jpg', 'photo5.jpg', 'photo6.jpg'
             ];
             renderPhotoGrid('gallery-grid', galleryPhotos, photoFolders.gallery, true);
@@ -669,10 +668,10 @@
             ];
 
             const carousel = document.getElementById('portfolio-carousel');
-
+            
             // Duplicate photos for seamless loop
             const allPhotos = [...carouselPhotos, ...carouselPhotos];
-
+            
             allPhotos.forEach(photo => {
                 const item = document.createElement('div');
                 item.className = 'carousel-item';
@@ -712,17 +711,4 @@
 
         function closeLightbox() {
             document.getElementById('lightbox').classList.remove('active');
-        }
-
-        // Close lightbox on background click
-        document.getElementById('lightbox').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeLightbox();
-            }
-        });
-
-        // Initialize
-        loadPhotos();
-    </script>
-</body>
-</html>
+        
