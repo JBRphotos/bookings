@@ -174,4 +174,251 @@
         .package.selected {
             border-color: var(--accent);
             background: linear-gradient(135deg, var(--white) 0%, #f5f7fa 100%);
-            box-shadow: 0 8px 25px rgba(201, 164,
+            box-shadow: 0 8px 25px rgba(201, 164, 92, 0.2);
+        }
+
+        .package-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+
+        .package-price {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .package-details {
+            list-style: none;
+            margin-bottom: 10px;
+        }
+
+        .package-details li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 0.95rem;
+        }
+
+        .form-section {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(10, 22, 40, 0.08);
+            margin-bottom: 30px;
+        }
+
+        .form-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: 'Work Sans', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--navy) 100%);
+            color: var(--white);
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(30, 58, 95, 0.3);
+            background: var(--accent);
+            color: var(--primary);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 3000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active { display: flex; }
+
+        .modal-content {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 400px;
+        }
+
+        @media (max-width: 768px) {
+            .back-nav { top: 15px; left: 15px; }
+            header { padding: 60px 20px 40px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="back-nav">
+        <a href="index.html" class="back-link">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            Back to Portfolio
+        </a>
+    </nav>
+
+    <header>
+        <button class="admin-access-btn" onclick="accessAdmin()">Admin</button>
+        <div class="logo">
+            <img src="YOUR_LOGO_HERE" alt="Jesse Reilly Photography Logo">
+        </div>
+        <h1>Book a Session</h1>
+        <p class="tagline">Professional Sports & Portrait Photography</p>
+        <p class="instagram">Follow my work <a href="https://instagram.com/JBR.photos" target="_blank">@JBR.photos</a></p>
+    </header>
+
+    <div class="container">
+        <div class="packages">
+            <div class="package" onclick="selectPackage('mini')">
+                <div class="package-name">Mini Session</div>
+                <div class="package-price">$175</div>
+                <ul class="package-details">
+                    <li>30 Minute Session</li>
+                    <li>10 High-Res Photos</li>
+                    <li>1 Location</li>
+                </ul>
+            </div>
+            <div class="package" onclick="selectPackage('standard')">
+                <div class="package-name">Standard Session</div>
+                <div class="package-price">$250</div>
+                <ul class="package-details">
+                    <li>60 Minute Session</li>
+                    <li>25 High-Res Photos</li>
+                    <li>2 Outfits / 1 Location</li>
+                </ul>
+            </div>
+            <div class="package" onclick="selectPackage('signature')">
+                <div class="package-name">Signature Session</div>
+                <div class="package-price">$375</div>
+                <ul class="package-details">
+                    <li>2 Hour Session</li>
+                    <li>All Best Photos (50+)</li>
+                    <li>Unlimited Outfits / 2 Locations</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h2>Session Details</h2>
+            <form id="bookingForm" action="https://formspree.io/f/mjkgpnpk" method="POST">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" name="name" required placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" name="email" required placeholder="email@example.com">
+                </div>
+                <div class="form-group">
+                    <label>Selected Package</label>
+                    <select name="package" id="package" required>
+                        <option value="">Choose a package...</option>
+                        <option value="Mini Session - $175">Mini Session - $175</option>
+                        <option value="Standard Session - $250">Standard Session - $250</option>
+                        <option value="Signature Session - $375">Signature Session - $375</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Additional Notes</label>
+                    <textarea name="message" placeholder="Tell me about your vision for the shoot..."></textarea>
+                </div>
+                <button type="submit" class="btn-primary">Send Booking Request</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <h3>Request Sent!</h3>
+            <p>Thanks for reaching out. I'll get back to you within 24 hours.</p>
+            <button onclick="closeModal()" class="btn-primary" style="margin-top: 20px;">Got it</button>
+        </div>
+    </div>
+
+    <script>
+        function selectPackage(pkg) {
+            document.querySelectorAll('.package').forEach(p => p.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+            
+            const packageSelect = document.getElementById('package');
+            const packageMap = {
+                'mini': 'Mini Session - $175',
+                'standard': 'Standard Session - $250',
+                'signature': 'Signature Session - $375'
+            };
+            packageSelect.value = packageMap[pkg];
+        }
+
+        const form = document.getElementById('bookingForm');
+        form.onsubmit = async (e) => {
+            e.preventDefault();
+            const data = new FormData(form);
+            const response = await fetch(form.action, {
+                method: 'POST',
+                body: data,
+                headers: { 'Accept': 'application/json' }
+            });
+            if (response.ok) {
+                document.getElementById('successModal').classList.add('active');
+                form.reset();
+            } else {
+                alert('Oops! There was a problem. Please email JBRphotos3650@gmail.com');
+            }
+        };
+
+        function closeModal() {
+            document.getElementById('successModal').classList.remove('active');
+        }
+
+        function accessAdmin() {
+            const pass = prompt("Enter Admin Password:");
+            if(pass === "admin123") {
+                alert("Accessing backend...");
+            } else {
+                alert("Incorrect password.");
+            }
+        }
+    </script>
+</body>
+</html>
