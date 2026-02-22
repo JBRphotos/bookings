@@ -80,7 +80,7 @@
             color: var(--white);
             text-align: center;
         }
-        .hero h1 { font-family: 'Playfair Display', serif; font-size: 4rem; font-weight: 900; margin-bottom: 15px; }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: 4.5rem; font-weight: 900; margin-bottom: 20px; }
         
         /* Buttons */
         .cta-button {
@@ -96,14 +96,14 @@
         .cta-button:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(201, 164, 92, 0.4); }
 
         /* Carousel Styles */
-        .carousel-container { overflow: hidden; width: 100%; margin: 30px 0; }
+        .carousel-container { overflow: hidden; width: 100%; margin: 40px 0; }
         .carousel-track { display: flex; gap: 25px; animation: scroll 40s linear infinite; }
         @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
         .carousel-item { flex: 0 0 400px; height: 300px; border-radius: 15px; overflow: hidden; }
         .carousel-item img { width: 100%; height: 100%; object-fit: cover; }
 
         /* Grid Styles */
-        .photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 25px; margin-top: 30px; }
+        .photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 25px; margin-top: 40px; }
         .photo-item { position: relative; border-radius: 15px; overflow: hidden; aspect-ratio: 4/3; }
         .photo-item img { width: 100%; height: 100%; object-fit: cover; }
         .photo-overlay {
@@ -120,31 +120,11 @@
         .buy-print-btn { background: var(--accent); color: var(--primary); padding: 10px 20px; border-radius: 20px; text-decoration: none; font-weight: 600; }
 
         /* Sections */
-        section { padding: 60px 20px; }
+        section { padding: 100px 20px; }
         .container { max-width: 1400px; margin: 0 auto; }
-        .section-header { text-align: center; margin-bottom: 40px; }
-        .section-header h2 { 
-            font-family: 'Playfair Display', serif; 
-            font-size: 2.5rem; 
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
-        .section-header p {
-            font-size: 1.1rem;
-            color: #666;
-        }
+        .section-header { text-align: center; margin-bottom: 60px; }
         #about { background: var(--light); }
-        .about-content { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
-        .about-text h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-            margin-bottom: 15px;
-            color: var(--primary);
-        }
-        .about-text p {
-            margin-bottom: 15px;
-            line-height: 1.7;
-        }
+        .about-content { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
         .about-image { width: 100%; border-radius: 20px; }
         #gallery { background: var(--primary); color: var(--white); }
         #contact { background: var(--navy); color: var(--white); text-align: center; }
@@ -218,7 +198,7 @@
                 <div class="carousel-track" id="portfolio-carousel">
                     </div>
             </div>
-            <div style="text-align: center; margin-top: 30px;">
+            <div style="text-align: center; margin-top: 40px;">
                 <a href="portfolio.html" class="cta-button">View Full Portfolio</a>
             </div>
         </div>
@@ -232,7 +212,7 @@
             </div>
             <div class="photo-grid" id="gallery-grid">
                 </div>
-            <div style="text-align: center; margin-top: 40px;">
+            <div style="text-align: center; margin-top: 50px;">
                 <a href="https://jbrphotos.darkroom.com" target="_blank" class="cta-button">Visit Full Shop</a>
             </div>
         </div>
@@ -245,7 +225,7 @@
                 <p style="color:white">Ready to work together?</p>
             </div>
             <div style="margin-bottom: 40px;">
-                <p>Email: <a href="/cdn-cgi/l/email-protection#c5afa7b7b5adaab1aab6f6f3f0f585a2a8a4aca9eba6aaa8" style="color:var(--accent); text-decoration:none; font-size:1.2rem;"><span class="__cf_email__" data-cfemail="305a524240585f445f430306050070575d51595c1e535f5d">[email&#160;protected]</span></a></p>
+                <p>Email: <a href="mailto:jbrphotos3650@gmail.com" style="color:var(--accent); text-decoration:none; font-size:1.2rem;">jbrphotos3650@gmail.com</a></p>
                 <p style="margin-top:20px;">📸 <a href="https://www.instagram.com/jbrphotos" target="_blank" style="color:white; text-decoration:none;">Follow on Instagram</a></p>
             </div>
             <a href="booking.html" class="cta-button">Book a Session</a>
@@ -256,7 +236,7 @@
         <p>&copy; 2026 Jesse Reilly Photography. All rights reserved.</p>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
         document.addEventListener('DOMContentLoaded', function () {
             
             // 1. CAROUSEL LOGIC
@@ -293,3 +273,12 @@
                 div.innerHTML = `
                     <img src="${src}" alt="Print for sale" onerror="this.parentElement.style.display='none'">
                     <div class="photo-overlay">
+                        <a href="https://jbrphotos.darkroom.com" target="_blank" class="buy-print-btn">Buy Print</a>
+                    </div>
+                `;
+                gallery.appendChild(div);
+            });
+        });
+    </script>
+</body>
+</html>
