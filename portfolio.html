@@ -282,6 +282,65 @@
             max-width: 90%;
             max-height: 90%;
             object-fit: contain;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .lightbox img.slide-left {
+            animation: slideLeft 0.4s ease;
+        }
+
+        .lightbox img.slide-right {
+            animation: slideRight 0.4s ease;
+        }
+
+        @keyframes slideLeft {
+            0% {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideRight {
+            0% {
+                opacity: 0;
+                transform: translateX(-100px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .lightbox-dots {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 2001;
+        }
+
+        .lightbox-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .lightbox-dot.active {
+            background: var(--accent);
+            transform: scale(1.3);
+        }
+
+        .lightbox-dot:hover {
+            background: rgba(255, 255, 255, 0.7);
         }
         .lightbox-close {
             position: absolute;
@@ -554,6 +613,7 @@
         <span class="lightbox-prev" onclick="navigateLightbox(-1)">&#8249;</span>
         <span class="lightbox-next" onclick="navigateLightbox(1)">&#8250;</span>
         <img src="" alt="" id="lightbox-img">
+        <div class="lightbox-dots" id="lightbox-dots"></div>
     </div>
 
     <script>
@@ -720,8 +780,14 @@
             // Lightbox functions
             window.openLightbox = function(src, index = 0) {
                 currentPhotoIndex = index;
-                document.getElementById('lightbox').classList.add('active');
-                document.getElementById('lightbox-img').src = src;
+                const lightbox = document.getElementById('lightbox');
+                const img = document.getElementById('lightbox-img');
+                
+                lightbox.classList.add('active');
+                img.src = src;
+                
+                // Create progress dots
+                updateProgressDots();
             };
 
             window.closeLightbox = function() {
@@ -732,6 +798,11 @@
             window.navigateLightbox = function(direction) {
                 if (currentAlbumPhotos.length === 0) return;
                 
+                const img = document.getElementById('lightbox-img');
+                
+                // Remove any existing animation classes
+                img.classList.remove('slide-left', 'slide-right');
+                
                 currentPhotoIndex += direction;
                 
                 // Loop around
@@ -741,8 +812,51 @@
                     currentPhotoIndex = 0;
                 }
                 
-                document.getElementById('lightbox-img').src = currentAlbumPhotos[currentPhotoIndex];
+                // Add slide animation based on direction
+                if (direction > 0) {
+                    img.classList.add('slide-left');
+                } else {
+                    img.classList.add('slide-right');
+                }
+                
+                img.src = currentAlbumPhotos[currentPhotoIndex];
+                updateProgressDots();
             };
+
+            function updateProgressDots() {
+                const dotsContainer = document.getElementById('lightbox-dots');
+                dotsContainer.innerHTML = '';
+                
+                // Only show dots if we have multiple photos
+                if (currentAlbumPhotos.length <= 1) return;
+                
+                currentAlbumPhotos.forEach((photo, index) => {
+                    const dot = document.createElement('div');
+                    dot.className = 'lightbox-dot';
+                    if (index === currentPhotoIndex) {
+                        dot.classList.add('active');
+                    }
+                    dot.onclick = () => jumpToPhoto(index);
+                    dotsContainer.appendChild(dot);
+                });
+            }
+
+            function jumpToPhoto(index) {
+                const img = document.getElementById('lightbox-img');
+                const direction = index > currentPhotoIndex ? 1 : -1;
+                
+                img.classList.remove('slide-left', 'slide-right');
+                
+                if (direction > 0) {
+                    img.classList.add('slide-left');
+                } else {
+                    img.classList.add('slide-right');
+                }
+                
+                currentPhotoIndex = index;
+                img.src = currentAlbumPhotos[currentPhotoIndex];
+                updateProgressDots();
+            }
 
             // Close on background click
             document.getElementById('lightbox').addEventListener('click', function(e) {
