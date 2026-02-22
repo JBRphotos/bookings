@@ -220,7 +220,7 @@
         }
 
         .album-card:hover img {
-            transform: scale(1.05);
+            transform: scale(1.02);
         }
 
         .album-card h3 {
@@ -261,7 +261,7 @@
             transition: transform 0.5s;
         }
         .photo-item:hover img {
-            transform: scale(1.05);
+            transform: scale(1.02);
         }
 
         /* Lightbox */
@@ -292,6 +292,35 @@
             cursor: pointer;
             font-weight: 300;
             line-height: 1;
+            transition: color 0.3s;
+        }
+        .lightbox-close:hover {
+            color: var(--accent);
+        }
+
+        .lightbox-prev,
+        .lightbox-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--white);
+            font-size: 5rem;
+            cursor: pointer;
+            font-weight: 300;
+            line-height: 1;
+            padding: 20px;
+            user-select: none;
+            transition: color 0.3s;
+        }
+        .lightbox-prev:hover,
+        .lightbox-next:hover {
+            color: var(--accent);
+        }
+        .lightbox-prev {
+            left: 40px;
+        }
+        .lightbox-next {
+            right: 40px;
         }
 
         /* Album Modal */
@@ -522,6 +551,8 @@
     <!-- Lightbox -->
     <div class="lightbox" id="lightbox">
         <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <span class="lightbox-prev" onclick="navigateLightbox(-1)">&#8249;</span>
+        <span class="lightbox-next" onclick="navigateLightbox(1)">&#8250;</span>
         <img src="" alt="" id="lightbox-img">
     </div>
 
@@ -642,7 +673,14 @@
                 showAlbumView(title, photos);
             };
 
+            // Lightbox state
+            let currentAlbumPhotos = [];
+            let currentPhotoIndex = 0;
+
             function showAlbumView(title, photos) {
+                // Store album photos for lightbox navigation
+                currentAlbumPhotos = photos;
+                
                 // Create modal overlay
                 const modal = document.createElement('div');
                 modal.className = 'album-modal';
@@ -659,11 +697,11 @@
                 
                 // Add photos
                 const grid = modal.querySelector('#album-grid');
-                photos.forEach(src => {
+                photos.forEach((src, index) => {
                     const div = document.createElement('div');
                     div.className = 'photo-item';
                     div.innerHTML = `<img src="${src}" alt="${title}" onerror="this.parentElement.style.display='none'">`;
-                    div.onclick = () => openLightbox(src);
+                    div.onclick = () => openLightbox(src, index);
                     grid.appendChild(div);
                 });
                 
@@ -680,18 +718,49 @@
             };
 
             // Lightbox functions
-            window.openLightbox = function(src) {
+            window.openLightbox = function(src, index = 0) {
+                currentPhotoIndex = index;
                 document.getElementById('lightbox').classList.add('active');
                 document.getElementById('lightbox-img').src = src;
             };
 
             window.closeLightbox = function() {
                 document.getElementById('lightbox').classList.remove('active');
+                currentAlbumPhotos = [];
+            };
+
+            window.navigateLightbox = function(direction) {
+                if (currentAlbumPhotos.length === 0) return;
+                
+                currentPhotoIndex += direction;
+                
+                // Loop around
+                if (currentPhotoIndex < 0) {
+                    currentPhotoIndex = currentAlbumPhotos.length - 1;
+                } else if (currentPhotoIndex >= currentAlbumPhotos.length) {
+                    currentPhotoIndex = 0;
+                }
+                
+                document.getElementById('lightbox-img').src = currentAlbumPhotos[currentPhotoIndex];
             };
 
             // Close on background click
             document.getElementById('lightbox').addEventListener('click', function(e) {
                 if (e.target === this) {
+                    closeLightbox();
+                }
+            });
+
+            // Keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                const lightbox = document.getElementById('lightbox');
+                if (!lightbox.classList.contains('active')) return;
+                
+                if (e.key === 'ArrowLeft') {
+                    navigateLightbox(-1);
+                } else if (e.key === 'ArrowRight') {
+                    navigateLightbox(1);
+                } else if (e.key === 'Escape') {
                     closeLightbox();
                 }
             });
