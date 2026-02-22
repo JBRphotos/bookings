@@ -455,7 +455,20 @@
                     <div class="header-image-overlay" id="portraits-overlay"></div>
                 </div>
                 <div class="accordion-content">
-                    <div class="photo-grid" id="portraits-grid"></div>
+                    <div class="albums">
+                        <div class="album-card" onclick="openAlbum('graduation')">
+                            <img src="images/portraits/photo7.jpg" alt="Graduation" onerror="this.src='images/placeholder.jpg'">
+                            <h3>Graduation</h3>
+                        </div>
+                        <div class="album-card" onclick="openAlbum('composites')">
+                            <img src="images/portraits/photo2.jpg" alt="Composites" onerror="this.src='images/placeholder.jpg'">
+                            <h3>Composites</h3>
+                        </div>
+                        <div class="album-card" onclick="openAlbum('family')">
+                            <img src="images/portraits/photo4.jpg" alt="Family" onerror="this.src='images/placeholder.jpg'">
+                            <h3>Family</h3>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -499,19 +512,6 @@
         document.addEventListener('DOMContentLoaded', function () {
             
             // Photo arrays for each category
-            const portraitPhotos = [
-                'images/portraits/photo1.jpg',
-                'images/portraits/photo2.jpg',
-                'images/portraits/photo3.jpg',
-                'images/portraits/photo4.jpg',
-                'images/portraits/photo5.jpg',
-                'images/portraits/photo6.jpg',
-                'images/portraits/photo7.jpg',
-                'images/portraits/photo8.jpg',
-                'images/portraits/photo9.jpg',
-                'images/portraits/photo10.jpg'
-            ];
-
             const creativePhotos = [
                 'images/creative/photo1.jpg',
                 'images/creative/photo2.jpg',
@@ -525,7 +525,7 @@
                 'images/creative/photo10.jpg'
             ];
 
-            // Album photos
+            // Sports album photos
             const hiveAthleticsPhotos = [
                 'images/sports/photo1.jpg',
                 'images/sports/photo2.jpg'
@@ -537,8 +537,24 @@
                 'images/sports/photo5.jpg'
             ];
 
+            // Portrait album photos
+            const graduationPhotos = [
+                'images/portraits/photo5.jpg',
+                'images/portraits/photo6.jpg',
+                'images/portraits/photo7.jpg'
+            ];
+
+            const compositesPhotos = [
+                'images/portraits/photo1.jpg',
+                'images/portraits/photo2.jpg'
+            ];
+
+            const familyPhotos = [
+                'images/portraits/photo3.jpg',
+                'images/portraits/photo4.jpg'
+            ];
+
             // Render grids
-            renderGrid('portraits-grid', portraitPhotos);
             renderGrid('creative-grid', creativePhotos);
 
             function renderGrid(gridId, photos) {
@@ -581,6 +597,15 @@
                 } else if (albumName === 'artistic-sports') {
                     photos = artisticSportsPhotos;
                     title = 'Artistic';
+                } else if (albumName === 'graduation') {
+                    photos = graduationPhotos;
+                    title = 'Graduation';
+                } else if (albumName === 'composites') {
+                    photos = compositesPhotos;
+                    title = 'Composites';
+                } else if (albumName === 'family') {
+                    photos = familyPhotos;
+                    title = 'Family';
                 }
                 
                 // Create album view
