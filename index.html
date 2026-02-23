@@ -9,12 +9,17 @@
         /* CSS REMAINS CLAUDE'S PREMIUM STYLING */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
-            --primary: #0a1628;
-            --secondary: #1e3a5f;
-            --accent: #c9a45c;
-            --light: #f8f9fb;
+            --primary: #0B1F33;
+            --secondary: #1C2F4A;
+            --accent: #D4AF6A;
+            --light: #F6F5F2;
             --white: #ffffff;
-            --navy: #14213d;
+            --navy: #081728;
+            --text-primary: #0E1726;
+            --text-secondary: #5F6C7B;
+            --text-light: #E3E7EC;
+            --border-light: #E3E7EC;
+            --section-bg: #E3E7EC;
         }
         html { scroll-behavior: smooth; }
         body { font-family: 'Work Sans', sans-serif; color: var(--primary); line-height: 1.6; overflow-x: hidden; }
@@ -79,24 +84,44 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(rgba(10,22,40,0.7), rgba(10,22,40,0.7)), url('images/hero.jpg') center/cover;
+            background: linear-gradient(135deg, #0B1F33 0%, #081728 100%), url('images/hero.jpg') center/cover;
+            background-blend-mode: multiply;
             color: var(--white);
             text-align: center;
         }
-        .hero h1 { font-family: 'Playfair Display', serif; font-size: 4.5rem; font-weight: 900; margin-bottom: 20px; }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: 4.5rem; font-weight: 900; margin-bottom: 20px; color: #FFFFFF; }
+        .hero p { color: #E3E7EC; font-size: 1.2rem; }
         
         /* Buttons */
         .cta-button {
             display: inline-block;
             padding: 18px 45px;
-            background: linear-gradient(135deg, var(--accent) 0%, #daa520 100%);
-            color: var(--primary);
+            background: #D4AF6A;
+            color: #0B1F33;
             text-decoration: none;
             font-weight: 600;
             border-radius: 50px;
             transition: all 0.3s;
+            border: 2px solid #D4AF6A;
         }
-        .cta-button:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(201, 164, 92, 0.4); }
+        .cta-button:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(212, 175, 106, 0.4); }
+        
+        .cta-button-outline {
+            display: inline-block;
+            padding: 18px 45px;
+            background: transparent;
+            color: #D4AF6A;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s;
+            border: 2px solid #D4AF6A;
+        }
+        .cta-button-outline:hover { 
+            background: #D4AF6A;
+            color: #0B1F33;
+            transform: translateY(-3px); 
+        }
 
         /* Carousel Styles */
         .carousel-container { overflow: hidden; width: 100%; margin: 40px 0; }
@@ -126,10 +151,20 @@
         section { padding: 100px 20px; }
         .container { max-width: 1400px; margin: 0 auto; }
         .section-header { text-align: center; margin-bottom: 60px; }
-        #about { background: var(--light); }
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: #0B1F33;
+            margin-bottom: 10px;
+        }
+        .section-header p {
+            font-size: 1.2rem;
+            color: #5F6C7B;
+        }
+        #about { background: #F6F5F2; }
         .about-content { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
         .about-text {
-            background: var(--white);
+            background: #FFFFFF;
             padding: 40px;
             border-radius: 20px;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
@@ -137,26 +172,29 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            border: 2px solid var(--accent);
+            border: 2px solid #E3E7EC;
         }
         .about-text h3 {
             font-family: 'Playfair Display', serif;
             font-size: 2rem;
             margin-bottom: 20px;
-            color: var(--primary);
+            color: #0B1F33;
             padding-bottom: 15px;
-            border-bottom: 3px solid var(--accent);
+            border-bottom: 3px solid #D4AF6A;
             display: inline-block;
         }
         .about-text p {
             line-height: 1.8;
-            color: #555;
+            color: #0E1726;
             margin-bottom: 15px;
         }
         .about-image { width: 100%; border-radius: 20px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); }
-        #gallery { background: var(--primary); color: var(--white); }
-        #contact { background: var(--navy); color: var(--white); text-align: center; }
-        footer { background: var(--primary); color: var(--white); padding: 30px; text-align: center; }
+        #portfolio { background: #E3E7EC; }
+        #gallery { background: #1C2F4A; color: var(--white); }
+        #contact { background: #F6F5F2; color: var(--primary); text-align: center; }
+        footer { background: #1C2F4A; color: #E3E7EC; padding: 30px; text-align: center; }
+        footer a { color: #5F6C7B; transition: color 0.3s; }
+        footer a:hover { color: #D4AF6A; }
 
         @media (max-width: 768px) {
             .about-content { grid-template-columns: 1fr; }
@@ -212,14 +250,14 @@
     <section id="portfolio">
         <div class="container">
             <div class="section-header">
-                <h2>Portfolio</h2>
-                <p>Explore my work across sports, portraits, and creative photography</p>
+                <h2 style="color:#0B1F33">Portfolio</h2>
+                <p style="color:#5F6C7B">Explore my work across sports, portraits, and creative photography</p>
             </div>
             <div class="carousel-container">
                 <div class="carousel-track" id="portfolio-carousel"></div>
             </div>
             <div style="text-align: center; margin-top: 40px;">
-                <a href="portfolio.html" class="cta-button">View Full Portfolio</a>
+                <a href="portfolio.html" class="cta-button-outline">View Full Portfolio</a>
             </div>
         </div>
     </section>
@@ -227,9 +265,9 @@
     <section id="gallery">
         <div class="container">
             <div class="section-header">
-                <h2 style="color:white">Shop Prints</h2>
-                <h3 style="color:var(--accent); margin-top: 20px; font-size: 1.3rem; font-weight: 600;">Featured Photos</h3>
-                <p style="color:white; margin-top: 10px;">Available as high-quality prints</p>
+                <h2 style="color:#FFFFFF">Shop Prints</h2>
+                <h3 style="color:#D4AF6A; margin-top: 20px; font-size: 1.3rem; font-weight: 600;">Featured Photos</h3>
+                <p style="color:#E3E7EC; margin-top: 10px;">Available as high-quality prints</p>
             </div>
             <div class="carousel-container">
                 <div class="carousel-track" id="gallery-carousel"></div>
@@ -243,14 +281,14 @@
     <section id="contact">
         <div class="container">
             <div class="section-header">
-                <h2 style="color:white">Get In Touch</h2>
-                <p style="color:white">Ready to work together?</p>
+                <h2 style="color:#0B1F33">Get In Touch</h2>
+                <p style="color:#0E1726">Ready to work together?</p>
             </div>
             <div style="margin-bottom: 40px;">
-                <p>Email: <a href="mailto:jbrphotos3650@gmail.com" style="color:var(--accent); text-decoration:none; font-size:1.2rem;">jbrphotos3650@gmail.com</a></p>
-                <p style="margin-top:20px;">📸 <a href="https://www.instagram.com/jbrphotos" target="_blank" style="color:white; text-decoration:none;">Follow on Instagram</a></p>
+                <p style="color:#0E1726">Email: <a href="mailto:jbrphotos3650@gmail.com" style="color:#D4AF6A; text-decoration:none; font-size:1.2rem;">jbrphotos3650@gmail.com</a></p>
+                <p style="margin-top:20px; color:#0E1726">📸 <a href="https://www.instagram.com/jbrphotos" target="_blank" style="color:#0E1726; text-decoration:none;">Follow on Instagram</a></p>
             </div>
-            <a href="booking.html" class="cta-button">Book a Session</a>
+            <a href="booking.html" class="cta-button-outline">Book a Session</a>
         </div>
     </section>
 
