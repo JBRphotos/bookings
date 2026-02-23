@@ -725,6 +725,19 @@
             hamburger.classList.toggle('active');
         }
         
+        // Close menu when any nav link is clicked
+        document.addEventListener('DOMContentLoaded', function () {
+            const navLinks = document.querySelectorAll('#nav-menu a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    const menu = document.getElementById('nav-menu');
+                    const hamburger = document.querySelector('.hamburger');
+                    menu.classList.remove('active');
+                    hamburger.classList.remove('active');
+                });
+            });
+        });
+        
         document.addEventListener('DOMContentLoaded', function () {
             
             // Sports album photos
@@ -805,6 +818,12 @@
 
             // Open album function
             window.openAlbum = function(albumName) {
+                // Close all accordion sections
+                const allItems = document.querySelectorAll('.accordion-item');
+                allItems.forEach(item => {
+                    item.classList.remove('active');
+                });
+                
                 let photos = [];
                 let title = '';
                 
