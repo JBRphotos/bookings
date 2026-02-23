@@ -382,6 +382,17 @@
         
         document.addEventListener('DOMContentLoaded', function () {
             
+            // Close menu when any nav link is clicked
+            const navLinks = document.querySelectorAll('#nav-menu a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    const menu = document.getElementById('nav-menu');
+                    const hamburger = document.querySelector('.hamburger');
+                    menu.classList.remove('active');
+                    hamburger.classList.remove('active');
+                });
+            });
+            
             // 1. PORTFOLIO CAROUSEL LOGIC
             const carousel = document.getElementById('portfolio-carousel');
             const carouselImages = [
