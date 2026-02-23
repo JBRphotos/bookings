@@ -13,21 +13,21 @@
         }
 
         :root {
-            --primary: #0a1628;
-            --secondary: #1e3a5f;
-            --accent: #c9a45c;
-            --light: #f8f9fb;
+            --primary-navy: #0B1F33;
+            --soft-navy: #1C2F4A;
+            --warm-gold: #D4AF6A;
+            --off-white: #F6F5F2;
+            --light-slate: #E3E7EC;
+            --primary-text: #0E1726;
             --white: #ffffff;
             --success: #2d5a3d;
             --error: #8b2e2e;
-            --navy: #14213d;
-            --gold: #daa520;
         }
 
         body {
             font-family: 'Work Sans', sans-serif;
-            background: linear-gradient(135deg, #e8eef5 0%, #d4dce8 100%);
-            color: var(--primary);
+            background: #F6F5F2;
+            color: var(--primary-text);
             line-height: 1.6;
             min-height: 100vh;
         }
@@ -41,11 +41,11 @@
         header {
             text-align: center;
             padding: 50px 20px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            background: linear-gradient(135deg, #2A3F5F 0%, #1C2F4A 100%);
             color: var(--white);
             margin-bottom: 40px;
             border-radius: 0 0 30px 30px;
-            box-shadow: 0 8px 30px rgba(10, 22, 40, 0.15);
+            box-shadow: 0 8px 30px rgba(28, 47, 74, 0.15);
             position: relative;
         }
 
@@ -69,7 +69,7 @@
 
         .back-btn:hover {
             background: rgba(255, 255, 255, 0.25);
-            border-color: var(--accent);
+            border-color: #D4AF6A;
             transform: translateY(-2px);
         }
 
@@ -91,7 +91,7 @@
 
         .admin-access-btn:hover {
             background: rgba(255, 255, 255, 0.25);
-            border-color: var(--accent);
+            border-color: #D4AF6A;
             transform: translateY(-2px);
         }
 
@@ -106,7 +106,7 @@
             justify-content: center;
             box-shadow: 0 6px 20px rgba(0,0,0,0.25);
             overflow: hidden;
-            border: 3px solid var(--accent);
+            border: 3px solid #D4AF6A;
         }
 
         .logo img {
@@ -132,7 +132,7 @@
 
         .tagline {
             font-size: 1rem;
-            opacity: 0.9;
+            color: #E3E7EC;
             font-weight: 300;
         }
 
@@ -143,7 +143,7 @@
         }
 
         .instagram a {
-            color: var(--accent);
+            color: #D4AF6A;
             text-decoration: none;
         }
 
@@ -168,12 +168,12 @@
         }
 
         .tab.active {
-            color: var(--primary);
-            border-bottom-color: var(--accent);
+            color: #0B1F33;
+            border-bottom-color: #D4AF6A;
         }
 
         .tab:hover {
-            color: var(--primary);
+            color: #0B1F33;
         }
 
         .tab-content {
@@ -201,7 +201,7 @@
             background: var(--white);
             padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(10, 22, 40, 0.08);
+            box-shadow: 0 4px 20px rgba(11, 31, 51, 0.08);
             transition: all 0.3s;
             border: 2px solid transparent;
             cursor: pointer;
@@ -210,14 +210,14 @@
 
         .package:hover {
             transform: translateY(-5px);
-            box-shadow: 0 12px 35px rgba(10, 22, 40, 0.15);
-            border-color: var(--accent);
+            box-shadow: 0 12px 35px rgba(11, 31, 51, 0.15);
+            border-color: #D4AF6A;
         }
 
         .package.selected {
-            border-color: var(--accent);
-            background: linear-gradient(135deg, var(--white) 0%, #f5f7fa 100%);
-            box-shadow: 0 8px 25px rgba(201, 164, 92, 0.2);
+            border-color: #D4AF6A;
+            background: linear-gradient(135deg, var(--white) 0%, #F6F5F2 100%);
+            box-shadow: 0 8px 25px rgba(212, 175, 106, 0.2);
         }
 
         .package-name {
@@ -257,6 +257,57 @@
             margin-top: 10px;
         }
 
+        /* Session Type Cards */
+        .session-type-card {
+            background: var(--white);
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(11, 31, 51, 0.08);
+            transition: all 0.3s;
+            border: 3px solid transparent;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .session-type-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(11, 31, 51, 0.15);
+            border-color: #D4AF6A;
+        }
+
+        .session-type-card.active {
+            border-color: #D4AF6A;
+            background: linear-gradient(135deg, var(--white) 0%, #F6F5F2 100%);
+            box-shadow: 0 8px 25px rgba(212, 175, 106, 0.3);
+        }
+
+        .session-icon {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+        }
+
+        .session-type-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: #1C2F4A;
+            margin-bottom: 10px;
+        }
+
+        .session-type-card p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .session-content {
+            display: none;
+            animation: fadeIn 0.4s;
+        }
+
+        .session-content.active {
+            display: block;
+        }
+
         .form-section {
             background: var(--white);
             padding: 30px;
@@ -269,7 +320,7 @@
             font-family: 'Playfair Display', serif;
             font-size: 1.8rem;
             margin-bottom: 20px;
-            color: var(--secondary);
+            color: #1C2F4A;
         }
 
         .form-group {
@@ -280,7 +331,7 @@
             display: block;
             margin-bottom: 8px;
             font-weight: 500;
-            color: var(--primary);
+            color: #0B1F33;
         }
 
         input, textarea, select {
@@ -295,8 +346,8 @@
 
         input:focus, textarea:focus, select:focus {
             outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(212, 165, 116, 0.1);
+            border-color: #D4AF6A;
+            box-shadow: 0 0 0 3px rgba(212, 175, 106, 0.1);
         }
 
         textarea {
@@ -341,21 +392,21 @@
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--secondary) 0%, var(--navy) 100%);
-            color: var(--white);
+            background: #D4AF6A;
+            color: #0B1F33;
             width: 100%;
-            border: 2px solid transparent;
+            border: 2px solid #D4AF6A;
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(30, 58, 95, 0.3);
-            border-color: var(--accent);
+            box-shadow: 0 8px 25px rgba(212, 175, 106, 0.4);
+            background: #C19A54;
         }
 
         .btn-secondary {
             background: #f0f0f0;
-            color: var(--primary);
+            color: #0B1F33;
             margin-right: 10px;
         }
 
@@ -398,7 +449,7 @@
         .modal-content h3 {
             font-family: 'Playfair Display', serif;
             font-size: 2rem;
-            color: var(--secondary);
+            color: #1C2F4A;
             margin-bottom: 15px;
         }
 
@@ -410,10 +461,10 @@
             background: var(--white);
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 2px 15px rgba(10, 22, 40, 0.08);
+            box-shadow: 0 2px 15px rgba(11, 31, 51, 0.08);
             margin-bottom: 15px;
             text-align: left;
-            border-left: 4px solid var(--accent);
+            border-left: 4px solid #D4AF6A;
         }
 
         .booking-header {
@@ -511,36 +562,102 @@
     <div class="container">
         <!-- Booking Tab -->
         <div id="booking-tab" class="tab-content active">
-            <div class="packages">
-                <div class="package" onclick="selectPackage('mini')">
-                    <div class="package-name">Mini Session</div>
-                    <div class="package-price">$175</div>
-                    <ul class="package-details">
-                        <li>⏱️ 25 minutes</li>
-                        <li>📍 1 location</li>
-                        <li>📸 10 edited photos</li>
-                    </ul>
+            <!-- Session Type Cards -->
+            <div style="text-align: center; margin-bottom: 40px;">
+                <h2 style="font-family: 'Playfair Display', serif; color: #1C2F4A; margin-bottom: 30px;">Choose Your Session Type</h2>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 40px;">
+                    <!-- Portrait Session Card -->
+                    <div class="session-type-card active" id="portrait-card" onclick="selectSessionType('portrait')">
+                        <div class="session-icon">📸</div>
+                        <h3>Portrait Session</h3>
+                        <p>Professional portraits that capture your personality and style</p>
+                    </div>
+                    
+                    <!-- Graduation Session Card -->
+                    <div class="session-type-card" id="graduation-card" onclick="selectSessionType('graduation')">
+                        <div class="session-icon">🎓</div>
+                        <h3>Graduation Session</h3>
+                        <p>Celebrate your achievement with professional graduation portraits</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Portrait Session Content -->
+            <div id="portrait-content" class="session-content active">
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <h3 style="font-family: 'Playfair Display', serif; color: #1C2F4A; margin-bottom: 10px;">Portrait Session Packages</h3>
                 </div>
 
-                <div class="package" onclick="selectPackage('standard')">
-                    <div class="package-name">Standard Session</div>
-                    <div class="package-price">$250</div>
-                    <ul class="package-details">
-                        <li>⏱️ 45 minutes</li>
-                        <li>📍 1 location</li>
-                        <li>📸 20 edited photos</li>
-                    </ul>
+                <div class="packages">
+                    <div class="package" onclick="selectPackage('mini', 'portrait')">
+                        <div class="package-name">Mini Session</div>
+                        <div class="package-price">$175</div>
+                        <ul class="package-details">
+                            <li>⏱️ 25 minutes</li>
+                            <li>📍 1 location</li>
+                            <li>📸 10 edited photos</li>
+                        </ul>
+                    </div>
+
+                    <div class="package" onclick="selectPackage('standard', 'portrait')">
+                        <div class="package-name">Standard Session</div>
+                        <div class="package-price">$250</div>
+                        <ul class="package-details">
+                            <li>⏱️ 45 minutes</li>
+                            <li>📍 1 location</li>
+                            <li>📸 20 edited photos</li>
+                        </ul>
+                    </div>
+
+                    <div class="package" onclick="selectPackage('signature', 'portrait')">
+                        <div class="package-name">Signature Session</div>
+                        <div class="package-price">$375</div>
+                        <ul class="package-details">
+                            <li>⏱️ 75 minutes</li>
+                            <li>📍 2 locations</li>
+                            <li>📸 30 edited photos</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Graduation Session Content -->
+            <div id="graduation-content" class="session-content">
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <h3 style="font-family: 'Playfair Display', serif; color: #1C2F4A; margin-bottom: 10px;">Graduation Session Packages</h3>
                 </div>
 
-                <div class="package" onclick="selectPackage('signature')">
-                    <div class="package-name">Signature Session</div>
-                    <div class="package-price">$375</div>
-                    <ul class="package-details">
-                        <li>⏱️ 75 minutes</li>
-                        <li>📍 2 locations</li>
-                        <li>📸 30 edited photos</li>
-                    </ul>
-                    <div class="package-note">*Limited: 1 per day</div>
+                <div class="packages">
+                    <div class="package" onclick="selectPackage('mini', 'graduation')">
+                        <div class="package-name">Mini Session</div>
+                        <div class="package-price">$175</div>
+                        <ul class="package-details">
+                            <li>⏱️ 25 minutes</li>
+                            <li>📍 1 location</li>
+                            <li>📸 10 edited photos</li>
+                        </ul>
+                    </div>
+
+                    <div class="package" onclick="selectPackage('standard', 'graduation')">
+                        <div class="package-name">Standard Session</div>
+                        <div class="package-price">$250</div>
+                        <ul class="package-details">
+                            <li>⏱️ 45 minutes</li>
+                            <li>📍 1 location</li>
+                            <li>📸 20 edited photos</li>
+                        </ul>
+                    </div>
+
+                    <div class="package" onclick="selectPackage('signature', 'graduation')">
+                        <div class="package-name">Signature Session</div>
+                        <div class="package-price">$375</div>
+                        <ul class="package-details">
+                            <li>⏱️ 75 minutes</li>
+                            <li>📍 2 locations</li>
+                            <li>📸 30 edited photos</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
@@ -560,6 +677,43 @@
                     <div class="form-group">
                         <label for="phone">Phone Number *</label>
                         <input type="tel" id="phone" name="phone" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="sessionType">Session Type *</label>
+                        <select id="sessionType" name="sessionType" required onchange="toggleSessionFields()">
+                            <option value="">Choose session type...</option>
+                            <option value="portrait">Portrait Session</option>
+                            <option value="graduation">Graduation Session</option>
+                        </select>
+                    </div>
+
+                    <!-- Graduation-specific fields -->
+                    <div id="graduationFields" style="display: none;">
+                        <div class="form-group">
+                            <label for="schoolName">School Name *</label>
+                            <input type="text" id="schoolName" name="schoolName">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="graduationDate">Graduation Date *</label>
+                            <input type="text" id="graduationDate" name="graduationDate" placeholder="e.g., May 15, 2026">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="degreeProgram">Degree/Program</label>
+                            <input type="text" id="degreeProgram" name="degreeProgram" placeholder="e.g., Bachelor of Science in Engineering">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="capGown">Will you have cap & gown? *</label>
+                            <select id="capGown" name="capGown">
+                                <option value="">Please select...</option>
+                                <option value="yes">Yes</option>
+                                <option value="no">No</option>
+                                <option value="unsure">Not sure yet</option>
+                            </select>
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -642,6 +796,58 @@
 
     <script>
         let selectedPackage = '';
+        let currentSessionType = 'portrait';
+
+        function selectSessionType(type) {
+            console.log('==== selectSessionType called ====');
+            console.log('Type:', type);
+            currentSessionType = type;
+            
+            // Update card active states
+            document.getElementById('portrait-card').classList.remove('active');
+            document.getElementById('graduation-card').classList.remove('active');
+            document.getElementById(type + '-card').classList.add('active');
+            console.log('Updated card states');
+            
+            // Show/hide package content
+            const portraitContent = document.getElementById('portrait-content');
+            const graduationContent = document.getElementById('graduation-content');
+            console.log('Portrait content element:', portraitContent);
+            console.log('Graduation content element:', graduationContent);
+            
+            portraitContent.classList.remove('active');
+            graduationContent.classList.remove('active');
+            document.getElementById(type + '-content').classList.add('active');
+            console.log('Updated content visibility for:', type);
+            
+            // Update form session type dropdown
+            document.getElementById('sessionType').value = type;
+            toggleSessionFields();
+            
+            // Clear selected package
+            document.querySelectorAll('.package').forEach(p => p.classList.remove('selected'));
+            document.getElementById('package').value = '';
+            console.log('==== selectSessionType complete ====');
+        }
+
+        function toggleSessionFields() {
+            const sessionType = document.getElementById('sessionType').value;
+            const graduationFields = document.getElementById('graduationFields');
+            
+            if (sessionType === 'graduation') {
+                graduationFields.style.display = 'block';
+                // Make graduation fields required
+                document.getElementById('schoolName').required = true;
+                document.getElementById('graduationDate').required = true;
+                document.getElementById('capGown').required = true;
+            } else {
+                graduationFields.style.display = 'none';
+                // Remove required from graduation fields
+                document.getElementById('schoolName').required = false;
+                document.getElementById('graduationDate').required = false;
+                document.getElementById('capGown').required = false;
+            }
+        }
 
         function accessAdmin() {
             const password = prompt('Enter admin password:');
@@ -654,7 +860,13 @@
             window.open('https://formspree.io/forms/xojnerpq/submissions', '_blank');
         }
 
-function selectPackage(pkg) {
+function selectPackage(pkg, sessionType) {
+            // Update current session type
+            currentSessionType = sessionType;
+            document.getElementById('sessionType').value = sessionType;
+            toggleSessionFields();
+            
+            // Remove selected from all packages
             document.querySelectorAll('.package').forEach(p => p.classList.remove('selected'));
             event.currentTarget.classList.add('selected');
             
