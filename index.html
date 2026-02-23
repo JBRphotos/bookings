@@ -99,7 +99,7 @@
         .carousel-container { overflow: hidden; width: 100%; margin: 40px 0; }
         .carousel-track { display: flex; gap: 25px; animation: scroll 38s linear infinite; }
         @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-        .carousel-item { flex: 0 0 400px; height: 300px; border-radius: 15px; overflow: hidden; }
+        .carousel-item { flex: 0 0 400px; height: 300px; border-radius: 15px; overflow: hidden; cursor: pointer; }
         .carousel-item img { width: 100%; height: 100%; object-fit: cover; }
 
         /* Grid Styles */
@@ -195,8 +195,7 @@
                 <p>Explore my work across sports, portraits, and creative photography</p>
             </div>
             <div class="carousel-container">
-                <div class="carousel-track" id="portfolio-carousel">
-                    </div>
+                <div class="carousel-track" id="portfolio-carousel"></div>
             </div>
             <div style="text-align: center; margin-top: 40px;">
                 <a href="portfolio.html" class="cta-button">View Full Portfolio</a>
@@ -226,7 +225,7 @@
                 <p style="color:white">Ready to work together?</p>
             </div>
             <div style="margin-bottom: 40px;">
-                <p>Email: <a href="/cdn-cgi/l/email-protection#a6ccc4d4d6cec9d2c9d595909396e6c1cbc7cfca88c5c9cb" style="color:var(--accent); text-decoration:none; font-size:1.2rem;"><span class="__cf_email__" data-cfemail="9af0f8e8eaf2f5eef5e9a9acafaadafdf7fbf3f6b4f9f5f7">[email&#160;protected]</span></a></p>
+                <p>Email: <a href="mailto:jbrphotos3650@gmail.com" style="color:var(--accent); text-decoration:none; font-size:1.2rem;">jbrphotos3650@gmail.com</a></p>
                 <p style="margin-top:20px;">📸 <a href="https://www.instagram.com/jbrphotos" target="_blank" style="color:white; text-decoration:none;">Follow on Instagram</a></p>
             </div>
             <a href="booking.html" class="cta-button">Book a Session</a>
@@ -237,10 +236,10 @@
         <p>&copy; 2026 Jesse Reilly Photography. All rights reserved.</p>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
         document.addEventListener('DOMContentLoaded', function () {
             
-            // 1. CAROUSEL LOGIC
+            // 1. PORTFOLIO CAROUSEL LOGIC
             const carousel = document.getElementById('portfolio-carousel');
             const carouselImages = [
                 'images/sports/photo1.jpg', 'images/sports/photo2.jpg',
@@ -257,6 +256,7 @@
                 const div = document.createElement('div');
                 div.className = 'carousel-item';
                 div.innerHTML = `<img src="${src}" alt="Portfolio" onerror="this.style.display='none'">`;
+                div.onclick = () => window.location.href = 'portfolio.html';
                 carousel.appendChild(div);
             });
 
@@ -276,20 +276,9 @@
                 div.className = 'carousel-item';
                 div.innerHTML = `<img src="${src}" alt="Print for sale" onerror="this.style.display='none'">`;
                 div.onclick = () => window.open('https://jbrphotos.darkroom.com', '_blank');
-                div.style.cursor = 'pointer';
                 galleryCarousel.appendChild(div);
             });
         });
     </script>
-            const galleryImages = [
-                'images/gallery/photo1.jpg', 'images/gallery/photo2.jpg',
-                'images/gallery/photo3.jpg', 'images/gallery/photo4.jpg',
-                'images/gallery/photo5.jpg', 'images/gallery/photo6.jpg'
-            ];
-
-            galleryImages.forEach(src => {
-                const div = document.createElement('div');
-                div.className = 'photo-item';
-                div.innerHTML = `
-                    <img src="${src}" alt="Print for sale" onerror="this.parentElement.style.display='none'">
-                    <div class="photo-overlay">
+</body>
+</html>
