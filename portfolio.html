@@ -522,11 +522,11 @@
                 <div class="accordion-content">
                     <div class="albums">
                         <div class="album-card" onclick="openAlbum('hive-athletics')">
-                            <img src="images/sports/photo2.jpg" alt="Hive Athletics" onerror="this.src='images/placeholder.jpg'">
+                            <img src="images/sports/photo2.jpg" alt="Hive Athletics" loading="lazy" onerror="this.src='images/placeholder.jpg'">
                             <h3>Hive Athletics</h3>
                         </div>
                         <div class="album-card" onclick="openAlbum('artistic-sports')">
-                            <img src="images/sports/photo4.jpg" alt="Artistic" onerror="this.src='images/placeholder.jpg'">
+                            <img src="images/sports/photo4.jpg" alt="Artistic" loading="lazy" onerror="this.src='images/placeholder.jpg'">
                             <h3>Artistic</h3>
                         </div>
                     </div>
@@ -673,7 +673,7 @@
                 photos.forEach(src => {
                     const div = document.createElement('div');
                     div.className = 'photo-item';
-                    div.innerHTML = `<img src="${src}" alt="Portfolio" onerror="this.parentElement.style.display='none'">`;
+                    div.innerHTML = `<img src="${src}" alt="Portfolio" loading="lazy" onerror="this.parentElement.style.display='none'">`;
                     div.onclick = () => openLightbox(src);
                     grid.appendChild(div);
                 });
@@ -760,7 +760,7 @@
                 photos.forEach((src, index) => {
                     const div = document.createElement('div');
                     div.className = 'photo-item';
-                    div.innerHTML = `<img src="${src}" alt="${title}" onerror="this.parentElement.style.display='none'">`;
+                    div.innerHTML = `<img src="${src}" alt="${title}" loading="lazy" onerror="this.parentElement.style.display='none'">`;
                     div.onclick = () => openLightbox(src, index);
                     grid.appendChild(div);
                 });
