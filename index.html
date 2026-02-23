@@ -179,7 +179,7 @@
                     <p>From high-energy sports events to intimate portrait sessions, I bring a creative eye and professional approach to every shoot.</p>
                     <p>Currently working with local sports leagues and offering graduation portrait sessions. Let's create something memorable together.</p>
                 </div>
-                <img src="images/about.jpg" alt="Jesse Reilly" class="about-image">
+                <img src="images/about.jpg" alt="Jesse Reilly" class="about-image" loading="lazy">
             </div>
         </div>
     </section>
@@ -252,7 +252,7 @@
             doubledCarousel.forEach(src => {
                 const div = document.createElement('div');
                 div.className = 'carousel-item';
-                div.innerHTML = `<img src="${src}" alt="Portfolio" onerror="this.style.display='none'">`;
+                div.innerHTML = `<img src="${src}" alt="Portfolio" loading="lazy" onerror="this.style.display='none'">`;
                 div.onclick = () => window.location.href = 'portfolio.html';
                 carousel.appendChild(div);
             });
@@ -271,7 +271,7 @@
             doubledGallery.forEach(src => {
                 const div = document.createElement('div');
                 div.className = 'carousel-item';
-                div.innerHTML = `<img src="${src}" alt="Print for sale" onerror="this.style.display='none'">`;
+                div.innerHTML = `<img src="${src}" alt="Print for sale" loading="lazy" onerror="this.style.display='none'">`;
                 div.onclick = () => window.open('https://jbrphotos.darkroom.com', '_blank');
                 galleryCarousel.appendChild(div);
             });
