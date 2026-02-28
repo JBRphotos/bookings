@@ -140,35 +140,6 @@
             text-decoration: none;
         }
 
-        .tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 30px;
-            border-bottom: 2px solid #ddd;
-        }
-
-        .tab {
-            padding: 12px 24px;
-            background: none;
-            border: none;
-            border-bottom: 3px solid transparent;
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: 500;
-            color: #666;
-            transition: all 0.3s;
-            font-family: 'Work Sans', sans-serif;
-        }
-
-        .tab.active {
-            color: #0B1F33;
-            border-bottom-color: #D4AF6A;
-        }
-
-        .tab:hover {
-            color: #0B1F33;
-        }
-
         .tab-content {
             display: none;
         }
@@ -217,14 +188,14 @@
             font-family: 'Playfair Display', serif;
             font-size: 1.5rem;
             font-weight: 600;
-            color: var(--secondary);
+            color: #1C2F4A;
             margin-bottom: 10px;
         }
 
         .package-price {
             font-size: 2rem;
             font-weight: 600;
-            color: var(--primary);
+            color: #0B1F33;
             margin-bottom: 15px;
         }
 
@@ -241,13 +212,6 @@
 
         .package-details li:last-child {
             border-bottom: none;
-        }
-
-        .package-note {
-            font-size: 0.85rem;
-            color: #666;
-            font-style: italic;
-            margin-top: 10px;
         }
 
         .session-type-card {
@@ -396,16 +360,6 @@
             background: #C19A54;
         }
 
-        .btn-secondary {
-            background: #f0f0f0;
-            color: #0B1F33;
-            margin-right: 10px;
-        }
-
-        .btn-secondary:hover {
-            background: #e0e0e0;
-        }
-
         .modal {
             display: none;
             position: fixed;
@@ -445,42 +399,18 @@
             margin-bottom: 15px;
         }
 
-        .booking-card {
-            background: var(--white);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 15px rgba(11, 31, 51, 0.08);
-            margin-bottom: 15px;
-            text-align: left;
-            border-left: 4px solid #D4AF6A;
-        }
-
         @media (max-width: 768px) {
             h1 { font-size: 2rem; }
             .packages { grid-template-columns: 1fr; }
-            .tabs { flex-direction: column; }
-            .tab {
-                border-left: 3px solid transparent;
-                border-bottom: none;
-            }
-            .tab.active {
-                border-left-color: #D4AF6A;
-                border-bottom-color: transparent;
-            }
         }
 
-        /* ===== CALENDAR PICKER STYLES ===== */
+        /* ===== CALENDAR STYLES ===== */
         .calendar-picker {
             border: 2px solid #e0e0e0;
             border-radius: 8px;
             overflow: hidden;
             background: white;
             transition: border-color 0.3s;
-        }
-
-        .calendar-picker:focus-within {
-            border-color: #D4AF6A;
-            box-shadow: 0 0 0 3px rgba(212, 175, 106, 0.1);
         }
 
         .calendar-header {
@@ -496,12 +426,13 @@
             background: none;
             border: none;
             color: white;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             cursor: pointer;
-            padding: 4px 10px;
+            padding: 4px 12px;
             border-radius: 4px;
             transition: background 0.2s;
             width: auto;
+            line-height: 1;
         }
 
         .calendar-header button:hover {
@@ -551,6 +482,7 @@
             background: none;
             font-family: 'Work Sans', sans-serif;
             color: #0B1F33;
+            width: 100%;
         }
 
         .cal-day:hover:not(.disabled):not(.empty) {
@@ -584,7 +516,7 @@
             background: #fafafa;
             font-size: 0.9rem;
             color: #555;
-            min-height: 38px;
+            min-height: 42px;
         }
 
         .selected-date-chip {
@@ -629,7 +561,7 @@
         <a href="index.html" class="back-btn">← Back</a>
         <button class="admin-access-btn" onclick="accessAdmin()">Admin</button>
         <div class="logo">
-            <!-- Replace src with your logo image URL -->
+            <img src="images/logo.png" alt="JBR Photos Logo">
         </div>
         <h1>Jesse Reilly Photography</h1>
         <p class="tagline">Portrait Sessions</p>
@@ -638,10 +570,10 @@
 
     <div class="container">
         <div id="booking-tab" class="tab-content active">
+
             <!-- Session Type Cards -->
             <div style="text-align: center; margin-bottom: 40px;">
                 <h2 style="font-family: 'Playfair Display', serif; color: #1C2F4A; margin-bottom: 30px;">Choose Your Session Type</h2>
-                
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 40px;">
                     <div class="session-type-card active" id="portrait-card" onclick="selectSessionType('portrait')">
                         <div class="session-icon">📸</div>
@@ -656,7 +588,7 @@
                 </div>
             </div>
 
-            <!-- Portrait Session Content -->
+            <!-- Portrait Packages -->
             <div id="portrait-content" class="session-content active">
                 <div style="text-align: center; margin-bottom: 30px;">
                     <h3 style="font-family: 'Playfair Display', serif; color: #1C2F4A; margin-bottom: 10px;">Portrait Session Packages</h3>
@@ -692,7 +624,7 @@
                 </div>
             </div>
 
-            <!-- Graduation Session Content -->
+            <!-- Graduation Packages -->
             <div id="graduation-content" class="session-content">
                 <div style="text-align: center; margin-bottom: 30px;">
                     <h3 style="font-family: 'Playfair Display', serif; color: #1C2F4A; margin-bottom: 10px;">Graduation Session Packages</h3>
@@ -728,9 +660,11 @@
                 </div>
             </div>
 
+            <!-- Booking Form -->
             <div class="form-section">
                 <h2>Your Information</h2>
                 <form id="bookingForm" action="https://formspree.io/f/xojnerpq" method="POST">
+
                     <div class="form-group">
                         <label for="name">Full Name *</label>
                         <input type="text" id="name" name="name" required>
@@ -811,7 +745,6 @@
                             </div>
                         </div>
                         <p class="calendar-hint">Click a date to select it. Click again to deselect.</p>
-                        <!-- Hidden input that gets submitted with the form -->
                         <input type="hidden" id="preferredDates" name="preferredDates" required>
                     </div>
 
@@ -877,9 +810,9 @@
     </div>
 
     <script>
-        // ===== CALENDAR LOGIC =====
+        // ===== CALENDAR =====
         let calYear, calMonth;
-        let selectedDates = []; // array of "YYYY-MM-DD" strings
+        let selectedDates = [];
 
         function calInit() {
             const today = new Date();
@@ -909,11 +842,9 @@
             today.setHours(0,0,0,0);
             const firstDay = new Date(calYear, calMonth, 1).getDay();
             const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
-
             const grid = document.getElementById('calDays');
             grid.innerHTML = '';
 
-            // Empty cells before first day
             for (let i = 0; i < firstDay; i++) {
                 const empty = document.createElement('div');
                 empty.className = 'cal-day empty';
@@ -927,20 +858,14 @@
                 btn.type = 'button';
                 btn.textContent = d;
                 btn.className = 'cal-day';
-                btn.setAttribute('data-date', dateStr);
 
                 if (dateObj < today) {
                     btn.classList.add('disabled');
                 } else {
-                    if (dateObj.toDateString() === today.toDateString()) {
-                        btn.classList.add('today');
-                    }
-                    if (selectedDates.includes(dateStr)) {
-                        btn.classList.add('selected');
-                    }
+                    if (dateObj.toDateString() === today.toDateString()) btn.classList.add('today');
+                    if (selectedDates.includes(dateStr)) btn.classList.add('selected');
                     btn.addEventListener('click', () => calToggleDate(dateStr));
                 }
-
                 grid.appendChild(btn);
             }
         }
@@ -978,14 +903,12 @@
         function updateSelectedDisplay() {
             const display = document.getElementById('selectedDatesDisplay');
             const hiddenInput = document.getElementById('preferredDates');
-
             if (selectedDates.length === 0) {
                 display.innerHTML = '<span style="color:#aaa;">No dates selected yet</span>';
                 hiddenInput.value = '';
             } else {
                 display.innerHTML = selectedDates.map(d =>
-                    `<span class="selected-date-chip">
-                        ${formatDateForDisplay(d)}
+                    `<span class="selected-date-chip">${formatDateForDisplay(d)}
                         <button type="button" onclick="calRemoveDate('${d}')" title="Remove">✕</button>
                     </span>`
                 ).join('');
@@ -993,12 +916,11 @@
             }
         }
 
-        // Initialize calendar on page load
         calInit();
-        // ===== END CALENDAR LOGIC =====
+        // ===== END CALENDAR =====
 
 
-        // ===== FORM & SESSION LOGIC =====
+        // ===== SESSION & FORM =====
         let selectedPackage = '';
         let currentSessionType = 'portrait';
 
@@ -1058,13 +980,10 @@
 
         document.getElementById('bookingForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-
-            // Validate at least one date selected
             if (selectedDates.length === 0) {
-                alert('Please select at least one preferred date.');
+                alert('Please select at least one preferred date on the calendar.');
                 return;
             }
-
             try {
                 const form = e.target;
                 const response = await fetch(form.action, {
@@ -1072,12 +991,10 @@
                     body: new FormData(form),
                     headers: { 'Accept': 'application/json' }
                 });
-
                 if (response.ok) {
                     document.getElementById('successModal').classList.add('active');
                     this.reset();
                     document.querySelectorAll('.package').forEach(p => p.classList.remove('selected'));
-                    // Reset calendar
                     selectedDates = [];
                     updateSelectedDisplay();
                     renderCalendar();
