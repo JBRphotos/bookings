@@ -1,0 +1,69 @@
+/*  ┌─────────────────────────────────────────────────────────────┐
+    │              ★  JBR PHOTOS — SITE TEXT  ★                   │
+    │                                                             │
+    │   Controls ALL text across the website.                     │
+    │   For IMAGES, see photo-config.js                           │
+    │                                                             │
+    │   Edit on GitHub → Commit → Site updates automatically.     │
+    │   Or use the Admin Panel text editor to change everything.  │
+    └─────────────────────────────────────────────────────────────┘ */
+
+var siteText = {
+
+    homepage: {
+        heroTitle:       'Jesse Reilly',
+        heroSubtitle:    'Sports & Portrait Photography | Capturing Moments That Matter',
+        heroButtonText:  'Book a Session',
+        aboutHeading:    'About Me',
+        aboutSubheading: 'Photographer based in the NYC area',
+        aboutName:       'Hi, I\'m Jesse',
+        aboutParagraph1: 'I\'m a photographer specializing in sports and portraits, blending creativity with storytelling to capture moments as they naturally unfold.',
+        aboutParagraph2: 'My work is driven by curiosity and observation, focusing on movement, emotion, and the small details that bring energy and authenticity to an image.',
+        aboutParagraph3: 'I currently work with local sports leagues and offer graduation portrait sessions, creating work that feels thoughtful, expressive, and true to the moment.',
+        portfolioHeading:    'Portfolio',
+        portfolioSubheading: 'Explore my work across sports, portraits, and creative photography',
+        portfolioButtonText: 'View Full Portfolio',
+        shopHeading:     'Shop Prints',
+        shopSubheading:  'Featured Photos',
+        shopDescription: 'Available as high-quality prints',
+        shopButtonText:  'Visit Full Shop',
+        contactHeading:    'Get In Touch',
+        contactSubheading: 'Ready to work together?',
+        contactEmail:      'jbrphotos3650@gmail.com',
+        contactInstagram:  'Follow on Instagram',
+        contactButtonText: 'Book a Session'
+    },
+
+    portfolio: {
+        pageTitle:     'Portfolio',
+        pageSubtitle:  'Explore my work across sports, portraits, and creative photography',
+        ctaHeading:    'Ready to Book?',
+        ctaSubheading: 'Let\'s create something amazing together',
+        ctaButtonText: 'Book a Session'
+    },
+
+    booking: {
+        pageTitle:    'Jesse Reilly Photography',
+        pageSubtitle: 'Portrait Sessions',
+        labelName:    'Full Name',
+        labelEmail:   'Email Address',
+        labelPhone:   'Phone Number',
+        labelDate:    'Preferred Date(s)',
+        labelType:    'Session Type',
+        labelMessage: 'Special Requests or Notes',
+        submitButton: 'Submit Booking Request',
+        sessionTypes: [
+            'Sports Photography',
+            'Portrait Session',
+            'Graduation Photos',
+            'Family Photos',
+            'Event Coverage',
+            'Other'
+        ]
+    },
+
+    footer: {
+        copyrightText: '\u00A9 2026 Jesse Reilly Photography. All rights reserved.'
+    }
+
+};
