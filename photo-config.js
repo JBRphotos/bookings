@@ -6,8 +6,8 @@ var homepageConfig = {
     portfolioCarouselFolders: [
         'images/portraits',
         'images/sports',
-        'images/family',
         'images/graduation',
+        'images/family',
         'images/product'
     ],
     galleryCarouselFolder: 'images/gallery'
@@ -35,16 +35,6 @@ var sections = [
     },
 
     {
-        id: 'family', title: 'Family',
-        banner: 'images/family/photo1.jpg', folder: 'images/family',
-        albums: [
-            { id: 'family-album-1', title: 'Album 1', cover: 'images/family/photo1.jpg', start: 1, end: 15 },
-            { id: 'family-album-2', title: 'Album 2', cover: 'images/family/photo16.jpg', start: 16, end: 30 },
-            { id: 'family-album-3', title: 'Album 3', cover: 'images/family/photo31.jpg', start: 31, end: 50 }
-        ]
-    },
-
-    {
         id: 'graduation', title: 'Graduation',
         banner: 'images/graduation/photo1.jpg', folder: 'images/graduation',
         albums: [
@@ -55,8 +45,18 @@ var sections = [
     },
 
     {
+        id: 'family', title: 'Family',
+        banner: 'images/family/photo1.jpg', folder: 'images/family',
+        albums: [
+            { id: 'family-album-1', title: 'Album 1', cover: 'images/family/photo1.jpg', start: 1, end: 15 },
+            { id: 'family-album-2', title: 'Album 2', cover: 'images/family/photo16.jpg', start: 16, end: 30 },
+            { id: 'family-album-3', title: 'Album 3', cover: 'images/family/photo31.jpg', start: 31, end: 50 }
+        ]
+    },
+
+    {
         id: 'product', title: 'Product',
-        banner: 'images/events/photo1.jpg', folder: 'images/product',
+        banner: 'images/product/photo1.jpg', folder: 'images/product',
         albums: [
             { id: 'events-album-1', title: 'Album 1', cover: 'images/product/photo1.jpg', start: 1, end: 15 },
             { id: 'events-album-2', title: 'Album 2', cover: 'images/product/photo16.jpg', start: 16, end: 30 },
