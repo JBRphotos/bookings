@@ -200,6 +200,15 @@
             background: var(--soft-navy); padding: 16px 20px;
             display: flex; justify-content: space-between; align-items: center; cursor: pointer;
         }
+        .section-card-header-left { display: flex; align-items: center; gap: 12px; flex: 1; }
+        .drag-handle {
+            cursor: grab; color: var(--accent); font-size: 1.2rem; opacity: 0.6;
+            transition: opacity 0.3s; user-select: none; padding: 2px 4px; line-height: 1;
+        }
+        .drag-handle:hover { opacity: 1; }
+        .drag-handle:active { cursor: grabbing; }
+        .section-editor-card.dragging { opacity: 0.5; border: 2px dashed var(--accent); }
+        .section-editor-card.drag-over { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(212,175,106,0.3); }
         .section-card-header h4 { font-family: 'Playfair Display', serif; color: var(--white); font-size: 1.05rem; }
         .section-toggle { color: var(--accent); font-size: 1.5rem; font-weight: 300; transition: transform 0.3s; }
         .section-editor-card.open .section-toggle { transform: rotate(45deg); }
@@ -444,15 +453,16 @@
                 </div>
                 <div class="token-setup" id="photoTokenSetup">
                     <h4>GitHub Token Setup (one-time)</h4>
-                    <p>To auto-save, you need a GitHub Personal Access Token with "repo" permissions.</p>
+                    <p>To auto-save, you need a GitHub Personal Access Token with repo contents permissions.</p>
                     <ol>
-                        <li>Go to <strong>github.com → Settings → Developer settings → Personal access tokens → Tokens (classic)</strong></li>
-                        <li>Click "Generate new token (classic)"</li>
-                        <li>Name it "JBR Admin", check the <strong>repo</strong> box, click Generate</li>
+                        <li>Go to <strong>github.com → Settings → Developer settings → Personal access tokens → Fine-grained tokens</strong></li>
+                        <li>Click "Generate new token"</li>
+                        <li>Name it "JBR Admin", select your <strong>bookings</strong> repo, set Contents to Read &amp; Write</li>
                         <li>Copy the token and paste it below</li>
                     </ol>
                     <div class="token-input-row">
-                        <input type="password" class="token-input" id="githubToken" placeholder="ghp_xxxxxxxxxxxx">
+                        <input type="password" class="token-input" id="githubToken" placeholder="github_pat_xxxxxxxxxxxx">
+                        <button class="token-save-btn" onclick="toggleTokenVisibility()" style="background:transparent; border:1px solid var(--slate); color:var(--text-muted);">Show</button>
                         <button class="token-save-btn" onclick="saveToken()">Save Token</button>
                     </div>
                     <div class="token-status" id="tokenStatus"></div>
@@ -511,6 +521,11 @@
                 <div class="save-mode-toggle">
                     <button class="save-mode-btn active" id="text-mode-copy" onclick="setSaveMode('text','copy')">Copy & Paste</button>
                     <button class="save-mode-btn" id="text-mode-auto" onclick="setSaveMode('text','auto')">Auto-Save to GitHub</button>
+                </div>
+                <div class="token-setup" id="textTokenSetup">
+                    <h4>GitHub Token</h4>
+                    <div id="textTokenStatus" class="token-status" style="display:none;"></div>
+                    <p id="textTokenMsg" style="font-size:0.85rem; color:var(--text-muted);">Checking token...</p>
                 </div>
 
                 <!-- Page Tabs -->
@@ -816,17 +831,50 @@
                 document.getElementById('photo-mode-copy').classList.toggle('active', mode === 'copy');
                 document.getElementById('photo-mode-auto').classList.toggle('active', mode === 'auto');
                 document.getElementById('photoTokenSetup').classList.toggle('show', mode === 'auto');
+                if (mode === 'auto') checkExistingToken();
             } else {
                 textSaveMode = mode;
                 document.getElementById('text-mode-copy').classList.toggle('active', mode === 'copy');
                 document.getElementById('text-mode-auto').classList.toggle('active', mode === 'auto');
+                document.getElementById('textTokenSetup').classList.toggle('show', mode === 'auto');
+                if (mode === 'auto') checkExistingTokenText();
             }
+        }
+        function checkExistingToken() {
+            var existing = localStorage.getItem('jbr_github_token');
+            var status = document.getElementById('tokenStatus');
+            var input = document.getElementById('githubToken');
+            if (existing) {
+                input.value = existing;
+                status.className = 'token-status success';
+                status.textContent = 'Token loaded — auto-save is ready.';
+            }
+        }
+        function checkExistingTokenText() {
+            var existing = localStorage.getItem('jbr_github_token');
+            var msg = document.getElementById('textTokenMsg');
+            if (existing) {
+                msg.style.color = '#2E7D32';
+                msg.textContent = '✓ Token loaded — auto-save is ready.';
+            } else {
+                msg.style.color = 'var(--danger)';
+                msg.textContent = 'No token saved. Add one in the Photo Config editor first.';
+            }
+        }
+        function toggleTokenVisibility() {
+            var input = document.getElementById('githubToken');
+            var isHidden = input.type === 'password';
+            input.type = isHidden ? 'text' : 'password';
+            input.previousElementSibling ? null : null;
+            // Update button text
+            var btn = input.parentElement.querySelectorAll('.token-save-btn')[0];
+            btn.textContent = isHidden ? 'Hide' : 'Show';
         }
         function saveToken() {
             var token = document.getElementById('githubToken').value.trim();
             var status = document.getElementById('tokenStatus');
-            if (!token || !token.startsWith('ghp_')) {
-                status.className = 'token-status error'; status.textContent = 'Token should start with ghp_'; return;
+            if (!token || (!token.startsWith('ghp_') && !token.startsWith('github_pat_'))) {
+                status.className = 'token-status error'; status.textContent = 'Token should start with ghp_ or github_pat_'; return;
             }
             localStorage.setItem('jbr_github_token', token);
             status.className = 'token-status success'; status.textContent = 'Token saved! Auto-save enabled.';
@@ -917,8 +965,10 @@
                 var card = document.createElement('div');
                 card.className = 'section-editor-card';
                 card.id = 'sec-card-' + si;
+                card.setAttribute('draggable', 'true');
+                card.setAttribute('data-index', si);
                 card.innerHTML =
-                    '<div class="section-card-header" onclick="toggleCard(' + si + ')"><h4>' + esc(section.title) + '</h4><span class="section-toggle">+</span></div>' +
+                    '<div class="section-card-header" onclick="toggleCard(' + si + ')"><div class="section-card-header-left"><span class="drag-handle" title="Drag to reorder" onclick="event.stopPropagation()">☰</span><h4>' + esc(section.title) + '</h4></div><span class="section-toggle">+</span></div>' +
                     '<div class="section-card-body"><div class="section-card-inner">' +
                         '<div class="field-row">' +
                             '<div class="field-group"><label class="field-label">Title</label><input class="field-input" value="' + esc(section.title) + '" onchange="updateSecTitle(' + si + ',this.value)"></div>' +
@@ -934,6 +984,44 @@
                         '<div class="section-actions"><button class="section-remove-btn" onclick="removeSection(' + si + ')">Remove Section</button></div>' +
                     '</div></div>';
                 container.appendChild(card);
+            });
+            initDragDrop();
+        }
+
+        /* ══ Drag & Drop Reorder ══ */
+        var dragSrcIndex = null;
+        function initDragDrop() {
+            var cards = document.querySelectorAll('#sections-container .section-editor-card');
+            cards.forEach(function(card) {
+                card.addEventListener('dragstart', function(e) {
+                    dragSrcIndex = parseInt(this.getAttribute('data-index'));
+                    this.classList.add('dragging');
+                    e.dataTransfer.effectAllowed = 'move';
+                    e.dataTransfer.setData('text/plain', dragSrcIndex);
+                });
+                card.addEventListener('dragend', function() {
+                    this.classList.remove('dragging');
+                    document.querySelectorAll('.section-editor-card').forEach(function(c) { c.classList.remove('drag-over'); });
+                });
+                card.addEventListener('dragover', function(e) {
+                    e.preventDefault();
+                    e.dataTransfer.dropEffect = 'move';
+                    this.classList.add('drag-over');
+                });
+                card.addEventListener('dragleave', function() {
+                    this.classList.remove('drag-over');
+                });
+                card.addEventListener('drop', function(e) {
+                    e.preventDefault();
+                    this.classList.remove('drag-over');
+                    var targetIndex = parseInt(this.getAttribute('data-index'));
+                    if (dragSrcIndex === null || dragSrcIndex === targetIndex) return;
+                    var moved = editSections.splice(dragSrcIndex, 1)[0];
+                    editSections.splice(targetIndex, 0, moved);
+                    renderSections();
+                    buildDropdown();
+                    showToast('Section moved!', 'success');
+                });
             });
         }
 
@@ -1188,22 +1276,47 @@
             if (!token) { showToast('No GitHub token. Add one or use Copy & Paste.','error'); return; }
             document.getElementById(statusId).textContent = 'Saving...';
             try {
-                var r = await fetch('https://api.github.com/repos/JBRphotos/JBRphotos.github.io/contents/' + filename, {
+                var r = await fetch('https://api.github.com/repos/JBRphotos/bookings/contents/' + filename, {
                     headers: {'Authorization':'token '+token}
                 });
                 var d = await r.json();
                 if (!r.ok) throw new Error(d.message||'Failed to read');
-                var p = await fetch('https://api.github.com/repos/JBRphotos/JBRphotos.github.io/contents/' + filename, {
+                var p = await fetch('https://api.github.com/repos/JBRphotos/bookings/contents/' + filename, {
                     method:'PUT', headers:{'Authorization':'token '+token,'Content-Type':'application/json'},
                     body: JSON.stringify({message:'Update '+filename+' via admin',content:btoa(unescape(encodeURIComponent(code))),sha:d.sha})
                 });
                 if (p.ok) {
+                    document.getElementById(statusId).textContent = 'Saved — updating cache...';
+                    await bustCacheOnPages(token, filename);
                     showToast('Saved to GitHub! Site updates in ~30s.','success');
                     document.getElementById(statusId).textContent = 'Saved';
                 } else { var e = await p.json(); throw new Error(e.message||'Failed'); }
             } catch(err) {
                 showToast('Error: '+err.message,'error');
                 document.getElementById(statusId).textContent = 'Failed';
+            }
+        }
+
+        /* ══ Cache Bust ══ */
+        async function bustCacheOnPages(token, configFile) {
+            var pages = ['index.html', 'portfolio.html', 'booking.html'];
+            var v = Date.now();
+            for (var i = 0; i < pages.length; i++) {
+                try {
+                    var r = await fetch('https://api.github.com/repos/JBRphotos/bookings/contents/' + pages[i], {
+                        headers: {'Authorization':'token '+token}
+                    });
+                    if (!r.ok) continue;
+                    var d = await r.json();
+                    var content = decodeURIComponent(escape(atob(d.content.replace(/\n/g,''))));
+                    var re = new RegExp(configFile.replace('.','\\.')+'\\?v=\\d+', 'g');
+                    var updated = content.replace(re, configFile + '?v=' + v);
+                    if (updated === content) continue;
+                    await fetch('https://api.github.com/repos/JBRphotos/bookings/contents/' + pages[i], {
+                        method:'PUT', headers:{'Authorization':'token '+token,'Content-Type':'application/json'},
+                        body: JSON.stringify({message:'Cache bust '+configFile+' in '+pages[i], content:btoa(unescape(encodeURIComponent(updated))), sha:d.sha})
+                    });
+                } catch(e) { console.log('Cache bust skip: '+pages[i], e); }
             }
         }
 
