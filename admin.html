@@ -462,6 +462,7 @@
                     </ol>
                     <div class="token-input-row">
                         <input type="password" class="token-input" id="githubToken" placeholder="github_pat_xxxxxxxxxxxx">
+                        <button class="token-save-btn" onclick="toggleTokenVisibility()" style="background:transparent; border:1px solid var(--slate); color:var(--text-muted);">Show</button>
                         <button class="token-save-btn" onclick="saveToken()">Save Token</button>
                     </div>
                     <div class="token-status" id="tokenStatus"></div>
@@ -520,6 +521,11 @@
                 <div class="save-mode-toggle">
                     <button class="save-mode-btn active" id="text-mode-copy" onclick="setSaveMode('text','copy')">Copy & Paste</button>
                     <button class="save-mode-btn" id="text-mode-auto" onclick="setSaveMode('text','auto')">Auto-Save to GitHub</button>
+                </div>
+                <div class="token-setup" id="textTokenSetup">
+                    <h4>GitHub Token</h4>
+                    <div id="textTokenStatus" class="token-status" style="display:none;"></div>
+                    <p id="textTokenMsg" style="font-size:0.85rem; color:var(--text-muted);">Checking token...</p>
                 </div>
 
                 <!-- Page Tabs -->
@@ -825,11 +831,44 @@
                 document.getElementById('photo-mode-copy').classList.toggle('active', mode === 'copy');
                 document.getElementById('photo-mode-auto').classList.toggle('active', mode === 'auto');
                 document.getElementById('photoTokenSetup').classList.toggle('show', mode === 'auto');
+                if (mode === 'auto') checkExistingToken();
             } else {
                 textSaveMode = mode;
                 document.getElementById('text-mode-copy').classList.toggle('active', mode === 'copy');
                 document.getElementById('text-mode-auto').classList.toggle('active', mode === 'auto');
+                document.getElementById('textTokenSetup').classList.toggle('show', mode === 'auto');
+                if (mode === 'auto') checkExistingTokenText();
             }
+        }
+        function checkExistingToken() {
+            var existing = localStorage.getItem('jbr_github_token');
+            var status = document.getElementById('tokenStatus');
+            var input = document.getElementById('githubToken');
+            if (existing) {
+                input.value = existing;
+                status.className = 'token-status success';
+                status.textContent = 'Token loaded — auto-save is ready.';
+            }
+        }
+        function checkExistingTokenText() {
+            var existing = localStorage.getItem('jbr_github_token');
+            var msg = document.getElementById('textTokenMsg');
+            if (existing) {
+                msg.style.color = '#2E7D32';
+                msg.textContent = '✓ Token loaded — auto-save is ready.';
+            } else {
+                msg.style.color = 'var(--danger)';
+                msg.textContent = 'No token saved. Add one in the Photo Config editor first.';
+            }
+        }
+        function toggleTokenVisibility() {
+            var input = document.getElementById('githubToken');
+            var isHidden = input.type === 'password';
+            input.type = isHidden ? 'text' : 'password';
+            input.previousElementSibling ? null : null;
+            // Update button text
+            var btn = input.parentElement.querySelectorAll('.token-save-btn')[0];
+            btn.textContent = isHidden ? 'Hide' : 'Show';
         }
         function saveToken() {
             var token = document.getElementById('githubToken').value.trim();
