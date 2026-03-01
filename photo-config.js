@@ -4,8 +4,8 @@ var homepageConfig = {
     heroImage:   'images/hero.jpg',
     aboutImage:  'images/about.jpg',
     portfolioCarouselFolders: [
-        'images/portraits',
         'images/sports',
+        'images/portraits',
         'images/graduation',
         'images/family',
         'images/product'
@@ -15,22 +15,22 @@ var homepageConfig = {
 
 var sections = [
     {
-        id: 'portraits', title: 'Portraits',
-        banner: 'images/portraits/photo1.jpg', folder: 'images/portraits',
-        albums: [
-            { id: 'portraits-album-1', title: 'Album 1', cover: 'images/portraits/photo1.jpg', start: 1, end: 15 },
-            { id: 'portraits-album-2', title: 'Album 2', cover: 'images/portraits/photo16.jpg', start: 16, end: 30 },
-            { id: 'portraits-album-3', title: 'Album 3', cover: 'images/portraits/photo31.jpg', start: 31, end: 50 }
-        ]
-    },
-
-    {
         id: 'sports', title: 'Sports',
         banner: 'images/sports/photo1.jpg', folder: 'images/sports',
         albums: [
             { id: 'sports-album-1', title: 'Album 1', cover: 'images/sports/photo1.jpg', start: 1, end: 15 },
             { id: 'sports-album-2', title: 'Album 2', cover: 'images/sports/photo16.jpg', start: 16, end: 30 },
             { id: 'sports-album-3', title: 'Album 3', cover: 'images/sports/photo31.jpg', start: 31, end: 50 }
+        ]
+    },
+
+    {
+        id: 'portraits', title: 'Portraits',
+        banner: 'images/portraits/photo1.jpg', folder: 'images/portraits',
+        albums: [
+            { id: 'portraits-album-1', title: 'Album 1', cover: 'images/portraits/photo1.jpg', start: 1, end: 15 },
+            { id: 'portraits-album-2', title: 'Album 2', cover: 'images/portraits/photo16.jpg', start: 16, end: 30 },
+            { id: 'portraits-album-3', title: 'Album 3', cover: 'images/portraits/photo31.jpg', start: 31, end: 50 }
         ]
     },
 
