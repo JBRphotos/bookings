@@ -8,101 +8,39 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
-            --primary: #0B1F33;
-            --secondary: #1C2F4A;
-            --accent: #D4AF6A;
-            --light: #F6F5F2;
-            --white: #ffffff;
-            --navy: #081728;
-            --text-primary: #0E1726;
-            --text-secondary: #5F6C7B;
-            --text-light: #E3E7EC;
-            --border-light: #E3E7EC;
-            --section-bg: #E3E7EC;
+            --primary: #0B1F33; --secondary: #1C2F4A; --accent: #D4AF6A;
+            --light: #F6F5F2; --white: #ffffff; --navy: #081728;
+            --text-primary: #0E1726; --text-secondary: #5F6C7B;
+            --text-light: #E3E7EC; --border-light: #E3E7EC; --section-bg: #E3E7EC;
         }
         html { scroll-behavior: smooth; }
         body { font-family: 'Work Sans', sans-serif; color: var(--primary); line-height: 1.6; overflow-x: hidden; }
-
-        nav {
-            position: fixed; top: 0; width: 100%;
-            background: rgba(10, 22, 40, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000; padding: 20px 0;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
-        }
-        nav .container {
-            max-width: 1400px; margin: 0 auto; padding: 0 40px;
-            display: flex; justify-content: space-between; align-items: center;
-        }
-        .logo-nav {
-            display: flex; align-items: center; gap: 15px;
-            color: var(--white); font-family: 'Playfair Display', serif;
-            font-size: 1.5rem; font-weight: 700; text-decoration: none;
-        }
+        nav { position: fixed; top: 0; width: 100%; background: rgba(10,22,40,0.95); backdrop-filter: blur(10px); z-index: 1000; padding: 20px 0; box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
+        nav .container { max-width: 1400px; margin: 0 auto; padding: 0 40px; display: flex; justify-content: space-between; align-items: center; }
+        .logo-nav { display: flex; align-items: center; gap: 15px; color: var(--white); font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; text-decoration: none; }
         .logo-nav img { width: 50px; height: 50px; }
         nav ul { display: flex; list-style: none; gap: 40px; }
         nav a { color: var(--white); text-decoration: none; font-weight: 500; transition: color 0.3s; font-size: 0.95rem; }
         nav a:hover { color: var(--accent); }
-
         .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; }
         @media (min-width: 769px) { .hamburger { display: none !important; } }
         .hamburger span { width: 25px; height: 3px; background: #FFFFFF; transition: all 0.3s; border-radius: 3px; }
         .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); }
         .hamburger.active span:nth-child(2) { opacity: 0; }
         .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
-
-        .dropdown { position: relative; }
-        .dropdown-menu {
-            display: none; position: absolute; top: 100%; left: 0;
-            background: rgba(10, 22, 40, 0.98); min-width: 180px;
-            padding: 10px 0; border-radius: 8px; margin-top: 15px;
-        }
-        .dropdown:hover .dropdown-menu, .dropdown-menu:hover { display: block; }
-        .dropdown-menu a { display: block; padding: 12px 20px; }
-
-        .hero {
-            height: 100vh; position: relative;
-            display: flex; align-items: center; justify-content: center;
-            background: linear-gradient(135deg, rgba(11,31,51,0.4) 0%, rgba(8,23,40,0.5) 100%);
-            background-size: cover; background-position: center;
-            color: var(--white); text-align: center;
-        }
+        .hero { height: 100vh; position: relative; display: flex; align-items: center; justify-content: center; background-size: cover; background-position: center; color: var(--white); text-align: center; }
         .hero h1 { font-family: 'Playfair Display', serif; font-size: 4.5rem; font-weight: 900; margin-bottom: 20px; color: #FFFFFF; }
         .hero p { color: #E3E7EC; font-size: 1.2rem; }
-
-        .cta-button {
-            display: inline-block; padding: 18px 45px;
-            background: #D4AF6A; color: #0B1F33; text-decoration: none;
-            font-weight: 600; border-radius: 50px; transition: all 0.3s; border: 2px solid #D4AF6A;
-        }
-        .cta-button:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(212, 175, 106, 0.4); }
-
-        .cta-button-outline {
-            display: inline-block; padding: 18px 45px;
-            background: transparent; color: #D4AF6A; text-decoration: none;
-            font-weight: 600; border-radius: 50px; transition: all 0.3s; border: 2px solid #D4AF6A;
-        }
+        .cta-button { display: inline-block; padding: 18px 45px; background: #D4AF6A; color: #0B1F33; text-decoration: none; font-weight: 600; border-radius: 50px; transition: all 0.3s; border: 2px solid #D4AF6A; }
+        .cta-button:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(212,175,106,0.4); }
+        .cta-button-outline { display: inline-block; padding: 18px 45px; background: transparent; color: #D4AF6A; text-decoration: none; font-weight: 600; border-radius: 50px; transition: all 0.3s; border: 2px solid #D4AF6A; }
         .cta-button-outline:hover { background: #D4AF6A; color: #0B1F33; transform: translateY(-3px); }
-
         .carousel-container { overflow: hidden; width: 100%; margin: 40px 0; }
         .carousel-track { display: flex; gap: 25px; }
         .carousel-track.scrolling { animation: scroll var(--scroll-duration, 38s) linear infinite; }
         @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
         .carousel-item { flex: 0 0 400px; height: 300px; border-radius: 15px; overflow: hidden; cursor: pointer; }
         .carousel-item img { width: 100%; height: 100%; object-fit: cover; }
-
-        .photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 25px; margin-top: 40px; }
-        .photo-item { position: relative; border-radius: 15px; overflow: hidden; aspect-ratio: 4/3; }
-        .photo-item img { width: 100%; height: 100%; object-fit: cover; }
-        .photo-overlay {
-            position: absolute; inset: 0;
-            background: rgba(10, 22, 40, 0.6);
-            display: flex; align-items: center; justify-content: center;
-            opacity: 0; transition: opacity 0.3s;
-        }
-        .photo-item:hover .photo-overlay { opacity: 1; }
-        .buy-print-btn { background: var(--accent); color: var(--primary); padding: 10px 20px; border-radius: 20px; text-decoration: none; font-weight: 600; }
-
         section { padding: 60px 20px; }
         .container { max-width: 1400px; margin: 0 auto; }
         .section-header { text-align: center; margin-bottom: 40px; }
@@ -110,36 +48,21 @@
         .section-header p { font-size: 1.2rem; color: #5F6C7B; }
         #about { background: #F6F5F2; }
         .about-content { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
-        .about-text {
-            background: #FFFFFF; padding: 40px; border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08); height: 100%;
-            display: flex; flex-direction: column; justify-content: center; border: 2px solid #E3E7EC;
-        }
-        .about-text h3 {
-            font-family: 'Playfair Display', serif; font-size: 2rem;
-            margin-bottom: 20px; color: #0B1F33; padding-bottom: 15px;
-            border-bottom: 3px solid #D4AF6A; display: inline-block;
-        }
+        .about-text { background: #FFFFFF; padding: 40px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); height: 100%; display: flex; flex-direction: column; justify-content: center; border: 2px solid #E3E7EC; }
+        .about-text h3 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 20px; color: #0B1F33; padding-bottom: 15px; border-bottom: 3px solid #D4AF6A; display: inline-block; }
         .about-text p { line-height: 1.8; color: #0E1726; margin-bottom: 15px; }
-        .about-image { width: 100%; border-radius: 20px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); }
+        .about-image { width: 100%; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); }
         #portfolio { background: #E3E7EC; }
         #gallery { background: #1C2F4A; color: var(--white); }
         #contact { background: #F6F5F2; color: var(--primary); text-align: center; }
         footer { background: #1C2F4A; color: #E3E7EC; padding: 30px; text-align: center; }
         footer a { color: #5F6C7B; transition: color 0.3s; }
         footer a:hover { color: #D4AF6A; }
-
         @media (max-width: 768px) {
             .hamburger { display: flex; }
-            nav ul {
-                position: absolute; top: 90px; left: 0; right: 0; width: 100%;
-                max-height: 0; overflow: hidden; background: #1C2F4A;
-                flex-direction: column; align-items: flex-start; padding: 0 20px; gap: 0;
-                transition: max-height 0.3s ease, padding 0.3s ease;
-                box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-            }
+            nav ul { position: absolute; top: 90px; left: 0; right: 0; width: 100%; max-height: 0; overflow: hidden; background: #1C2F4A; flex-direction: column; align-items: flex-start; padding: 0 20px; gap: 0; transition: max-height 0.3s ease, padding 0.3s ease; box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
             nav ul.active { max-height: 400px; padding: 20px; }
-            nav ul li { width: 100%; border-bottom: 1px solid rgba(227, 231, 236, 0.1); }
+            nav ul li { width: 100%; border-bottom: 1px solid rgba(227,231,236,0.1); }
             nav ul li:last-child { border-bottom: none; }
             nav a { font-size: 1rem; display: block; padding: 15px 0; }
             .about-content { grid-template-columns: 1fr; }
@@ -148,47 +71,42 @@
     </style>
 </head>
 <body>
-
     <nav>
         <div class="container">
-            <a href="#home" class="logo-nav">
-                <img src="images/logo.png" alt="JBR Photos Logo">
-                <span>JBRphotos</span>
-            </a>
-            <div class="hamburger" onclick="toggleMenu()">
-                <span></span><span></span><span></span>
-            </div>
+            <a href="#home" class="logo-nav"><img src="images/logo.png" alt="JBR Photos Logo"><span>JBRphotos</span></a>
+            <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
             <ul id="nav-menu">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#portfolio">Portfolio</a></li>
                 <li><a href="#gallery">Shop</a></li>
                 <li><a href="#contact">Contact</a></li>
+                <li><a href="admin.html" style="opacity:0.3;font-size:0.75rem;">●</a></li>
             </ul>
         </div>
     </nav>
 
     <section id="home" class="hero">
         <div class="hero-content">
-            <h1>Jesse Reilly</h1>
-            <p>Sports & Portrait Photography | Capturing Moments That Matter</p>
+            <h1 id="t-heroHeading"></h1>
+            <p id="t-heroSubtext"></p>
             <br>
-            <a href="booking.html" class="cta-button">Book a Session</a>
+            <a href="booking.html" class="cta-button" id="t-heroButton"></a>
         </div>
     </section>
 
     <section id="about">
         <div class="container">
             <div class="section-header">
-                <h2>About Me</h2>
-                <p>Photographer based in the NYC area</p>
+                <h2 id="t-aboutSectionTitle"></h2>
+                <p id="t-aboutSectionSub"></p>
             </div>
             <div class="about-content">
                 <div class="about-text">
-                    <h3>Hi, I'm Jesse</h3>
-                    <p>I'm a photographer specializing in sports and portraits, blending creativity with storytelling to capture moments as they naturally unfold.</p>
-                    <p>My work is driven by curiosity and observation, focusing on movement, emotion, and the small details that bring energy and authenticity to an image.</p>
-                    <p>I currently work with local sports leagues and offer graduation portrait sessions, creating work that feels thoughtful, expressive, and true to the moment.</p>
+                    <h3 id="t-aboutHeading"></h3>
+                    <p id="t-aboutP1"></p>
+                    <p id="t-aboutP2"></p>
+                    <p id="t-aboutP3"></p>
                 </div>
                 <img id="about-photo" src="" alt="Jesse Reilly" class="about-image" loading="lazy">
             </div>
@@ -198,14 +116,12 @@
     <section id="portfolio">
         <div class="container">
             <div class="section-header">
-                <h2 style="color:#0B1F33">Portfolio</h2>
-                <p style="color:#5F6C7B">Explore my work across sports, portraits, and creative photography</p>
+                <h2 style="color:#0B1F33" id="t-portfolioTitle"></h2>
+                <p style="color:#5F6C7B" id="t-portfolioSubtext"></p>
             </div>
-            <div class="carousel-container">
-                <div class="carousel-track" id="portfolio-carousel"></div>
-            </div>
-            <div style="text-align: center; margin-top: 40px;">
-                <a href="portfolio.html" class="cta-button-outline">View Full Portfolio</a>
+            <div class="carousel-container"><div class="carousel-track" id="portfolio-carousel"></div></div>
+            <div style="text-align:center;margin-top:40px;">
+                <a href="portfolio.html" class="cta-button-outline" id="t-portfolioButton"></a>
             </div>
         </div>
     </section>
@@ -213,15 +129,13 @@
     <section id="gallery">
         <div class="container">
             <div class="section-header">
-                <h2 style="color:#FFFFFF">Shop Prints</h2>
-                <h3 style="color:#D4AF6A; margin-top: 20px; font-size: 1.3rem; font-weight: 600;">Featured Photos</h3>
-                <p style="color:#E3E7EC; margin-top: 10px;">Available as high-quality prints</p>
+                <h2 style="color:#FFFFFF" id="t-shopTitle"></h2>
+                <h3 style="color:#D4AF6A;margin-top:20px;font-size:1.3rem;font-weight:600;" id="t-shopSubtitle"></h3>
+                <p style="color:#E3E7EC;margin-top:10px;" id="t-shopSubtext"></p>
             </div>
-            <div class="carousel-container">
-                <div class="carousel-track" id="gallery-carousel"></div>
-            </div>
-            <div style="text-align: center; margin-top: 50px;">
-                <a href="https://jbrphotos.darkroom.com" target="_blank" class="cta-button">Visit Full Shop</a>
+            <div class="carousel-container"><div class="carousel-track" id="gallery-carousel"></div></div>
+            <div style="text-align:center;margin-top:50px;">
+                <a id="t-shopButton" href="" target="_blank" class="cta-button"></a>
             </div>
         </div>
     </section>
@@ -229,112 +143,89 @@
     <section id="contact">
         <div class="container">
             <div class="section-header">
-                <h2 style="color:#0B1F33">Get In Touch</h2>
-                <p style="color:#0E1726">Ready to work together?</p>
+                <h2 style="color:#0B1F33" id="t-contactTitle"></h2>
+                <p style="color:#0E1726" id="t-contactSubtext"></p>
             </div>
-            <div style="margin-bottom: 40px;">
-                <p style="color:#0E1726">Email: <a href="mailto:jbrphotos3650@gmail.com" style="color:#D4AF6A; text-decoration:none; font-size:1.2rem;">jbrphotos3650@gmail.com</a></p>
-                <p style="margin-top:20px; color:#0E1726">📸 <a href="https://www.instagram.com/jbrphotos" target="_blank" style="color:#0E1726; text-decoration:none;">Follow on Instagram</a></p>
+            <div style="margin-bottom:40px;">
+                <p style="color:#0E1726">Email: <a id="t-contactEmail" href="" style="color:#D4AF6A;text-decoration:none;font-size:1.2rem;"></a></p>
+                <p style="margin-top:20px;color:#0E1726">📸 <a id="t-contactInsta" href="" target="_blank" style="color:#0E1726;text-decoration:none;">Follow on Instagram</a></p>
             </div>
-            <a href="booking.html" class="cta-button-outline">Book a Session</a>
+            <a href="booking.html" class="cta-button-outline" id="t-contactButton"></a>
         </div>
     </section>
 
-    <footer>
-        <p>&copy; 2026 Jesse Reilly Photography. All rights reserved.</p>
-    </footer>
+    <footer><p id="t-footer"></p></footer>
 
-    <!-- Reads photo settings from the config file -->
     <script src="photo-config.js"></script>
+    <script src="site-text.js"></script>
     <script>
         function toggleMenu() {
-            var menu = document.getElementById('nav-menu');
-            var hamburger = document.querySelector('.hamburger');
-            menu.classList.toggle('active');
-            hamburger.classList.toggle('active');
+            var m = document.getElementById('nav-menu'), h = document.querySelector('.hamburger');
+            m.classList.toggle('active'); h.classList.toggle('active');
         }
-
-        function loadImagesFromFolder(folder, maxPhotos) {
-            maxPhotos = maxPhotos || MAX_PHOTOS || 50;
+        function loadImagesFromFolder(folder, max) {
+            max = max || MAX_PHOTOS || 50;
             return new Promise(function(resolve) {
-                var found = [];
-                var checked = 0;
-                for (var i = 1; i <= maxPhotos; i++) {
-                    (function(index) {
-                        var img = new Image();
-                        var src = folder + '/photo' + index + '.jpg';
-                        img.onload = function() {
-                            found.push({ src: src, index: index });
-                            checked++;
-                            if (checked === maxPhotos) {
-                                found.sort(function(a, b) { return a.index - b.index; });
-                                resolve(found.map(function(f) { return f.src; }));
-                            }
-                        };
-                        img.onerror = function() {
-                            checked++;
-                            if (checked === maxPhotos) {
-                                found.sort(function(a, b) { return a.index - b.index; });
-                                resolve(found.map(function(f) { return f.src; }));
-                            }
-                        };
-                        img.src = src;
-                    })(i);
-                }
+                var found = [], checked = 0;
+                for (var i = 1; i <= max; i++) { (function(idx) {
+                    var img = new Image(), src = folder + '/photo' + idx + '.jpg';
+                    img.onload = function() { found.push({src:src,index:idx}); checked++; if(checked===max){found.sort(function(a,b){return a.index-b.index});resolve(found.map(function(f){return f.src}))} };
+                    img.onerror = function() { checked++; if(checked===max){found.sort(function(a,b){return a.index-b.index});resolve(found.map(function(f){return f.src}))} };
+                    img.src = src;
+                })(i); }
             });
         }
-
         document.addEventListener('DOMContentLoaded', async function() {
+            document.querySelectorAll('#nav-menu a').forEach(function(l){l.addEventListener('click',function(){document.getElementById('nav-menu').classList.remove('active');document.querySelector('.hamburger').classList.remove('active')})});
 
-            var navLinks = document.querySelectorAll('#nav-menu a');
-            navLinks.forEach(function(link) {
-                link.addEventListener('click', function() {
-                    document.getElementById('nav-menu').classList.remove('active');
-                    document.querySelector('.hamburger').classList.remove('active');
-                });
-            });
+            /* ── Apply text from config ── */
+            var hp = siteText.homepage;
+            document.getElementById('t-heroHeading').textContent = hp.heroTitle;
+            document.getElementById('t-heroSubtext').textContent = hp.heroSubtitle;
+            document.getElementById('t-heroButton').textContent = hp.heroButtonText;
+            document.getElementById('t-aboutSectionTitle').textContent = hp.aboutHeading;
+            document.getElementById('t-aboutSectionSub').textContent = hp.aboutSubheading;
+            document.getElementById('t-aboutHeading').textContent = hp.aboutName;
+            document.getElementById('t-aboutP1').textContent = hp.aboutParagraph1;
+            document.getElementById('t-aboutP2').textContent = hp.aboutParagraph2;
+            document.getElementById('t-aboutP3').textContent = hp.aboutParagraph3;
+            document.getElementById('t-portfolioTitle').textContent = hp.portfolioHeading;
+            document.getElementById('t-portfolioSubtext').textContent = hp.portfolioSubheading;
+            document.getElementById('t-portfolioButton').textContent = hp.portfolioButtonText;
+            document.getElementById('t-shopTitle').textContent = hp.shopHeading;
+            document.getElementById('t-shopSubtitle').textContent = hp.shopSubheading;
+            document.getElementById('t-shopSubtext').textContent = hp.shopDescription;
+            document.getElementById('t-shopButton').textContent = hp.shopButtonText;
+            document.getElementById('t-shopButton').href = 'https://jbrphotos.darkroom.com';
+            document.getElementById('t-contactTitle').textContent = hp.contactHeading;
+            document.getElementById('t-contactSubtext').textContent = hp.contactSubheading;
+            document.getElementById('t-contactEmail').textContent = hp.contactEmail;
+            document.getElementById('t-contactEmail').href = 'mailto:' + hp.contactEmail;
+            document.getElementById('t-contactInsta').textContent = hp.contactInstagram;
+            document.getElementById('t-contactInsta').href = 'https://www.instagram.com/jbrphotos';
+            document.getElementById('t-contactButton').textContent = hp.contactButtonText;
+            document.getElementById('t-footer').textContent = siteText.footer.copyrightText;
 
-            // Apply hero image from config
-            var hero = document.getElementById('home');
-            hero.style.backgroundImage = "linear-gradient(135deg, rgba(11,31,51,0.4) 0%, rgba(8,23,40,0.5) 100%), url('" + homepageConfig.heroImage + "')";
-
-            // Apply about photo from config
+            /* ── Apply images from config ── */
+            document.getElementById('home').style.backgroundImage = "linear-gradient(135deg, rgba(11,31,51,0.4) 0%, rgba(8,23,40,0.5) 100%), url('" + homepageConfig.heroImage + "')";
             document.getElementById('about-photo').src = homepageConfig.aboutImage;
 
-            // Portfolio carousel
+            /* ── Portfolio carousel ── */
             var carousel = document.getElementById('portfolio-carousel');
-            var allImages = [];
-            var folderResults = await Promise.all(
-                homepageConfig.portfolioCarouselFolders.map(function(folder) {
-                    return loadImagesFromFolder(folder);
-                })
-            );
-            folderResults.forEach(function(imgs) { allImages = allImages.concat(imgs); });
-            var shuffled = allImages.sort(function() { return Math.random() - 0.5; });
-            var doubled = shuffled.concat(shuffled);
-            doubled.forEach(function(src) {
-                var div = document.createElement('div');
-                div.className = 'carousel-item';
-                div.innerHTML = '<img src="' + src + '" alt="Portfolio" loading="lazy">';
-                div.onclick = function() { window.location.href = 'portfolio.html'; };
-                carousel.appendChild(div);
-            });
-            carousel.style.setProperty('--scroll-duration', Math.max(20, shuffled.length * 3.5) + 's');
+            var all = [];
+            var results = await Promise.all(homepageConfig.portfolioCarouselFolders.map(function(f){return loadImagesFromFolder(f)}));
+            results.forEach(function(imgs){all = all.concat(imgs)});
+            var shuffled = all.sort(function(){return Math.random()-0.5});
+            shuffled.concat(shuffled).forEach(function(src){var d=document.createElement('div');d.className='carousel-item';d.innerHTML='<img src="'+src+'" alt="Portfolio" loading="lazy">';d.onclick=function(){window.location.href='portfolio.html'};carousel.appendChild(d)});
+            carousel.style.setProperty('--scroll-duration',Math.max(20,shuffled.length*3.5)+'s');
             carousel.classList.add('scrolling');
 
-            // Gallery carousel
-            var galleryCarousel = document.getElementById('gallery-carousel');
-            var galleryImages = await loadImagesFromFolder(homepageConfig.galleryCarouselFolder);
-            var doubledGallery = galleryImages.concat(galleryImages);
-            doubledGallery.forEach(function(src) {
-                var div = document.createElement('div');
-                div.className = 'carousel-item';
-                div.innerHTML = '<img src="' + src + '" alt="Print for sale" loading="lazy">';
-                div.onclick = function() { window.open('https://jbrphotos.darkroom.com', '_blank'); };
-                galleryCarousel.appendChild(div);
-            });
-            galleryCarousel.style.setProperty('--scroll-duration', Math.max(20, galleryImages.length * 3.5) + 's');
-            galleryCarousel.classList.add('scrolling');
+            /* ── Gallery carousel ── */
+            var gc = document.getElementById('gallery-carousel');
+            var gi = await loadImagesFromFolder(homepageConfig.galleryCarouselFolder);
+            gi.concat(gi).forEach(function(src){var d=document.createElement('div');d.className='carousel-item';d.innerHTML='<img src="'+src+'" alt="Print" loading="lazy">';d.onclick=function(){window.open('https://jbrphotos.darkroom.com','_blank')};gc.appendChild(d)});
+            gc.style.setProperty('--scroll-duration',Math.max(20,gi.length*3.5)+'s');
+            gc.classList.add('scrolling');
         });
     </script>
 </body>
