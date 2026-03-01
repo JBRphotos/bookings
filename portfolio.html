@@ -319,8 +319,8 @@
         <div class="lightbox-dots" id="lightbox-dots"></div>
     </div>
 
-    <script src="photo-config.js"></script>
-    <script src="site-text.js"></script>
+    <script src="photo-config.js?v=20260301"></script>
+    <script src="site-text.js?v=20260301"></script>
     <script>
         function toggleMenu() {
             var menu = document.getElementById('nav-menu');
@@ -362,14 +362,16 @@
 
         document.addEventListener('DOMContentLoaded', function() {
 
-            // Apply text from config
-            var pt = siteText.portfolio;
-            document.getElementById('t-portfolioPageTitle').textContent = pt.pageTitle;
-            document.getElementById('t-portfolioPageSubtitle').textContent = pt.pageSubtitle;
-            document.getElementById('t-ctaHeading').textContent = pt.ctaHeading;
-            document.getElementById('t-ctaSubheading').textContent = pt.ctaSubheading;
-            document.getElementById('t-ctaButton').textContent = pt.ctaButtonText;
-            document.getElementById('t-portfolioFooter').textContent = siteText.footer.copyrightText;
+            // Apply text from config (if loaded)
+            if (typeof siteText !== 'undefined' && siteText.portfolio) {
+                var pt = siteText.portfolio;
+                document.getElementById('t-portfolioPageTitle').textContent = pt.pageTitle;
+                document.getElementById('t-portfolioPageSubtitle').textContent = pt.pageSubtitle;
+                document.getElementById('t-ctaHeading').textContent = pt.ctaHeading;
+                document.getElementById('t-ctaSubheading').textContent = pt.ctaSubheading;
+                document.getElementById('t-ctaButton').textContent = pt.ctaButtonText;
+                document.getElementById('t-portfolioFooter').textContent = siteText.footer.copyrightText;
+            }
 
             // Close mobile menu on link click
             var navLinks = document.querySelectorAll('#nav-menu a');
