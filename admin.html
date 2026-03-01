@@ -444,15 +444,15 @@
                 </div>
                 <div class="token-setup" id="photoTokenSetup">
                     <h4>GitHub Token Setup (one-time)</h4>
-                    <p>To auto-save, you need a GitHub Personal Access Token with "repo" permissions.</p>
+                    <p>To auto-save, you need a GitHub Personal Access Token with repo contents permissions.</p>
                     <ol>
-                        <li>Go to <strong>github.com → Settings → Developer settings → Personal access tokens → Tokens (classic)</strong></li>
-                        <li>Click "Generate new token (classic)"</li>
-                        <li>Name it "JBR Admin", check the <strong>repo</strong> box, click Generate</li>
+                        <li>Go to <strong>github.com → Settings → Developer settings → Personal access tokens → Fine-grained tokens</strong></li>
+                        <li>Click "Generate new token"</li>
+                        <li>Name it "JBR Admin", select your <strong>bookings</strong> repo, set Contents to Read &amp; Write</li>
                         <li>Copy the token and paste it below</li>
                     </ol>
                     <div class="token-input-row">
-                        <input type="password" class="token-input" id="githubToken" placeholder="ghp_xxxxxxxxxxxx">
+                        <input type="password" class="token-input" id="githubToken" placeholder="github_pat_xxxxxxxxxxxx">
                         <button class="token-save-btn" onclick="saveToken()">Save Token</button>
                     </div>
                     <div class="token-status" id="tokenStatus"></div>
@@ -825,8 +825,8 @@
         function saveToken() {
             var token = document.getElementById('githubToken').value.trim();
             var status = document.getElementById('tokenStatus');
-            if (!token || !token.startsWith('ghp_')) {
-                status.className = 'token-status error'; status.textContent = 'Token should start with ghp_'; return;
+            if (!token || (!token.startsWith('ghp_') && !token.startsWith('github_pat_'))) {
+                status.className = 'token-status error'; status.textContent = 'Token should start with ghp_ or github_pat_'; return;
             }
             localStorage.setItem('jbr_github_token', token);
             status.className = 'token-status success'; status.textContent = 'Token saved! Auto-save enabled.';
@@ -1188,12 +1188,12 @@
             if (!token) { showToast('No GitHub token. Add one or use Copy & Paste.','error'); return; }
             document.getElementById(statusId).textContent = 'Saving...';
             try {
-                var r = await fetch('https://api.github.com/repos/JBRphotos/JBRphotos.github.io/contents/' + filename, {
+                var r = await fetch('https://api.github.com/repos/JBRphotos/bookings/contents/' + filename, {
                     headers: {'Authorization':'token '+token}
                 });
                 var d = await r.json();
                 if (!r.ok) throw new Error(d.message||'Failed to read');
-                var p = await fetch('https://api.github.com/repos/JBRphotos/JBRphotos.github.io/contents/' + filename, {
+                var p = await fetch('https://api.github.com/repos/JBRphotos/bookings/contents/' + filename, {
                     method:'PUT', headers:{'Authorization':'token '+token,'Content-Type':'application/json'},
                     body: JSON.stringify({message:'Update '+filename+' via admin',content:btoa(unescape(encodeURIComponent(code))),sha:d.sha})
                 });
