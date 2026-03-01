@@ -1286,37 +1286,12 @@
                     body: JSON.stringify({message:'Update '+filename+' via admin',content:btoa(unescape(encodeURIComponent(code))),sha:d.sha})
                 });
                 if (p.ok) {
-                    document.getElementById(statusId).textContent = 'Saved — updating cache...';
-                    await bustCacheOnPages(token, filename);
                     showToast('Saved to GitHub! Site updates in ~30s.','success');
                     document.getElementById(statusId).textContent = 'Saved';
                 } else { var e = await p.json(); throw new Error(e.message||'Failed'); }
             } catch(err) {
                 showToast('Error: '+err.message,'error');
                 document.getElementById(statusId).textContent = 'Failed';
-            }
-        }
-
-        /* ══ Cache Bust ══ */
-        async function bustCacheOnPages(token, configFile) {
-            var pages = ['index.html', 'portfolio.html', 'booking.html'];
-            var v = Date.now();
-            for (var i = 0; i < pages.length; i++) {
-                try {
-                    var r = await fetch('https://api.github.com/repos/JBRphotos/bookings/contents/' + pages[i], {
-                        headers: {'Authorization':'token '+token}
-                    });
-                    if (!r.ok) continue;
-                    var d = await r.json();
-                    var content = decodeURIComponent(escape(atob(d.content.replace(/\n/g,''))));
-                    var re = new RegExp(configFile.replace('.','\\.')+'\\?v=\\d+', 'g');
-                    var updated = content.replace(re, configFile + '?v=' + v);
-                    if (updated === content) continue;
-                    await fetch('https://api.github.com/repos/JBRphotos/bookings/contents/' + pages[i], {
-                        method:'PUT', headers:{'Authorization':'token '+token,'Content-Type':'application/json'},
-                        body: JSON.stringify({message:'Cache bust '+configFile+' in '+pages[i], content:btoa(unescape(encodeURIComponent(updated))), sha:d.sha})
-                    });
-                } catch(e) { console.log('Cache bust skip: '+pages[i], e); }
             }
         }
 
