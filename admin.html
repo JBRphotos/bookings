@@ -200,6 +200,15 @@
             background: var(--soft-navy); padding: 16px 20px;
             display: flex; justify-content: space-between; align-items: center; cursor: pointer;
         }
+        .section-card-header-left { display: flex; align-items: center; gap: 12px; flex: 1; }
+        .drag-handle {
+            cursor: grab; color: var(--accent); font-size: 1.2rem; opacity: 0.6;
+            transition: opacity 0.3s; user-select: none; padding: 2px 4px; line-height: 1;
+        }
+        .drag-handle:hover { opacity: 1; }
+        .drag-handle:active { cursor: grabbing; }
+        .section-editor-card.dragging { opacity: 0.5; border: 2px dashed var(--accent); }
+        .section-editor-card.drag-over { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(212,175,106,0.3); }
         .section-card-header h4 { font-family: 'Playfair Display', serif; color: var(--white); font-size: 1.05rem; }
         .section-toggle { color: var(--accent); font-size: 1.5rem; font-weight: 300; transition: transform 0.3s; }
         .section-editor-card.open .section-toggle { transform: rotate(45deg); }
@@ -917,8 +926,10 @@
                 var card = document.createElement('div');
                 card.className = 'section-editor-card';
                 card.id = 'sec-card-' + si;
+                card.setAttribute('draggable', 'true');
+                card.setAttribute('data-index', si);
                 card.innerHTML =
-                    '<div class="section-card-header" onclick="toggleCard(' + si + ')"><h4>' + esc(section.title) + '</h4><span class="section-toggle">+</span></div>' +
+                    '<div class="section-card-header" onclick="toggleCard(' + si + ')"><div class="section-card-header-left"><span class="drag-handle" title="Drag to reorder" onclick="event.stopPropagation()">☰</span><h4>' + esc(section.title) + '</h4></div><span class="section-toggle">+</span></div>' +
                     '<div class="section-card-body"><div class="section-card-inner">' +
                         '<div class="field-row">' +
                             '<div class="field-group"><label class="field-label">Title</label><input class="field-input" value="' + esc(section.title) + '" onchange="updateSecTitle(' + si + ',this.value)"></div>' +
@@ -934,6 +945,44 @@
                         '<div class="section-actions"><button class="section-remove-btn" onclick="removeSection(' + si + ')">Remove Section</button></div>' +
                     '</div></div>';
                 container.appendChild(card);
+            });
+            initDragDrop();
+        }
+
+        /* ══ Drag & Drop Reorder ══ */
+        var dragSrcIndex = null;
+        function initDragDrop() {
+            var cards = document.querySelectorAll('#sections-container .section-editor-card');
+            cards.forEach(function(card) {
+                card.addEventListener('dragstart', function(e) {
+                    dragSrcIndex = parseInt(this.getAttribute('data-index'));
+                    this.classList.add('dragging');
+                    e.dataTransfer.effectAllowed = 'move';
+                    e.dataTransfer.setData('text/plain', dragSrcIndex);
+                });
+                card.addEventListener('dragend', function() {
+                    this.classList.remove('dragging');
+                    document.querySelectorAll('.section-editor-card').forEach(function(c) { c.classList.remove('drag-over'); });
+                });
+                card.addEventListener('dragover', function(e) {
+                    e.preventDefault();
+                    e.dataTransfer.dropEffect = 'move';
+                    this.classList.add('drag-over');
+                });
+                card.addEventListener('dragleave', function() {
+                    this.classList.remove('drag-over');
+                });
+                card.addEventListener('drop', function(e) {
+                    e.preventDefault();
+                    this.classList.remove('drag-over');
+                    var targetIndex = parseInt(this.getAttribute('data-index'));
+                    if (dragSrcIndex === null || dragSrcIndex === targetIndex) return;
+                    var moved = editSections.splice(dragSrcIndex, 1)[0];
+                    editSections.splice(targetIndex, 0, moved);
+                    renderSections();
+                    buildDropdown();
+                    showToast('Section moved!', 'success');
+                });
             });
         }
 
