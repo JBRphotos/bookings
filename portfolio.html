@@ -319,15 +319,7 @@
         <div class="lightbox-dots" id="lightbox-dots"></div>
     </div>
 
-    <script>
-        function loadScript(src) {
-            var s = document.createElement('script');
-            s.src = src + '?_=' + Math.floor(Date.now()/60000);
-            document.write(s.outerHTML);
-        }
-        loadScript('photo-config.js');
-        loadScript('site-text.js');
-    </script>
+    <script>var _v='?_='+Math.floor(Date.now()/60000);document.write('<script src="photo-config.js'+_v+'"><\/script><script src="site-text.js'+_v+'"><\/script>');</script>
     <script>
         function toggleMenu() {
             var menu = document.getElementById('nav-menu');
