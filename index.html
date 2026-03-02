@@ -216,7 +216,7 @@
             results.forEach(function(imgs){all = all.concat(imgs)});
             var shuffled = all.sort(function(){return Math.random()-0.5});
             shuffled.concat(shuffled).forEach(function(src){var d=document.createElement('div');d.className='carousel-item';d.innerHTML='<img src="'+src+'" alt="Portfolio" loading="lazy">';d.onclick=function(){window.location.href='portfolio.html'};carousel.appendChild(d)});
-            var pDur = Math.max(20,shuffled.length*3.5);
+            var pDur = Math.max(30,shuffled.length*5);
             var pHalf = shuffled.length * (400 + 25);
             carousel.style.animation = 'scrollP ' + pDur + 's linear infinite';
             var styleEl = document.createElement('style');
@@ -227,7 +227,7 @@
             var gc = document.getElementById('gallery-carousel');
             var gi = await loadImagesFromFolder(homepageConfig.galleryCarouselFolder);
             gi.concat(gi).forEach(function(src){var d=document.createElement('div');d.className='carousel-item';d.innerHTML='<img src="'+src+'" alt="Print" loading="lazy">';d.onclick=function(){window.open('https://jbrphotos.darkroom.com','_blank')};gc.appendChild(d)});
-            var gDur = Math.max(20,gi.length*3.5);
+            var gDur = Math.max(30,gi.length*5);
             var gHalf = gi.length * (400 + 25);
             gc.style.animation = 'scrollG ' + gDur + 's linear infinite';
             var styleEl2 = document.createElement('style');
