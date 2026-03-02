@@ -147,7 +147,7 @@
                 <p style="color:#0E1726" id="t-contactSubtext">Ready to work together?</p>
             </div>
             <div style="margin-bottom:40px;">
-                <p style="color:#0E1726">Email: <a id="t-contactEmail" href="/cdn-cgi/l/email-protection#244e4656544c4b504b5717121114644349454d480a474b49" style="color:#D4AF6A;text-decoration:none;font-size:1.2rem;"><span class="__cf_email__" data-cfemail="c7ada5b5b7afa8b3a8b4f4f1f2f787a0aaa6aeabe9a4a8aa">[email&#160;protected]</span></a></p>
+                <p style="color:#0E1726">Email: <a id="t-contactEmail" href="/cdn-cgi/l/email-protection#d0bab2a2a0b8bfa4bfa3e3e6e5e090b7bdb1b9bcfeb3bfbd" style="color:#D4AF6A;text-decoration:none;font-size:1.2rem;"><span class="__cf_email__" data-cfemail="29434b5b5941465d465a1a1f1c19694e44484045074a4644">[email&#160;protected]</span></a></p>
                 <p style="margin-top:20px;color:#0E1726">📸 <a id="t-contactInsta" href="https://www.instagram.com/jbrphotos" target="_blank" style="color:#0E1726;text-decoration:none;">Follow on Instagram</a></p>
             </div>
             <a href="booking.html" class="cta-button-outline" id="t-contactButton">Book a Session</a>
@@ -156,8 +156,7 @@
 
     <footer><p id="t-footer">&copy; 2026 Jesse Reilly Photography. All rights reserved.</p></footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-    <script src="photo-config.js"></script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="photo-config.js"></script>
     <script src="site-text.js"></script>
     <script>
         function toggleMenu() {
@@ -176,7 +175,7 @@
                 })(i); }
             });
         }
-        document.addEventListener('DOMContentLoaded', async function() {
+        (async function() {
             document.querySelectorAll('#nav-menu a').forEach(function(l){l.addEventListener('click',function(){document.getElementById('nav-menu').classList.remove('active');document.querySelector('.hamburger').classList.remove('active')})});
 
             /* ── Apply text from config ── */
@@ -224,4 +223,10 @@
             /* ── Gallery carousel ── */
             var gc = document.getElementById('gallery-carousel');
             var gi = await loadImagesFromFolder(homepageConfig.galleryCarouselFolder);
-            gi.concat(gi).forEach(function(src){var d=document.createElement('div');d.className='carousel-item';d.innerHTML='<img src="'+src+'" alt="Print" loading="lazy">';d.onclick=functio
+            gi.concat(gi).forEach(function(src){var d=document.createElement('div');d.className='carousel-item';d.innerHTML='<img src="'+src+'" alt="Print" loading="lazy">';d.onclick=function(){window.open('https://jbrphotos.darkroom.com','_blank')};gc.appendChild(d)});
+            gc.style.setProperty('--scroll-duration',Math.max(20,gi.length*3.5)+'s');
+            gc.classList.add('scrolling');
+        })();
+    </script>
+</body>
+</html>
