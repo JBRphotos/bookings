@@ -3,7 +3,7 @@
 var siteText = {
 
     homepage: {
-        heroTitle:       'TEST',
+        heroTitle:       'JESSE REILLY Test',
         heroSubtitle:    'Sports & Portrait Photography | Capturing Moments That Matter',
         heroButtonText:  'Book a Session',
         aboutHeading:    'About Me',
