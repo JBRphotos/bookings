@@ -16,10 +16,10 @@ var homepageConfig = {
 var sections = [
     {
         id: 'portraits', title: 'Portraits',
-        banner: 'images/portraits/photo1.jpg', bannerPosition: 'center 37%',
+        banner: 'images/portraits/photo1.jpg', bannerPosition: 'center 36%',
         folder: 'images/portraits',
         albums: [
-            { id: 'portraits-album-1', title: 'Album 1', cover: 'images/portraits/photo1.jpg', start: 1, end: 15 },
+            { id: 'portraits-album-1', title: 'Studio Headshots', cover: 'images/portraits/photo1.jpg', start: 1, end: 15 },
             { id: 'portraits-album-2', title: 'Album 2', cover: 'images/portraits/photo16.jpg', start: 16, end: 30 },
             { id: 'portraits-album-3', title: 'Album 3', cover: 'images/portraits/photo31.jpg', start: 31, end: 50 }
         ]
@@ -27,10 +27,10 @@ var sections = [
 
     {
         id: 'sports', title: 'Sports',
-        banner: 'images/sports/photo2.jpg', bannerPosition: 'center 40%',
+        banner: 'images/sports/photo1.jpg', bannerPosition: 'center 38%',
         folder: 'images/sports',
         albums: [
-            { id: 'sports-album-1', title: 'Album 1', cover: 'images/sports/photo1.jpg', start: 1, end: 15 },
+            { id: 'sports-album-1', title: 'Hive Athletics', cover: 'images/sports/photo1.jpg', start: 1, end: 15 },
             { id: 'sports-album-2', title: 'Album 2', cover: 'images/sports/photo16.jpg', start: 16, end: 30 },
             { id: 'sports-album-3', title: 'Album 3', cover: 'images/sports/photo31.jpg', start: 31, end: 50 }
         ]
@@ -38,7 +38,7 @@ var sections = [
 
     {
         id: 'graduation', title: 'Graduation',
-        banner: 'images/graduation/photo1.jpg', bannerPosition: 'center 18%',
+        banner: 'images/graduation/photo1.jpg', bannerPosition: 'center 50%',
         folder: 'images/graduation',
         albums: [
             { id: 'graduation-album-1', title: 'Caroline', cover: 'images/graduation/photo1.jpg', start: 1, end: 10 },
