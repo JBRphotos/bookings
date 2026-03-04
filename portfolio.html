@@ -76,7 +76,7 @@
         .accordion-header::before {
             content: ''; position: absolute; inset: 0;
             background-image: var(--banner-img);
-            background-size: cover; background-position: center;
+            background-size: cover; background-position: var(--banner-pos, center);
             filter: grayscale(50%) brightness(0.7);
             transition: all 0.4s ease; z-index: 1;
         }
@@ -393,7 +393,7 @@
 
                 // Header with banner
                 item.innerHTML =
-                    '<div class="accordion-header" style="--banner-img: url(\'' + section.banner + '\')" onclick="toggleAccordion(\'' + section.id + '\')">' +
+                    '<div class="accordion-header" style="--banner-img: url(\'' + section.banner + '\'); --banner-pos: ' + (section.bannerPosition || 'center') + '" onclick="toggleAccordion(\'' + section.id + '\')">' +
                         '<div class="header-content">' +
                             '<h2>' + section.title + '</h2>' +
                             '<span class="expand-icon">+</span>' +
