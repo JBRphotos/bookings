@@ -48,7 +48,7 @@ var sections = [
 
     {
         id: 'family', title: 'Family',
-        banner: 'images/family/photo1.jpg', bannerPosition: 'center 50%',
+        banner: 'images/family/photo2.jpg', bannerPosition: 'center 24%',
         folder: 'images/family',
         albums: [
             { id: 'family-album-1', title: 'Album 1', cover: 'images/family/photo1.jpg', start: 1, end: 15 },
