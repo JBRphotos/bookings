@@ -433,53 +433,25 @@
             var currentAlbumPhotos = [];
             var currentPhotoIndex = 0;
 
-            /* ── OPEN ALBUM ── */
+            /* ── OPEN ALBUM → straight to lightbox ── */
             window.openAlbum = async function(folder, album) {
-                var allItems = document.querySelectorAll('.accordion-item');
-                allItems.forEach(function(i) { i.classList.remove('active'); });
-
-                var modal = document.createElement('div');
-                modal.className = 'album-modal';
-                modal.innerHTML =
-                    '<div class="album-modal-content">' +
-                        '<div class="album-modal-header">' +
-                            '<h2>' + album.title + '</h2>' +
-                            '<span class="album-close" onclick="closeAlbumModal()">&times;</span>' +
-                        '</div>' +
-                        '<div class="album-loading">Loading photos</div>' +
-                        '<div class="photo-grid" id="album-grid" style="display:none;"></div>' +
-                    '</div>';
-                document.body.appendChild(modal);
-                setTimeout(function() { modal.classList.add('active'); }, 10);
+                // Show lightbox immediately with loading state
+                var lightbox = document.getElementById('lightbox');
+                var img = document.getElementById('lightbox-img');
+                img.src = '';
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
 
                 var photos = await loadAlbumPhotos(folder, album.start, album.end);
-                currentAlbumPhotos = photos;
-
-                var loading = modal.querySelector('.album-loading');
-                var grid = modal.querySelector('#album-grid');
-                if (loading) loading.remove();
-                grid.style.display = '';
-
                 if (photos.length === 0) {
-                    grid.innerHTML = '<p style="text-align:center; color:#5F6C7B; padding:40px;">No photos in this album yet.</p>';
+                    closeLightbox();
                     return;
                 }
-
-                photos.forEach(function(src, index) {
-                    var div = document.createElement('div');
-                    div.className = 'photo-item';
-                    div.innerHTML = '<img src="' + src + '" alt="' + album.title + '" loading="lazy">';
-                    div.onclick = function() { openLightbox(src, index); };
-                    grid.appendChild(div);
-                });
-            };
-
-            window.closeAlbumModal = function() {
-                var modal = document.querySelector('.album-modal');
-                if (modal) {
-                    modal.classList.remove('active');
-                    setTimeout(function() { modal.remove(); }, 300);
-                }
+                currentAlbumPhotos = photos;
+                currentPhotoIndex = 0;
+                img.src = photos[0];
+                updateProgressDots();
+                updateCounter();
             };
 
             /* ── LIGHTBOX ── */
@@ -488,12 +460,14 @@
                 var lightbox = document.getElementById('lightbox');
                 document.getElementById('lightbox-img').src = src;
                 lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
                 updateProgressDots();
                 updateCounter();
             };
 
             window.closeLightbox = function() {
                 document.getElementById('lightbox').classList.remove('active');
+                document.body.style.overflow = '';
                 currentAlbumPhotos = [];
             };
 
@@ -548,6 +522,24 @@
                 else if (e.key === 'ArrowRight') navigateLightbox(1);
                 else if (e.key === 'Escape') closeLightbox();
             });
+
+            /* ── TOUCH SWIPE FOR LIGHTBOX ── */
+            var touchStartX = 0;
+            var touchStartY = 0;
+            var lightboxEl = document.getElementById('lightbox');
+
+            lightboxEl.addEventListener('touchstart', function(e) {
+                touchStartX = e.changedTouches[0].screenX;
+                touchStartY = e.changedTouches[0].screenY;
+            }, { passive: true });
+
+            lightboxEl.addEventListener('touchend', function(e) {
+                var diffX = touchStartX - e.changedTouches[0].screenX;
+                var diffY = Math.abs(touchStartY - e.changedTouches[0].screenY);
+                if (Math.abs(diffX) < 50 || diffY > Math.abs(diffX)) return;
+                if (diffX > 0) navigateLightbox(1);
+                else navigateLightbox(-1);
+            }, { passive: true });
 
             // Open section from URL hash
             if (window.location.hash) {
