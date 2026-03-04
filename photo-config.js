@@ -16,7 +16,8 @@ var homepageConfig = {
 var sections = [
     {
         id: 'portraits', title: 'Portraits',
-        banner: 'images/portraits/photo1.jpg', folder: 'images/portraits',
+        banner: 'images/portraits/photo1.jpg', bannerPosition: 'center 37%',
+        folder: 'images/portraits',
         albums: [
             { id: 'portraits-album-1', title: 'Album 1', cover: 'images/portraits/photo1.jpg', start: 1, end: 15 },
             { id: 'portraits-album-2', title: 'Album 2', cover: 'images/portraits/photo16.jpg', start: 16, end: 30 },
@@ -26,7 +27,8 @@ var sections = [
 
     {
         id: 'sports', title: 'Sports',
-        banner: 'images/sports/photo1.jpg', folder: 'images/sports',
+        banner: 'images/sports/photo2.jpg', bannerPosition: 'center 40%',
+        folder: 'images/sports',
         albums: [
             { id: 'sports-album-1', title: 'Album 1', cover: 'images/sports/photo1.jpg', start: 1, end: 15 },
             { id: 'sports-album-2', title: 'Album 2', cover: 'images/sports/photo16.jpg', start: 16, end: 30 },
@@ -36,7 +38,8 @@ var sections = [
 
     {
         id: 'graduation', title: 'Graduation',
-        banner: 'images/graduation/photo1.jpg', folder: 'images/graduation',
+        banner: 'images/graduation/photo1.jpg', bannerPosition: 'center 18%',
+        folder: 'images/graduation',
         albums: [
             { id: 'graduation-album-1', title: 'Caroline', cover: 'images/graduation/photo1.jpg', start: 1, end: 10 },
             { id: 'graduation-album-2', title: 'Justin', cover: 'images/graduation/photo16.jpg', start: 11, end: 20 }
@@ -45,7 +48,8 @@ var sections = [
 
     {
         id: 'family', title: 'Family',
-        banner: 'images/family/photo1.jpg', folder: 'images/family',
+        banner: 'images/family/photo1.jpg', bannerPosition: 'center 50%',
+        folder: 'images/family',
         albums: [
             { id: 'family-album-1', title: 'Album 1', cover: 'images/family/photo1.jpg', start: 1, end: 15 },
             { id: 'family-album-2', title: 'Album 2', cover: 'images/family/photo16.jpg', start: 16, end: 30 },
@@ -55,7 +59,8 @@ var sections = [
 
     {
         id: 'product', title: 'Product',
-        banner: 'images/product/photo1.jpg', folder: 'images/product',
+        banner: 'images/product/photo1.jpg', bannerPosition: 'center 50%',
+        folder: 'images/product',
         albums: [
             { id: 'events-album-1', title: 'Album 1', cover: 'images/product/photo1.jpg', start: 1, end: 15 },
             { id: 'events-album-2', title: 'Album 2', cover: 'images/product/photo16.jpg', start: 16, end: 30 },
