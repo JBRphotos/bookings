@@ -39,8 +39,7 @@ var sections = [
         banner: 'images/graduation/photo1.jpg', folder: 'images/graduation',
         albums: [
             { id: 'graduation-album-1', title: 'Caroline', cover: 'images/graduation/photo1.jpg', start: 1, end: 10 },
-            { id: 'graduation-album-2', title: 'Justin', cover: 'images/graduation/photo16.jpg', start: 11, end: 20 },
-            { id: 'graduation-album-3', title: 'Album 3', cover: 'images/graduation/photo31.jpg', start: 31, end: 50 }
+            { id: 'graduation-album-2', title: 'Justin', cover: 'images/graduation/photo16.jpg', start: 11, end: 20 }
         ]
     },
 
