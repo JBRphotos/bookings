@@ -38,7 +38,7 @@ var sections = [
 
     {
         id: 'graduation', title: 'Graduation',
-        banner: 'images/graduation/photo1.jpg', bannerPosition: 'center 50%',
+        banner: 'images/graduation/photo1.jpg', bannerPosition: 'center 19%',
         folder: 'images/graduation',
         albums: [
             { id: 'graduation-album-1', title: 'Caroline', cover: 'images/graduation/photo1.jpg', start: 1, end: 10 },
