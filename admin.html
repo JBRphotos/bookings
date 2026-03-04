@@ -986,9 +986,9 @@
                                 '<div class="banner-pos-picker" id="bpos-' + si + '">' +
                                     '<div class="banner-pos-preview" style="background-image:url(\'' + esc(section.banner) + '\');background-position:center ' + parseBannerPos(section.bannerPosition) + '%"></div>' +
                                     '<div class="banner-pos-slider">' +
-                                        '<span>Bottom</span>' +
-                                        '<input type="range" min="0" max="100" value="' + (100 - parseBannerPos(section.bannerPosition)) + '" oninput="setBannerPos(' + si + ',100-this.value)">' +
                                         '<span>Top</span>' +
+                                        '<input type="range" min="0" max="100" value="' + (100 - parseBannerPos(section.bannerPosition)) + '" oninput="setBannerPos(' + si + ',100-this.value)">' +
+                                        '<span>Bottom</span>' +
                                     '</div>' +
                                 '</div>' +
                                 '<div class="banner-pos-val" id="bpos-val-' + si + '">' + parseBannerPos(section.bannerPosition) + '%</div>' +
