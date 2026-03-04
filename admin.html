@@ -187,12 +187,12 @@
         }
         .field-textarea:focus { border-color: var(--accent); }
         .field-hint { font-size: 0.78rem; color: var(--text-muted); margin-top: 3px; font-style: italic; }
-        .banner-pos-picker { margin-top: 6px; }
-        .banner-pos-preview { width: 100%; height: 80px; border-radius: 8px; background-size: cover; border: 2px solid var(--slate); margin-bottom: 8px; }
-        .banner-pos-btns { display: flex; gap: 6px; }
-        .bpos-btn { flex: 1; padding: 6px; border: 2px solid var(--slate); border-radius: 6px; background: var(--soft-navy); color: var(--text-muted); font-size: 0.8rem; cursor: pointer; transition: all 0.2s; }
-        .bpos-btn:hover { border-color: var(--accent); color: #fff; }
-        .bpos-btn.active { background: var(--accent); color: var(--navy); border-color: var(--accent); font-weight: 600; }
+        .banner-pos-picker { margin-top: 6px; display: flex; gap: 10px; align-items: stretch; }
+        .banner-pos-preview { flex: 1; height: 100px; border-radius: 8px; background-size: cover; border: 2px solid var(--slate); }
+        .banner-pos-slider { display: flex; flex-direction: column; align-items: center; gap: 4px; width: 40px; }
+        .banner-pos-slider span { font-size: 0.65rem; color: var(--text-muted); }
+        .banner-pos-slider input[type=range] { writing-mode: vertical-lr; direction: rtl; height: 80px; width: 20px; accent-color: var(--accent); cursor: pointer; }
+        .banner-pos-val { font-size: 0.75rem; color: var(--accent); font-weight: 600; text-align: center; margin-top: 4px; }
         .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
         .field-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; }
 
@@ -984,13 +984,14 @@
                             '<div class="field-group"><label class="field-label">Banner Image</label><input class="field-input" value="' + esc(section.banner) + '" onchange="editSections[' + si + '].banner=this.value"></div>' +
                             '<div class="field-group"><label class="field-label">Banner Position</label>' +
                                 '<div class="banner-pos-picker" id="bpos-' + si + '">' +
-                                    '<div class="banner-pos-preview" style="background-image:url(\'' + esc(section.banner) + '\');background-position:' + (section.bannerPosition || 'center') + '"></div>' +
-                                    '<div class="banner-pos-btns">' +
-                                        '<button class="bpos-btn' + ((section.bannerPosition||'center')==='top'?' active':'') + '" onclick="setBannerPos(' + si + ',\'top\')">Top</button>' +
-                                        '<button class="bpos-btn' + ((section.bannerPosition||'center')==='center'?' active':'') + '" onclick="setBannerPos(' + si + ',\'center\')">Center</button>' +
-                                        '<button class="bpos-btn' + ((section.bannerPosition||'center')==='bottom'?' active':'') + '" onclick="setBannerPos(' + si + ',\'bottom\')">Bottom</button>' +
+                                    '<div class="banner-pos-preview" style="background-image:url(\'' + esc(section.banner) + '\');background-position:center ' + parseBannerPos(section.bannerPosition) + '%"></div>' +
+                                    '<div class="banner-pos-slider">' +
+                                        '<span>Top</span>' +
+                                        '<input type="range" min="0" max="100" value="' + parseBannerPos(section.bannerPosition) + '" oninput="setBannerPos(' + si + ',this.value)">' +
+                                        '<span>Bottom</span>' +
                                     '</div>' +
                                 '</div>' +
+                                '<div class="banner-pos-val" id="bpos-val-' + si + '">' + parseBannerPos(section.bannerPosition) + '%</div>' +
                             '</div>' +
                             '<div class="field-group"><label class="field-label">Folder</label><input class="field-input" value="' + esc(section.folder) + '" onchange="editSections[' + si + '].folder=this.value"><span class="field-hint">e.g. images/sports</span></div>' +
                         '</div>' +
@@ -1071,12 +1072,19 @@
             editSections.splice(si, 1); renderSections(); buildDropdown();
         }
 
-        function setBannerPos(si, pos) {
-            editSections[si].bannerPosition = pos;
+        function parseBannerPos(val) {
+            if (!val || val === 'center') return 50;
+            if (val === 'top') return 0;
+            if (val === 'bottom') return 100;
+            var m = val.match(/(\d+)/);
+            return m ? parseInt(m[1]) : 50;
+        }
+
+        function setBannerPos(si, pct) {
+            editSections[si].bannerPosition = 'center ' + pct + '%';
             var picker = document.getElementById('bpos-' + si);
-            picker.querySelector('.banner-pos-preview').style.backgroundPosition = pos;
-            picker.querySelectorAll('.bpos-btn').forEach(function(b){ b.classList.remove('active'); });
-            event.target.classList.add('active');
+            picker.querySelector('.banner-pos-preview').style.backgroundPosition = 'center ' + pct + '%';
+            document.getElementById('bpos-val-' + si).textContent = pct + '%';
         }
 
         function generatePhotoCode() {
@@ -1088,7 +1096,7 @@
             c += "    galleryCarouselFolder: 'images/gallery'\n};\n\nvar sections = [\n";
             editSections.forEach(function(s,si){
                 c += "    {\n        id: '"+s.id+"', title: '"+s.title+"',\n";
-                c += "        banner: '"+s.banner+"', bannerPosition: '"+(s.bannerPosition||'center')+"',\n        folder: '"+s.folder+"',\n        albums: [\n";
+                c += "        banner: '"+s.banner+"', bannerPosition: '"+(s.bannerPosition||'center 50%')+"',\n        folder: '"+s.folder+"',\n        albums: [\n";
                 s.albums.forEach(function(al,ai){
                     c += "            { id: '"+al.id+"', title: '"+al.title+"', cover: '"+al.cover+"', start: "+al.start+", end: "+al.end+" }";
                     c += ai<s.albums.length-1?',\n':'\n';
