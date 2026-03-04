@@ -19,7 +19,7 @@ var sections = [
         banner: 'images/portraits/photo1.jpg', bannerPosition: 'center 36%',
         folder: 'images/portraits',
         albums: [
-            { id: 'portraits-album-1', title: 'Studio Headshots', cover: 'images/portraits/photo1.jpg', start: 1, end: 15 },
+            { id: 'portraits-album-1', title: 'Headshots', cover: 'images/portraits/photo1.jpg', start: 1, end: 15 },
             { id: 'portraits-album-2', title: 'Album 2', cover: 'images/portraits/photo16.jpg', start: 16, end: 30 },
             { id: 'portraits-album-3', title: 'Album 3', cover: 'images/portraits/photo31.jpg', start: 31, end: 50 }
         ]
@@ -27,7 +27,7 @@ var sections = [
 
     {
         id: 'sports', title: 'Sports',
-        banner: 'images/sports/photo1.jpg', bannerPosition: 'center 38%',
+        banner: 'images/sports/photo2.jpg', bannerPosition: 'center 38%',
         folder: 'images/sports',
         albums: [
             { id: 'sports-album-1', title: 'Hive Athletics', cover: 'images/sports/photo1.jpg', start: 1, end: 15 },
@@ -41,8 +41,8 @@ var sections = [
         banner: 'images/graduation/photo1.jpg', bannerPosition: 'center 19%',
         folder: 'images/graduation',
         albums: [
-            { id: 'graduation-album-1', title: 'Caroline', cover: 'images/graduation/photo1.jpg', start: 1, end: 10 },
-            { id: 'graduation-album-2', title: 'Justin', cover: 'images/graduation/photo16.jpg', start: 11, end: 20 }
+            { id: 'graduation-album-1', title: '', cover: 'images/graduation/photo1.jpg', start: 1, end: 10 },
+            { id: 'graduation-album-2', title: '', cover: 'images/graduation/photo16.jpg', start: 11, end: 20 }
         ]
     },
 
@@ -51,9 +51,7 @@ var sections = [
         banner: 'images/family/photo2.jpg', bannerPosition: 'center 24%',
         folder: 'images/family',
         albums: [
-            { id: 'family-album-1', title: 'Album 1', cover: 'images/family/photo1.jpg', start: 1, end: 15 },
-            { id: 'family-album-2', title: 'Album 2', cover: 'images/family/photo16.jpg', start: 16, end: 30 },
-            { id: 'family-album-3', title: 'Album 3', cover: 'images/family/photo31.jpg', start: 31, end: 50 }
+            { id: 'family-album-1', title: '', cover: 'images/family/photo1.jpg', start: 1, end: 15 }
         ]
     },
 
