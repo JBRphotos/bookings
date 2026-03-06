@@ -711,6 +711,11 @@
                                 <input class="field-input" id="txt-bookingPageSubtitle" type="text">
                             </div>
                         </div>
+                        <div class="field-group">
+                            <label class="field-label">Logo Image</label>
+                            <input class="field-input" id="txt-bookingLogo" type="text">
+                            <span class="field-hint">Path to logo image, e.g. images/logo.png</span>
+                        </div>
                     </div>
                     <div class="text-subsection">
                         <h4>Form Labels</h4>
@@ -978,6 +983,17 @@
                                 '<input class="field-input" value="' + esc(album.title) + '" onchange="editSections[' + si + '].albums[' + ai + '].title=this.value;buildDropdown()"></div>' +
                                 '<div class="field-group"><label class="field-label">Cover</label>' +
                                 '<input class="field-input" value="' + esc(album.cover) + '" onchange="editSections[' + si + '].albums[' + ai + '].cover=this.value"></div>' +
+                                '<div class="field-group"><label class="field-label">Cover Position</label>' +
+                                    '<div class="banner-pos-picker" id="apos-' + si + '-' + ai + '">' +
+                                        '<div class="banner-pos-preview" style="background-image:url(\'' + esc(album.cover) + '\');background-position:center ' + parseBannerPos(album.coverPosition) + '%"></div>' +
+                                        '<div class="banner-pos-slider">' +
+                                            '<span>Top</span>' +
+                                            '<input type="range" min="0" max="100" value="' + (100 - parseBannerPos(album.coverPosition)) + '" oninput="setAlbumCoverPos(' + si + ',' + ai + ',100-this.value)">' +
+                                            '<span>Bottom</span>' +
+                                        '</div>' +
+                                    '</div>' +
+                                    '<div class="banner-pos-val" id="apos-val-' + si + '-' + ai + '">' + parseBannerPos(album.coverPosition) + '%</div>' +
+                                '</div>' +
                                 '<div class="field-group"><label class="field-label">Start #</label>' +
                                 '<input class="field-input" type="number" value="' + album.start + '" onchange="editSections[' + si + '].albums[' + ai + '].start=parseInt(this.value)"></div>' +
                                 '<div class="field-group"><label class="field-label">End #</label>' +
@@ -1124,6 +1140,13 @@
             document.getElementById('bpos-val-' + si).textContent = pct + '%';
         }
 
+        function setAlbumCoverPos(si, ai, pct) {
+            editSections[si].albums[ai].coverPosition = 'center ' + pct + '%';
+            var picker = document.getElementById('apos-' + si + '-' + ai);
+            picker.querySelector('.banner-pos-preview').style.backgroundPosition = 'center ' + pct + '%';
+            document.getElementById('apos-val-' + si + '-' + ai).textContent = pct + '%';
+        }
+
         function generatePhotoCode() {
             var h = document.getElementById('cfg-hero').value, a = document.getElementById('cfg-about').value;
             var folders = editSections.map(function(s){return"        '"+s.folder+"'"});
@@ -1135,7 +1158,7 @@
                 c += "    {\n        id: '"+s.id+"', title: '"+s.title+"',"+(s.hidden?" hidden: true,":"")+"\n";
                 c += "        banner: '"+s.banner+"', bannerPosition: '"+(s.bannerPosition||'center 50%')+"',\n        folder: '"+s.folder+"',\n        albums: [\n";
                 s.albums.forEach(function(al,ai){
-                    c += "            { id: '"+al.id+"', title: '"+al.title+"', cover: '"+al.cover+"', start: "+al.start+", end: "+al.end+" }";
+                    c += "            { id: '"+al.id+"', title: '"+al.title+"', cover: '"+al.cover+"', coverPosition: '"+(al.coverPosition||'center 50%')+"', start: "+al.start+", end: "+al.end+" }";
                     c += ai<s.albums.length-1?',\n':'\n';
                 });
                 c += '        ]\n    }'; c += si<editSections.length-1?',\n\n':'\n';
@@ -1200,6 +1223,7 @@
             // Booking
             document.getElementById('txt-bookingPageTitle').value = editText.booking.pageTitle;
             document.getElementById('txt-bookingPageSubtitle').value = editText.booking.pageSubtitle;
+            document.getElementById('txt-bookingLogo').value = editText.booking.bookingLogo || 'images/logo.png';
             document.getElementById('txt-labelName').value = editText.booking.labelName;
             document.getElementById('txt-labelEmail').value = editText.booking.labelEmail;
             document.getElementById('txt-labelPhone').value = editText.booking.labelPhone;
@@ -1327,6 +1351,7 @@
                 booking: {
                     pageTitle: document.getElementById('txt-bookingPageTitle').value,
                     pageSubtitle: document.getElementById('txt-bookingPageSubtitle').value,
+                    bookingLogo: document.getElementById('txt-bookingLogo').value,
                     labelName: document.getElementById('txt-labelName').value,
                     labelEmail: document.getElementById('txt-labelEmail').value,
                     labelPhone: document.getElementById('txt-labelPhone').value,
@@ -1381,6 +1406,7 @@
             c += '    booking: {\n';
             c += "        pageTitle:    '" + e(t.booking.pageTitle) + "',\n";
             c += "        pageSubtitle: '" + e(t.booking.pageSubtitle) + "',\n";
+            c += "        bookingLogo:  '" + e(t.booking.bookingLogo) + "',\n";
             c += "        labelName:    '" + e(t.booking.labelName) + "',\n";
             c += "        labelEmail:   '" + e(t.booking.labelEmail) + "',\n";
             c += "        labelPhone:   '" + e(t.booking.labelPhone) + "',\n";

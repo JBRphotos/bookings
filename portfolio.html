@@ -414,7 +414,7 @@
                     card.className = 'album-card';
                     card.onclick = function() { openAlbum(section.folder, album); };
                     card.innerHTML =
-                        '<img src="' + album.cover + '" alt="' + album.title + '" loading="lazy" onerror="this.src=\'images/placeholder.jpg\'">' +
+                        '<img src="' + album.cover + '" alt="' + album.title + '" loading="lazy" style="object-position:' + (album.coverPosition || 'center') + '" onerror="this.src=\'images/placeholder.jpg\'">' +
                         '<h3>' + album.title + '</h3>';
                     albumsGrid.appendChild(card);
                 });

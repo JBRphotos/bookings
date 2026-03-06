@@ -148,7 +148,7 @@
         <a href="index.html" class="back-btn">← Back</a>
         <a href="admin.html" class="admin-dot">●</a>
         <div class="logo">
-            <img src="images/logo.png" alt="JBR Photos Logo">
+            <img id="t-bookingLogo" src="images/logo.png" alt="JBR Photos Logo">
         </div>
         <h1 id="t-bookingTitle">Jesse Reilly Photography</h1>
         <p class="tagline" id="t-bookingSubtitle">Portrait Sessions</p>
@@ -451,6 +451,7 @@
             var el = function(id) { return document.getElementById(id); };
             if (el('t-bookingTitle')) el('t-bookingTitle').textContent = b.pageTitle;
             if (el('t-bookingSubtitle')) el('t-bookingSubtitle').textContent = b.pageSubtitle;
+            if (b.bookingLogo && el('t-bookingLogo')) el('t-bookingLogo').src = b.bookingLogo;
             if (el('t-labelName')) el('t-labelName').textContent = b.labelName + ' *';
             if (el('t-labelEmail')) el('t-labelEmail').textContent = b.labelEmail + ' *';
             if (el('t-labelPhone')) el('t-labelPhone').textContent = b.labelPhone + ' *';
