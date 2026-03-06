@@ -4,7 +4,7 @@ var siteText = {
 
     homepage: {
         heroTitle:       'Jesse Reilly',
-        heroSubtitle:    'Sports & Portrait Photography | Capturing Moments That Matter',
+        heroSubtitle:    'Portrait & Sports Photography | Capturing Moments That Matter',
         heroButtonText:  'Book a Session',
         aboutHeading:    'About Me',
         aboutSubheading: 'Photographer based in the NYC area',
@@ -13,7 +13,7 @@ var siteText = {
         aboutParagraph2: 'My work is driven by curiosity and observation, focusing on movement, emotion, and the small details that bring energy and authenticity to an image.',
         aboutParagraph3: 'I currently work with local sports leagues and offer graduation portrait sessions, creating work that feels thoughtful, expressive, and true to the moment.',
         portfolioHeading:    'Portfolio',
-        portfolioSubheading: 'Explore my work across sports, portraits, and creative photography',
+        portfolioSubheading: 'Explore my work across portraits, sports, and creative photography',
         portfolioButtonText: 'View Full Portfolio',
         shopHeading:     'Shop Prints',
         shopSubheading:  'Featured Photos',
