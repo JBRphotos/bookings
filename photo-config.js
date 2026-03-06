@@ -15,11 +15,11 @@ var homepageConfig = {
 var sections = [
     {
         id: 'portraits', title: 'Portraits',
-        banner: 'images/portraits/photo1.jpg', bannerPosition: 'center 36%',
+        banner: 'images/portraits/photo1.jpg', bannerPosition: 'center 29%',
         folder: 'images/portraits',
         albums: [
-            { id: 'portraits-album-1', title: 'Headshots', cover: 'images/portraits/photo1.jpg', start: 1, end: 15 },
-            { id: 'portraits-album-2', title: 'Greek Life', cover: 'images/portraits/photo16.jpg', start: 16, end: 30 }
+            { id: 'portraits-album-1', title: 'Headshots', cover: 'images/portraits/photo1.jpg', coverPosition: 'center 27%', start: 1, end: 15 },
+            { id: 'portraits-album-2', title: 'Greek Life', cover: 'images/portraits/photo16.jpg', coverPosition: 'center 50%', start: 16, end: 30 }
         ]
     },
 
@@ -28,17 +28,17 @@ var sections = [
         banner: 'images/sports/photo2.jpg', bannerPosition: 'center 38%',
         folder: 'images/sports',
         albums: [
-            { id: 'sports-album-1', title: 'Hive Athletics', cover: 'images/sports/photo1.jpg', start: 1, end: 15 }
+            { id: 'sports-album-1', title: 'Hive Athletics', cover: 'images/sports/photo1.jpg', coverPosition: 'center 50%', start: 1, end: 15 }
         ]
     },
 
     {
         id: 'graduation', title: 'Graduation',
-        banner: 'images/graduation/photo1.jpg', bannerPosition: 'center 19%',
+        banner: 'images/graduation/photo1.jpg', bannerPosition: 'center 5%',
         folder: 'images/graduation',
         albums: [
-            { id: 'graduation-album-1', title: '', cover: 'images/graduation/photo1.jpg', start: 1, end: 10 },
-            { id: 'graduation-album-2', title: '', cover: 'images/graduation/photo16.jpg', start: 11, end: 20 }
+            { id: 'graduation-album-1', title: '', cover: 'images/graduation/photo1.jpg', coverPosition: 'center 50%', start: 1, end: 10 },
+            { id: 'graduation-album-2', title: '', cover: 'images/graduation/photo16.jpg', coverPosition: 'center 66%', start: 11, end: 20 }
         ]
     },
 
@@ -47,7 +47,7 @@ var sections = [
         banner: 'images/family/photo2.jpg', bannerPosition: 'center 26%',
         folder: 'images/family',
         albums: [
-            { id: 'family-album-1', title: '', cover: 'images/family/photo1.jpg', start: 1, end: 15 }
+            { id: 'family-album-1', title: '', cover: 'images/family/photo2.jpg', coverPosition: 'center 50%', start: 1, end: 15 }
         ]
     }
 ];
