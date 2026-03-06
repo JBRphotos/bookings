@@ -218,9 +218,9 @@
         .section-card-header h4 { font-family: 'Playfair Display', serif; color: var(--white); font-size: 1.05rem; }
         .section-toggle { color: var(--accent); font-size: 1.5rem; font-weight: 300; transition: transform 0.3s; }
         .section-editor-card.open .section-toggle { transform: rotate(45deg); }
-        .hide-toggle { background: none; border: none; cursor: pointer; font-size: 1.2rem; padding: 4px 8px; opacity: 0.6; transition: opacity 0.2s; }
-        .hide-toggle:hover { opacity: 1; }
-        .hide-toggle.is-hidden { opacity: 0.35; }
+        .hide-toggle { background: none; border: 1px solid rgba(255,255,255,0.3); border-radius: 6px; cursor: pointer; font-size: 0.75rem; padding: 4px 10px; color: rgba(255,255,255,0.7); transition: all 0.2s; margin-right: 8px; }
+        .hide-toggle:hover { border-color: var(--accent); color: var(--accent); }
+        .hide-toggle.is-hidden { background: rgba(255,107,107,0.2); border-color: rgba(255,107,107,0.5); color: #ff6b6b; }
         .section-editor-card.is-hidden { opacity: 0.5; border-style: dashed; }
         .section-card-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
         .section-editor-card.open .section-card-body { max-height: 8000px; }
@@ -991,7 +991,7 @@
                 card.setAttribute('data-index', si);
                 if (section.hidden) card.classList.add('is-hidden');
                 card.innerHTML =
-                    '<div class="section-card-header" onclick="toggleCard(' + si + ')"><div class="section-card-header-left"><span class="drag-handle" title="Drag to reorder" onclick="event.stopPropagation()">☰</span><h4>' + esc(section.title) + (section.hidden ? ' <span style="font-size:0.75rem;color:var(--text-muted);">(hidden)</span>' : '') + '</h4></div><button class="hide-toggle' + (section.hidden ? ' is-hidden' : '') + '" onclick="event.stopPropagation();toggleSectionHidden(' + si + ')" title="' + (section.hidden ? 'Show' : 'Hide') + ' section">' + (section.hidden ? '👁️‍🗨️' : '👁️') + '</button><span class="section-toggle">+</span></div>' +
+                    '<div class="section-card-header" onclick="toggleCard(' + si + ')"><div class="section-card-header-left"><span class="drag-handle" title="Drag to reorder" onclick="event.stopPropagation()">☰</span><h4>' + esc(section.title) + (section.hidden ? ' <span style="font-size:0.75rem;color:var(--text-muted);">(hidden)</span>' : '') + '</h4></div><button class="hide-toggle' + (section.hidden ? ' is-hidden' : '') + '" onclick="event.stopPropagation();toggleSectionHidden(' + si + ')" title="' + (section.hidden ? 'Show' : 'Hide') + ' section">' + (section.hidden ? 'Show' : 'Hide') + '</button><span class="section-toggle">+</span></div>' +
                     '<div class="section-card-body"><div class="section-card-inner">' +
                         '<div class="field-row">' +
                             '<div class="field-group"><label class="field-label">Title</label><input class="field-input" value="' + esc(section.title) + '" onchange="updateSecTitle(' + si + ',this.value)"></div>' +
@@ -1093,6 +1093,20 @@
             editSections[si].hidden = !editSections[si].hidden;
             renderSections(); buildDropdown();
             showToast(editSections[si].title + (editSections[si].hidden ? ' hidden' : ' visible'), 'success');
+        }
+
+        function toggleSessionCard(ci) {
+            var card = document.getElementById('sc-card-' + ci);
+            card.classList.toggle('open');
+            var body = card.querySelector('.section-card-body');
+            var toggle = card.querySelector('.section-toggle');
+            if (card.classList.contains('open')) {
+                body.style.display = 'block';
+                toggle.textContent = '−';
+            } else {
+                body.style.display = 'none';
+                toggle.textContent = '+';
+            }
         }
 
         function parseBannerPos(val) {
@@ -1234,13 +1248,13 @@
                     '</div>';
                 });
 
-                var cardHTML = '<div class="section-editor-card' + (card.hidden ? ' is-hidden' : '') + '" style="margin-bottom:12px;">' +
-                    '<div class="section-card-header" onclick="this.parentElement.querySelector(\'.section-card-body\').classList.toggle(\'active\');this.querySelector(\'.section-toggle\').textContent=this.parentElement.querySelector(\'.section-card-body.active\')?\'−\':\'+\'">' +
+                var cardHTML = '<div class="section-editor-card' + (card.hidden ? ' is-hidden' : '') + '" style="margin-bottom:12px;" id="sc-card-' + ci + '">' +
+                    '<div class="section-card-header" onclick="toggleSessionCard(' + ci + ')">' +
                         '<div class="section-card-header-left"><h4>' + esc(card.title || 'New Card') + (card.hidden ? ' <span style="font-size:0.75rem;color:var(--text-muted);">(hidden)</span>' : '') + '</h4></div>' +
-                        '<button class="hide-toggle' + (card.hidden ? ' is-hidden' : '') + '" onclick="event.stopPropagation();editSessionCards[' + ci + '].hidden=!editSessionCards[' + ci + '].hidden;renderSessionCards();" title="' + (card.hidden ? 'Show' : 'Hide') + '">' + (card.hidden ? '👁️‍🗨️' : '👁️') + '</button>' +
+                        '<button class="hide-toggle' + (card.hidden ? ' is-hidden' : '') + '" onclick="event.stopPropagation();editSessionCards[' + ci + '].hidden=!editSessionCards[' + ci + '].hidden;renderSessionCards();" title="' + (card.hidden ? 'Show' : 'Hide') + '">' + (card.hidden ? 'Show' : 'Hide') + '</button>' +
                         '<span class="section-toggle">+</span>' +
                     '</div>' +
-                    '<div class="section-card-body">' +
+                    '<div class="section-card-body" style="display:none;">' +
                         '<div class="field-row">' +
                             '<div class="field-group"><label class="field-label">ID</label><input class="field-input" value="' + esc(card.id) + '" onchange="editSessionCards[' + ci + '].id=this.value"></div>' +
                             '<div class="field-group"><label class="field-label">Icon (emoji)</label><input class="field-input" value="' + esc(card.icon) + '" onchange="editSessionCards[' + ci + '].icon=this.value"></div>' +
