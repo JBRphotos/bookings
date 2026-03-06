@@ -1250,7 +1250,7 @@
 
                 var cardHTML = '<div class="section-editor-card' + (card.hidden ? ' is-hidden' : '') + '" style="margin-bottom:12px;" id="sc-card-' + ci + '">' +
                     '<div class="section-card-header" onclick="toggleSessionCard(' + ci + ')">' +
-                        '<div class="section-card-header-left"><h4>' + esc(card.title || 'New Card') + (card.hidden ? ' <span style="font-size:0.75rem;color:var(--text-muted);">(hidden)</span>' : '') + '</h4></div>' +
+                        '<div class="section-card-header-left"><h4 style="color:#fff;">' + esc(card.title || 'New Card') + (card.hidden ? ' <span style="font-size:0.75rem;color:var(--text-muted);">(hidden)</span>' : '') + '</h4></div>' +
                         '<button class="hide-toggle' + (card.hidden ? ' is-hidden' : '') + '" onclick="event.stopPropagation();editSessionCards[' + ci + '].hidden=!editSessionCards[' + ci + '].hidden;renderSessionCards();" title="' + (card.hidden ? 'Show' : 'Hide') + '">' + (card.hidden ? 'Show' : 'Hide') + '</button>' +
                         '<span class="section-toggle">+</span>' +
                     '</div>' +
