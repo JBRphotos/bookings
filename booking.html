@@ -158,94 +158,14 @@
     <div class="container">
         <div id="booking-tab" class="tab-content active">
 
-            <!-- Session Type Cards -->
+            <!-- Session Type Cards (built from config) -->
             <div style="text-align: center; margin-bottom: 40px;">
                 <h2 style="font-family: 'Playfair Display', serif; color: #1C2F4A; margin-bottom: 30px;">Choose Your Session Type</h2>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 40px;">
-                    <div class="session-type-card active" id="portrait-card" onclick="selectSessionType('portrait')">
-                        <div class="session-icon">📸</div>
-                        <h3>Portrait Session</h3>
-                        <p>Professional portraits that capture your personality and style</p>
-                    </div>
-                    <div class="session-type-card" id="graduation-card" onclick="selectSessionType('graduation')">
-                        <div class="session-icon">🎓</div>
-                        <h3>Graduation Session</h3>
-                        <p>Celebrate your achievement with professional graduation portraits</p>
-                    </div>
-                </div>
+                <div id="session-cards-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 40px;"></div>
             </div>
 
-            <!-- Portrait Packages -->
-            <div id="portrait-content" class="session-content active">
-                <div style="text-align: center; margin-bottom: 30px;">
-                    <h3 style="font-family: 'Playfair Display', serif; color: #1C2F4A; margin-bottom: 10px;">Portrait Session Packages</h3>
-                </div>
-                <div class="packages">
-                    <div class="package" onclick="selectPackage('mini', 'portrait')">
-                        <div class="package-name">Mini Session</div>
-                        <div class="package-price">$175</div>
-                        <ul class="package-details">
-                            <li>⏱️ 25 minutes</li>
-                            <li>📍 1 location</li>
-                            <li>📸 10 edited photos</li>
-                        </ul>
-                    </div>
-                    <div class="package" onclick="selectPackage('standard', 'portrait')">
-                        <div class="package-name">Standard Session</div>
-                        <div class="package-price">$250</div>
-                        <ul class="package-details">
-                            <li>⏱️ 45 minutes</li>
-                            <li>📍 1 location</li>
-                            <li>📸 20 edited photos</li>
-                        </ul>
-                    </div>
-                    <div class="package" onclick="selectPackage('signature', 'portrait')">
-                        <div class="package-name">Signature Session</div>
-                        <div class="package-price">$375</div>
-                        <ul class="package-details">
-                            <li>⏱️ 75 minutes</li>
-                            <li>📍 2 locations</li>
-                            <li>📸 30 edited photos</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Graduation Packages -->
-            <div id="graduation-content" class="session-content">
-                <div style="text-align: center; margin-bottom: 30px;">
-                    <h3 style="font-family: 'Playfair Display', serif; color: #1C2F4A; margin-bottom: 10px;">Graduation Session Packages</h3>
-                </div>
-                <div class="packages">
-                    <div class="package" onclick="selectPackage('mini', 'graduation')">
-                        <div class="package-name">Mini Session</div>
-                        <div class="package-price">$175</div>
-                        <ul class="package-details">
-                            <li>⏱️ 25 minutes</li>
-                            <li>📍 1 location</li>
-                            <li>📸 10 edited photos</li>
-                        </ul>
-                    </div>
-                    <div class="package" onclick="selectPackage('standard', 'graduation')">
-                        <div class="package-name">Standard Session</div>
-                        <div class="package-price">$250</div>
-                        <ul class="package-details">
-                            <li>⏱️ 45 minutes</li>
-                            <li>📍 1 location</li>
-                            <li>📸 20 edited photos</li>
-                        </ul>
-                    </div>
-                    <div class="package" onclick="selectPackage('signature', 'graduation')">
-                        <div class="package-name">Signature Session</div>
-                        <div class="package-price">$375</div>
-                        <ul class="package-details">
-                            <li>⏱️ 75 minutes</li>
-                            <li>📍 2 locations</li>
-                            <li>📸 30 edited photos</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            <!-- Packages container (built from config) -->
+            <div id="packages-container"></div>
 
             <!-- Booking Form -->
             <div class="form-section">
@@ -271,8 +191,6 @@
                         <label for="sessionType" id="t-labelType">Session Type *</label>
                         <select id="sessionType" name="sessionType" required onchange="toggleSessionFields()">
                             <option value="">Choose session type...</option>
-                            <option value="portrait">Portrait Session</option>
-                            <option value="graduation">Graduation Session</option>
                         </select>
                     </div>
 
@@ -305,9 +223,6 @@
                         <label for="package">Select Package *</label>
                         <select id="package" name="package" required>
                             <option value="">Choose a package...</option>
-                            <option value="Mini Session - $175">Mini Session - $175</option>
-                            <option value="Standard Session - $250">Standard Session - $250</option>
-                            <option value="Signature Session - $375">Signature Session - $375</option>
                         </select>
                     </div>
 
@@ -342,24 +257,7 @@
 
                     <div class="form-group">
                         <label>Add-ons (Optional)</label>
-                        <div class="addon-group">
-                            <div class="addon">
-                                <input type="checkbox" id="addon1" name="addons[]" value="Extra photos ($8 each or $40 for 6)">
-                                <label for="addon1">Extra edited photos - $8 each or $40 for 6</label>
-                            </div>
-                            <div class="addon">
-                                <input type="checkbox" id="addon2" name="addons[]" value="Advanced retouching ($5 per photo)">
-                                <label for="addon2">Advanced retouching - $5 per photo</label>
-                            </div>
-                            <div class="addon">
-                                <input type="checkbox" id="addon3" name="addons[]" value="Rush delivery ($40)">
-                                <label for="addon3">Rush delivery (48 hours) - $40</label>
-                            </div>
-                            <div class="addon">
-                                <input type="checkbox" id="addon4" name="addons[]" value="Small group add-on ($25)">
-                                <label for="addon4">Small group add-on - $25</label>
-                            </div>
-                        </div>
+                        <div class="addon-group" id="addons-container"></div>
                     </div>
 
                     <div class="form-group">
@@ -400,21 +298,6 @@
     <script src="site-text.js"></script>
     <script>
         // Apply text from config
-        document.addEventListener('DOMContentLoaded', function() {
-            if (typeof siteText !== 'undefined' && siteText.booking) {
-                var b = siteText.booking;
-                var el = function(id) { return document.getElementById(id); };
-                if (el('t-bookingTitle')) el('t-bookingTitle').textContent = b.pageTitle;
-                if (el('t-bookingSubtitle')) el('t-bookingSubtitle').textContent = b.pageSubtitle;
-                if (el('t-labelName')) el('t-labelName').textContent = b.labelName + ' *';
-                if (el('t-labelEmail')) el('t-labelEmail').textContent = b.labelEmail + ' *';
-                if (el('t-labelPhone')) el('t-labelPhone').textContent = b.labelPhone + ' *';
-                if (el('t-labelType')) el('t-labelType').textContent = b.labelType + ' *';
-                if (el('t-labelMessage')) el('t-labelMessage').textContent = b.labelMessage;
-                if (el('t-submitButton')) el('t-submitButton').textContent = b.submitButton;
-            }
-        });
-
         // ===== CALENDAR =====
         let calYear, calMonth;
         let selectedDates = [];
@@ -495,20 +378,112 @@
 
         // ===== SESSION & FORM =====
         let selectedPackage = '';
-        let currentSessionType = 'portrait';
+        let currentSessionType = '';
+        var sessionCards = [];
+
+        // Build UI from config
+        if (typeof siteText !== 'undefined' && siteText.booking) {
+            var b = siteText.booking;
+            sessionCards = b.sessionCards || [];
+
+            // Filter out hidden cards
+            var visibleCards = sessionCards.filter(function(c) { return !c.hidden; });
+
+            // Build session type cards
+            var cardsContainer = document.getElementById('session-cards-container');
+            visibleCards.forEach(function(card, i) {
+                var div = document.createElement('div');
+                div.className = 'session-type-card' + (i === 0 ? ' active' : '');
+                div.id = card.id + '-card';
+                div.onclick = function() { selectSessionType(card.id); };
+                div.innerHTML = '<div class="session-icon">' + card.icon + '</div><h3>' + card.title + '</h3><p>' + card.description + '</p>';
+                cardsContainer.appendChild(div);
+            });
+
+            // Build packages per session type
+            var pkgContainer = document.getElementById('packages-container');
+            visibleCards.forEach(function(card, i) {
+                var section = document.createElement('div');
+                section.id = card.id + '-content';
+                section.className = 'session-content' + (i === 0 ? ' active' : '');
+                var html = '<div style="text-align:center;margin-bottom:30px;"><h3 style="font-family:\'Playfair Display\',serif;color:#1C2F4A;margin-bottom:10px;">' + card.packagesTitle + '</h3></div><div class="packages">';
+                card.packages.forEach(function(pkg) {
+                    html += '<div class="package" onclick="selectPackage(\'' + pkg.name + '\',\'' + pkg.price + '\',\'' + card.id + '\',this)">';
+                    html += '<div class="package-name">' + pkg.name + '</div>';
+                    html += '<div class="package-price">' + pkg.price + '</div>';
+                    html += '<ul class="package-details">';
+                    pkg.features.forEach(function(f) { html += '<li>' + f + '</li>'; });
+                    html += '</ul></div>';
+                });
+                html += '</div>';
+                section.innerHTML = html;
+                pkgContainer.appendChild(section);
+            });
+
+            // Build session type dropdown
+            var typeSelect = document.getElementById('sessionType');
+            visibleCards.forEach(function(card) {
+                var opt = document.createElement('option');
+                opt.value = card.id;
+                opt.textContent = card.title;
+                typeSelect.appendChild(opt);
+            });
+
+            // Build package dropdown (updates when session type changes)
+            updatePackageDropdown(visibleCards[0]);
+
+            // Build addons
+            var addonsContainer = document.getElementById('addons-container');
+            (b.addons || []).forEach(function(addon, i) {
+                var div = document.createElement('div');
+                div.className = 'addon';
+                div.innerHTML = '<input type="checkbox" id="addon' + (i+1) + '" name="addons[]" value="' + addon + '"><label for="addon' + (i+1) + '">' + addon + '</label>';
+                addonsContainer.appendChild(div);
+            });
+
+            // Set default session type
+            if (visibleCards.length > 0) {
+                currentSessionType = visibleCards[0].id;
+                document.getElementById('sessionType').value = currentSessionType;
+            }
+
+            // Apply text labels
+            var el = function(id) { return document.getElementById(id); };
+            if (el('t-bookingTitle')) el('t-bookingTitle').textContent = b.pageTitle;
+            if (el('t-bookingSubtitle')) el('t-bookingSubtitle').textContent = b.pageSubtitle;
+            if (el('t-labelName')) el('t-labelName').textContent = b.labelName + ' *';
+            if (el('t-labelEmail')) el('t-labelEmail').textContent = b.labelEmail + ' *';
+            if (el('t-labelPhone')) el('t-labelPhone').textContent = b.labelPhone + ' *';
+            if (el('t-labelType')) el('t-labelType').textContent = b.labelType + ' *';
+            if (el('t-labelMessage')) el('t-labelMessage').textContent = b.labelMessage;
+            if (el('t-submitButton')) el('t-submitButton').textContent = b.submitButton;
+        }
+
+        function updatePackageDropdown(card) {
+            var pkgSelect = document.getElementById('package');
+            pkgSelect.innerHTML = '<option value="">Choose a package...</option>';
+            if (card && card.packages) {
+                card.packages.forEach(function(pkg) {
+                    var opt = document.createElement('option');
+                    opt.value = pkg.name + ' - ' + pkg.price;
+                    opt.textContent = pkg.name + ' - ' + pkg.price;
+                    pkgSelect.appendChild(opt);
+                });
+            }
+        }
 
         function selectSessionType(type) {
             currentSessionType = type;
-            document.getElementById('portrait-card').classList.remove('active');
-            document.getElementById('graduation-card').classList.remove('active');
+            document.querySelectorAll('.session-type-card').forEach(function(c) { c.classList.remove('active'); });
             document.getElementById(type + '-card').classList.add('active');
-            document.getElementById('portrait-content').classList.remove('active');
-            document.getElementById('graduation-content').classList.remove('active');
+            document.querySelectorAll('.session-content').forEach(function(c) { c.classList.remove('active'); });
             document.getElementById(type + '-content').classList.add('active');
             document.getElementById('sessionType').value = type;
             toggleSessionFields();
-            document.querySelectorAll('.package').forEach(p => p.classList.remove('selected'));
+            document.querySelectorAll('.package').forEach(function(p) { p.classList.remove('selected'); });
             document.getElementById('package').value = '';
+            var card = sessionCards.find(function(c) { return c.id === type; });
+            updatePackageDropdown(card);
         }
 
         function toggleSessionFields() {
@@ -527,15 +502,17 @@
             }
         }
 
-        function selectPackage(pkg, sessionType) {
+        function selectPackage(name, price, sessionType, el) {
             currentSessionType = sessionType;
             document.getElementById('sessionType').value = sessionType;
             toggleSessionFields();
-            document.querySelectorAll('.package').forEach(p => p.classList.remove('selected'));
-            event.currentTarget.classList.add('selected');
-            const packageMap = { 'mini': 'Mini Session - $175', 'standard': 'Standard Session - $250', 'signature': 'Signature Session - $375' };
-            document.getElementById('package').value = packageMap[pkg];
-            selectedPackage = pkg;
+            document.querySelectorAll('.package').forEach(function(p) { p.classList.remove('selected'); });
+            el.classList.add('selected');
+            document.getElementById('package').value = name + ' - ' + price;
+            selectedPackage = name;
+            var card = sessionCards.find(function(c) { return c.id === sessionType; });
+            updatePackageDropdown(card);
+            document.getElementById('package').value = name + ' - ' + price;
         }
 
         document.getElementById('bookingForm').addEventListener('submit', async function(e) {

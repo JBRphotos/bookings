@@ -218,6 +218,10 @@
         .section-card-header h4 { font-family: 'Playfair Display', serif; color: var(--white); font-size: 1.05rem; }
         .section-toggle { color: var(--accent); font-size: 1.5rem; font-weight: 300; transition: transform 0.3s; }
         .section-editor-card.open .section-toggle { transform: rotate(45deg); }
+        .hide-toggle { background: none; border: none; cursor: pointer; font-size: 1.2rem; padding: 4px 8px; opacity: 0.6; transition: opacity 0.2s; }
+        .hide-toggle:hover { opacity: 1; }
+        .hide-toggle.is-hidden { opacity: 0.35; }
+        .section-editor-card.is-hidden { opacity: 0.5; border-style: dashed; }
         .section-card-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
         .section-editor-card.open .section-card-body { max-height: 8000px; }
         .section-card-inner { padding: 22px 20px; }
@@ -749,6 +753,18 @@
                         <div id="session-types-container"></div>
                         <button class="add-session-type-btn" onclick="addSessionType()">+ Add Session Type</button>
                     </div>
+                    <div class="text-subsection">
+                        <h4>Session Cards & Packages</h4>
+                        <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:12px;">These are the visual cards and package tiers on the booking page.</p>
+                        <div id="session-cards-editor"></div>
+                        <button class="add-session-type-btn" onclick="addSessionCard()">+ Add Session Card</button>
+                    </div>
+                    <div class="text-subsection">
+                        <h4>Add-ons</h4>
+                        <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:12px;">Optional extras shown on the booking form.</p>
+                        <div id="addons-editor"></div>
+                        <button class="add-session-type-btn" onclick="addAddon()">+ Add Add-on</button>
+                    </div>
                 </div>
 
                 <!-- FOOTER TEXT -->
@@ -973,8 +989,9 @@
                 card.id = 'sec-card-' + si;
                 card.setAttribute('draggable', 'true');
                 card.setAttribute('data-index', si);
+                if (section.hidden) card.classList.add('is-hidden');
                 card.innerHTML =
-                    '<div class="section-card-header" onclick="toggleCard(' + si + ')"><div class="section-card-header-left"><span class="drag-handle" title="Drag to reorder" onclick="event.stopPropagation()">☰</span><h4>' + esc(section.title) + '</h4></div><span class="section-toggle">+</span></div>' +
+                    '<div class="section-card-header" onclick="toggleCard(' + si + ')"><div class="section-card-header-left"><span class="drag-handle" title="Drag to reorder" onclick="event.stopPropagation()">☰</span><h4>' + esc(section.title) + (section.hidden ? ' <span style="font-size:0.75rem;color:var(--text-muted);">(hidden)</span>' : '') + '</h4></div><button class="hide-toggle' + (section.hidden ? ' is-hidden' : '') + '" onclick="event.stopPropagation();toggleSectionHidden(' + si + ')" title="' + (section.hidden ? 'Show' : 'Hide') + ' section">' + (section.hidden ? '👁️‍🗨️' : '👁️') + '</button><span class="section-toggle">+</span></div>' +
                     '<div class="section-card-body"><div class="section-card-inner">' +
                         '<div class="field-row">' +
                             '<div class="field-group"><label class="field-label">Title</label><input class="field-input" value="' + esc(section.title) + '" onchange="updateSecTitle(' + si + ',this.value)"></div>' +
@@ -1072,6 +1089,12 @@
             editSections.splice(si, 1); renderSections(); buildDropdown();
         }
 
+        function toggleSectionHidden(si) {
+            editSections[si].hidden = !editSections[si].hidden;
+            renderSections(); buildDropdown();
+            showToast(editSections[si].title + (editSections[si].hidden ? ' hidden' : ' visible'), 'success');
+        }
+
         function parseBannerPos(val) {
             if (!val || val === 'center') return 50;
             if (val === 'top') return 0;
@@ -1095,7 +1118,7 @@
             c += '    portfolioCarouselFolders: [\n'+folders.join(',\n')+'\n    ],\n';
             c += "    galleryCarouselFolder: 'images/gallery'\n};\n\nvar sections = [\n";
             editSections.forEach(function(s,si){
-                c += "    {\n        id: '"+s.id+"', title: '"+s.title+"',\n";
+                c += "    {\n        id: '"+s.id+"', title: '"+s.title+"',"+(s.hidden?" hidden: true,":"")+"\n";
                 c += "        banner: '"+s.banner+"', bannerPosition: '"+(s.bannerPosition||'center 50%')+"',\n        folder: '"+s.folder+"',\n        albums: [\n";
                 s.albums.forEach(function(al,ai){
                     c += "            { id: '"+al.id+"', title: '"+al.title+"', cover: '"+al.cover+"', start: "+al.start+", end: "+al.end+" }";
@@ -1121,10 +1144,14 @@
            ═══════════════════════════════════════ */
         var editText = {};
         var editSessionTypes = [];
+        var editSessionCards = [];
+        var editAddons = [];
 
         function loadTextConfig() {
             editText = JSON.parse(JSON.stringify(siteText));
             editSessionTypes = editText.booking.sessionTypes.slice();
+            editSessionCards = JSON.parse(JSON.stringify(editText.booking.sessionCards || []));
+            editAddons = (editText.booking.addons || []).slice();
 
             // Homepage
             document.getElementById('txt-heroTitle').value = editText.homepage.heroTitle;
@@ -1171,6 +1198,8 @@
             document.getElementById('txt-copyrightText').value = editText.footer.copyrightText;
 
             renderSessionTypes();
+            renderSessionCards();
+            renderAddons();
         }
 
         function renderSessionTypes() {
@@ -1186,6 +1215,68 @@
         }
         function addSessionType() { editSessionTypes.push('New Type'); renderSessionTypes(); }
         function removeSessionType(i) { editSessionTypes.splice(i, 1); renderSessionTypes(); }
+
+        /* ── Session Cards Editor ── */
+        function renderSessionCards() {
+            var ctr = document.getElementById('session-cards-editor');
+            ctr.innerHTML = '';
+            editSessionCards.forEach(function(card, ci) {
+                var pkgHTML = '';
+                (card.packages || []).forEach(function(pkg, pi) {
+                    pkgHTML += '<div style="background:var(--soft-navy);border-radius:10px;padding:12px;margin-bottom:8px;">' +
+                        '<div class="field-row" style="margin-bottom:8px;">' +
+                            '<div class="field-group" style="margin:0;"><label class="field-label" style="font-size:0.7rem;">Name</label><input class="field-input" value="' + esc(pkg.name) + '" onchange="editSessionCards[' + ci + '].packages[' + pi + '].name=this.value"></div>' +
+                            '<div class="field-group" style="margin:0;"><label class="field-label" style="font-size:0.7rem;">Price</label><input class="field-input" value="' + esc(pkg.price) + '" onchange="editSessionCards[' + ci + '].packages[' + pi + '].price=this.value"></div>' +
+                        '</div>' +
+                        '<div class="field-group" style="margin:0;"><label class="field-label" style="font-size:0.7rem;">Features (one per line)</label>' +
+                        '<textarea class="field-input" rows="3" style="resize:vertical;" onchange="editSessionCards[' + ci + '].packages[' + pi + '].features=this.value.split(\'\\n\').filter(function(l){return l.trim();})">' + (pkg.features||[]).join('\n') + '</textarea></div>' +
+                        '<button style="background:none;border:none;color:#ff6b6b;cursor:pointer;font-size:0.8rem;margin-top:4px;" onclick="editSessionCards[' + ci + '].packages.splice(' + pi + ',1);renderSessionCards();">&times; Remove Package</button>' +
+                    '</div>';
+                });
+
+                var cardHTML = '<div class="section-editor-card' + (card.hidden ? ' is-hidden' : '') + '" style="margin-bottom:12px;">' +
+                    '<div class="section-card-header" onclick="this.parentElement.querySelector(\'.section-card-body\').classList.toggle(\'active\');this.querySelector(\'.section-toggle\').textContent=this.parentElement.querySelector(\'.section-card-body.active\')?\'−\':\'+\'">' +
+                        '<div class="section-card-header-left"><h4>' + esc(card.title || 'New Card') + (card.hidden ? ' <span style="font-size:0.75rem;color:var(--text-muted);">(hidden)</span>' : '') + '</h4></div>' +
+                        '<button class="hide-toggle' + (card.hidden ? ' is-hidden' : '') + '" onclick="event.stopPropagation();editSessionCards[' + ci + '].hidden=!editSessionCards[' + ci + '].hidden;renderSessionCards();" title="' + (card.hidden ? 'Show' : 'Hide') + '">' + (card.hidden ? '👁️‍🗨️' : '👁️') + '</button>' +
+                        '<span class="section-toggle">+</span>' +
+                    '</div>' +
+                    '<div class="section-card-body">' +
+                        '<div class="field-row">' +
+                            '<div class="field-group"><label class="field-label">ID</label><input class="field-input" value="' + esc(card.id) + '" onchange="editSessionCards[' + ci + '].id=this.value"></div>' +
+                            '<div class="field-group"><label class="field-label">Icon (emoji)</label><input class="field-input" value="' + esc(card.icon) + '" onchange="editSessionCards[' + ci + '].icon=this.value"></div>' +
+                        '</div>' +
+                        '<div class="field-row">' +
+                            '<div class="field-group"><label class="field-label">Title</label><input class="field-input" value="' + esc(card.title) + '" onchange="editSessionCards[' + ci + '].title=this.value"></div>' +
+                            '<div class="field-group"><label class="field-label">Packages Title</label><input class="field-input" value="' + esc(card.packagesTitle) + '" onchange="editSessionCards[' + ci + '].packagesTitle=this.value"></div>' +
+                        '</div>' +
+                        '<div class="field-group"><label class="field-label">Description</label><input class="field-input" value="' + esc(card.description) + '" onchange="editSessionCards[' + ci + '].description=this.value"></div>' +
+                        '<h5 style="margin:15px 0 8px;color:var(--navy);">Packages</h5>' +
+                        pkgHTML +
+                        '<button class="add-session-type-btn" style="margin-top:8px;" onclick="editSessionCards[' + ci + '].packages.push({name:\'New Package\',price:\'$0\',features:[]});renderSessionCards();">+ Add Package</button>' +
+                        '<div style="margin-top:12px;"><button style="background:none;border:none;color:#ff6b6b;cursor:pointer;font-size:0.85rem;" onclick="if(confirm(\'Remove this session card?\')){editSessionCards.splice(' + ci + ',1);renderSessionCards();}">&times; Remove Session Card</button></div>' +
+                    '</div>' +
+                '</div>';
+                ctr.innerHTML += cardHTML;
+            });
+        }
+        function addSessionCard() {
+            editSessionCards.push({ id: 'new', icon: '📷', title: 'New Session', description: '', packagesTitle: 'New Session Packages', packages: [] });
+            renderSessionCards();
+        }
+
+        /* ── Addons Editor ── */
+        function renderAddons() {
+            var ctr = document.getElementById('addons-editor');
+            ctr.innerHTML = '';
+            editAddons.forEach(function(addon, i) {
+                var row = document.createElement('div');
+                row.className = 'session-type-row';
+                row.innerHTML = '<input class="field-input" value="' + esc(addon) + '" onchange="editAddons[' + i + ']=this.value">' +
+                    '<button class="session-type-remove" onclick="editAddons.splice(' + i + ',1);renderAddons();">&times;</button>';
+                ctr.appendChild(row);
+            });
+        }
+        function addAddon() { editAddons.push('New add-on - $0'); renderAddons(); }
 
         function gatherTextEdits() {
             return {
@@ -1229,7 +1320,9 @@
                     labelType: document.getElementById('txt-labelType').value,
                     labelMessage: document.getElementById('txt-labelMessage').value,
                     submitButton: document.getElementById('txt-submitButton').value,
-                    sessionTypes: editSessionTypes.slice()
+                    sessionTypes: editSessionTypes.slice(),
+                    sessionCards: JSON.parse(JSON.stringify(editSessionCards)),
+                    addons: editAddons.slice()
                 },
                 footer: {
                     copyrightText: document.getElementById('txt-copyrightText').value
@@ -1284,6 +1377,30 @@
             c += '        sessionTypes: [\n';
             t.booking.sessionTypes.forEach(function(st, i) {
                 c += "            '" + e(st) + "'" + (i < t.booking.sessionTypes.length - 1 ? ',\n' : '\n');
+            });
+            c += '        ],\n';
+            // Session Cards
+            c += '        sessionCards: [\n';
+            t.booking.sessionCards.forEach(function(card, ci) {
+                c += '            {\n';
+                c += "                id: '" + e(card.id) + "'," + (card.hidden ? " hidden: true," : "") + "\n";
+                c += "                icon: '" + e(card.icon) + "',\n";
+                c += "                title: '" + e(card.title) + "',\n";
+                c += "                description: '" + e(card.description) + "',\n";
+                c += "                packagesTitle: '" + e(card.packagesTitle) + "',\n";
+                c += '                packages: [\n';
+                (card.packages||[]).forEach(function(pkg, pi) {
+                    c += "                    { name: '" + e(pkg.name) + "', price: '" + e(pkg.price) + "', features: [" + (pkg.features||[]).map(function(f){return"'"+e(f)+"'"}).join(', ') + '] }';
+                    c += pi < card.packages.length - 1 ? ',\n' : '\n';
+                });
+                c += '                ]\n';
+                c += '            }' + (ci < t.booking.sessionCards.length - 1 ? ',\n' : '\n');
+            });
+            c += '        ],\n';
+            // Addons
+            c += '        addons: [\n';
+            t.booking.addons.forEach(function(addon, i) {
+                c += "            '" + e(addon) + "'" + (i < t.booking.addons.length - 1 ? ',\n' : '\n');
             });
             c += '        ]\n    },\n\n';
             c += '    footer: {\n';

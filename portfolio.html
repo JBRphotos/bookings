@@ -386,6 +386,7 @@
             var container = document.getElementById('accordion-container');
 
             sections.forEach(function(section) {
+                if (section.hidden) return;
                 // Create accordion item
                 var item = document.createElement('div');
                 item.className = 'accordion-item';
