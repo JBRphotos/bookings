@@ -55,7 +55,7 @@ var siteText = {
         ],
         sessionCards: [
             {
-                id: 'portrait',
+                id: 'portrait', hidden: true,
                 icon: '📸',
                 title: 'Portrait Session',
                 description: 'Professional portraits that capture your personality and style',
