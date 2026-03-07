@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -19,541 +20,548 @@
         html { scroll-behavior: smooth; }
         body { font-family: 'Work Sans', sans-serif; color: var(--primary-navy); line-height: 1.6; overflow-x: hidden; }
 
-        nav {
-            position: fixed; top: 0; width: 100%;
-            background: #1C2F4A; backdrop-filter: blur(10px);
-            z-index: 1000; padding: 20px 0;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
-        }
-        nav .container {
-            max-width: 1400px; margin: 0 auto; padding: 0 40px;
-            display: flex; justify-content: space-between; align-items: center;
-        }
-        .logo-nav {
-            display: flex; align-items: center; gap: 15px;
-            color: var(--white); font-family: 'Playfair Display', serif;
-            font-size: 1.5rem; font-weight: 700; text-decoration: none;
-        }
-        .logo-nav img { width: 50px; height: 50px; }
-        nav ul { display: flex; list-style: none; gap: 40px; }
-        nav a { color: #FFFFFF; text-decoration: none; font-weight: 500; transition: color 0.3s; font-size: 0.95rem; }
-        nav a:hover { color: #D4AF6A; }
+```
+    nav {
+        position: fixed; top: 0; width: 100%;
+        background: #1C2F4A; backdrop-filter: blur(10px);
+        z-index: 1000; padding: 20px 0;
+        box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+    }
+    nav .container {
+        max-width: 1400px; margin: 0 auto; padding: 0 40px;
+        display: flex; justify-content: space-between; align-items: center;
+    }
+    .logo-nav {
+        display: flex; align-items: center; gap: 15px;
+        color: var(--white); font-family: 'Playfair Display', serif;
+        font-size: 1.5rem; font-weight: 700; text-decoration: none;
+    }
+    .logo-nav img { width: 50px; height: 50px; }
+    nav ul { display: flex; list-style: none; gap: 40px; }
+    nav a { color: #FFFFFF; text-decoration: none; font-weight: 500; transition: color 0.3s; font-size: 0.95rem; }
+    nav a:hover { color: #D4AF6A; }
 
-        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; }
-        @media (min-width: 769px) { .hamburger { display: none !important; } }
-        .hamburger span { width: 25px; height: 3px; background: #FFFFFF; transition: all 0.3s; border-radius: 3px; }
-        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); }
-        .hamburger.active span:nth-child(2) { opacity: 0; }
-        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+    .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; }
+    @media (min-width: 769px) { .hamburger { display: none !important; } }
+    .hamburger span { width: 25px; height: 3px; background: #FFFFFF; transition: all 0.3s; border-radius: 3px; }
+    .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
 
-        .page-header {
-            margin-top: 90px; padding: 50px 20px; text-align: center;
-            background: linear-gradient(135deg, #2A3F5F 0%, #1C2F4A 100%);
-            color: var(--white);
-        }
-        .page-header h1 {
-            font-family: 'Playfair Display', serif; font-size: 4rem; font-weight: 900;
-            margin-bottom: 20px; color: #FFFFFF; letter-spacing: -1px; line-height: 1.1;
-            padding-bottom: 15px; border-bottom: 3px solid #D4AF6A; display: inline-block;
-        }
-        .page-header p {
-            font-size: 1.3rem; color: #E3E7EC; max-width: 700px;
-            margin: 0 auto; font-weight: 300; line-height: 1.6;
-        }
+    .page-header {
+        margin-top: 90px; padding: 50px 20px; text-align: center;
+        background: linear-gradient(135deg, #2A3F5F 0%, #1C2F4A 100%);
+        color: var(--white);
+    }
+    .page-header h1 {
+        font-family: 'Playfair Display', serif; font-size: 4rem; font-weight: 900;
+        margin-bottom: 20px; color: #FFFFFF; letter-spacing: -1px; line-height: 1.1;
+        padding-bottom: 15px; border-bottom: 3px solid #D4AF6A; display: inline-block;
+    }
+    .page-header p {
+        font-size: 1.3rem; color: #E3E7EC; max-width: 700px;
+        margin: 0 auto; font-weight: 300; line-height: 1.6;
+    }
 
-        .portfolio-section { padding: 0; }
-        .portfolio-container { max-width: 100%; margin: 0; padding: 0; }
+    .portfolio-section { padding: 0; }
+    .portfolio-container { max-width: 100%; margin: 0; padding: 0; }
 
-        .accordion-item {
-            margin-bottom: 0; border-radius: 0; overflow: hidden;
-            box-shadow: none; border-bottom: 1px solid rgba(227, 231, 236, 0.2);
-            background: #1C2F4A;
-        }
-        .accordion-header {
-            position: relative; height: 250px; cursor: pointer;
-            overflow: hidden; transition: all 0.4s ease; background: #1C2F4A;
-        }
-        .accordion-header::before {
-            content: ''; position: absolute; inset: 0;
-            background-image: var(--banner-img);
-            background-size: cover; background-position: var(--banner-pos, center);
-            filter: grayscale(50%) brightness(0.7);
-            transition: all 0.4s ease; z-index: 1;
-        }
-        .accordion-item.active .accordion-header::before {
-            filter: grayscale(0%) brightness(1);
-        }
-        .header-content {
-            position: relative; z-index: 3; height: 100%;
-            display: flex; align-items: center; justify-content: center;
-            flex-direction: column; color: #FFFFFF;
-        }
-        .accordion-header h2 {
-            font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 900;
-            margin-bottom: 15px; text-shadow: 0 2px 10px rgba(0,0,0,0.5); color: #FFFFFF;
-        }
-        .expand-icon {
-            font-size: 3rem; font-weight: 300;
-            transition: transform 0.3s ease, color 0.3s ease; color: #FFFFFF;
-        }
-        .accordion-item:hover .expand-icon { color: #D4AF6A; }
-        .accordion-item.active .expand-icon { transform: rotate(45deg); color: #D4AF6A; }
-        .header-image-overlay {
-            position: absolute; inset: 0;
-            background: linear-gradient(to bottom, rgba(10,22,40,0.4), rgba(10,22,40,0.7));
-            z-index: 2; transition: opacity 0.4s ease;
-        }
-        .accordion-item.active .header-image-overlay { opacity: 0.3; }
-        .accordion-content {
-            max-height: 0; overflow: hidden; background: #FFFFFF;
-            transition: max-height 0.5s ease;
-        }
-        .accordion-item.active .accordion-content {
-            max-height: 5000px; padding: 60px 40px;
-        }
+    .accordion-item {
+        margin-bottom: 0; border-radius: 0; overflow: hidden;
+        box-shadow: none; border-bottom: 1px solid rgba(227, 231, 236, 0.2);
+        background: #1C2F4A;
+    }
+    .accordion-header {
+        position: relative; height: 250px; cursor: pointer;
+        overflow: hidden; transition: all 0.4s ease; background: #1C2F4A;
+    }
+    .accordion-header::before {
+        content: ''; position: absolute; inset: 0;
+        background-image: var(--banner-img);
+        background-size: cover; background-position: var(--banner-pos, center);
+        filter: grayscale(50%) brightness(0.7);
+        transition: all 0.4s ease; z-index: 1;
+    }
+    .accordion-item.active .accordion-header::before {
+        filter: grayscale(0%) brightness(1);
+    }
+    .header-content {
+        position: relative; z-index: 3; height: 100%;
+        display: flex; align-items: center; justify-content: center;
+        flex-direction: column; color: #FFFFFF;
+    }
+    .accordion-header h2 {
+        font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 900;
+        margin-bottom: 15px; text-shadow: 0 2px 10px rgba(0,0,0,0.5); color: #FFFFFF;
+    }
+    .expand-icon {
+        font-size: 3rem; font-weight: 300;
+        transition: transform 0.3s ease, color 0.3s ease; color: #FFFFFF;
+    }
+    .accordion-item:hover .expand-icon { color: #D4AF6A; }
+    .accordion-item.active .expand-icon { transform: rotate(45deg); color: #D4AF6A; }
+    .header-image-overlay {
+        position: absolute; inset: 0;
+        background: linear-gradient(to bottom, rgba(10,22,40,0.4), rgba(10,22,40,0.7));
+        z-index: 2; transition: opacity 0.4s ease;
+    }
+    .accordion-item.active .header-image-overlay { opacity: 0.3; }
+    .accordion-content {
+        max-height: 0; overflow: hidden; background: #FFFFFF;
+        transition: max-height 0.5s ease;
+    }
+    .accordion-item.active .accordion-content {
+        max-height: 5000px; padding: 60px 40px;
+    }
 
-        .albums {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px; margin-bottom: 40px;
-        }
-        .album-card {
-            position: relative; border-radius: 15px; overflow: hidden;
-            cursor: pointer; box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
-        .album-card:hover { transform: translateY(-5px); }
-        .album-card img {
-            width: 100%; height: 250px; object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        .album-card:hover img { transform: scale(1.02); }
-        .album-card h3 {
-            position: absolute; bottom: 0; left: 0; right: 0; padding: 20px;
-            background: linear-gradient(to top, rgba(11,31,51,0.95), transparent);
-            color: #FFFFFF; font-family: 'Playfair Display', serif;
-            font-size: 1.8rem; text-align: center;
-        }
+    .albums {
+        display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px; margin-bottom: 40px;
+    }
+    .album-card {
+        position: relative; border-radius: 15px; overflow: hidden;
+        cursor: pointer; box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease;
+    }
+    .album-card:hover { transform: translateY(-5px); }
+    .album-card img {
+        width: 100%; height: 250px; object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+    .album-card:hover img { transform: scale(1.02); }
+    .album-card h3 {
+        position: absolute; bottom: 0; left: 0; right: 0; padding: 20px;
+        background: linear-gradient(to top, rgba(11,31,51,0.95), transparent);
+        color: #FFFFFF; font-family: 'Playfair Display', serif;
+        font-size: 1.8rem; text-align: center;
+    }
 
-        .photo-grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 25px;
-        }
-        .photo-item {
-            position: relative; border-radius: 15px; overflow: hidden;
-            aspect-ratio: 4/3; cursor: pointer;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1); transition: transform 0.3s;
-        }
-        .photo-item:hover { transform: translateY(-5px); }
-        .photo-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
-        .photo-item:hover img { transform: scale(1.02); }
+    .photo-grid {
+        display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 25px;
+    }
+    .photo-item {
+        position: relative; border-radius: 15px; overflow: hidden;
+        aspect-ratio: 4/3; cursor: pointer;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1); transition: transform 0.3s;
+    }
+    .photo-item:hover { transform: translateY(-5px); }
+    .photo-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+    .photo-item:hover img { transform: scale(1.02); }
 
-        .lightbox {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.95); z-index: 2000;
-            align-items: center; justify-content: center;
-        }
-        .lightbox.active { display: flex; }
-        .lightbox img {
-            max-width: 90%; max-height: 90%; object-fit: contain;
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
-        .lightbox img.slide-left { animation: slideLeft 0.4s ease; }
-        .lightbox img.slide-right { animation: slideRight 0.4s ease; }
-        @keyframes slideLeft { 0% { opacity: 0; transform: translateX(100px); } 100% { opacity: 1; transform: translateX(0); } }
-        @keyframes slideRight { 0% { opacity: 0; transform: translateX(-100px); } 100% { opacity: 1; transform: translateX(0); } }
+    .lightbox {
+        display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0,0,0,0.95); z-index: 2000;
+        align-items: center; justify-content: center;
+    }
+    .lightbox.active { display: flex; }
+    .lightbox img {
+        max-width: 90%; max-height: 90%; object-fit: contain;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    .lightbox img.slide-left { animation: slideLeft 0.4s ease; }
+    .lightbox img.slide-right { animation: slideRight 0.4s ease; }
+    @keyframes slideLeft { 0% { opacity: 0; transform: translateX(100px); } 100% { opacity: 1; transform: translateX(0); } }
+    @keyframes slideRight { 0% { opacity: 0; transform: translateX(-100px); } 100% { opacity: 1; transform: translateX(0); } }
 
-        .lightbox-dots {
-            position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
-            display: flex; gap: 10px; z-index: 2001;
-            flex-wrap: wrap; justify-content: center; max-width: 80%;
-        }
-        .lightbox-dot {
-            width: 10px; height: 10px; border-radius: 50%;
-            background: rgba(255, 255, 255, 0.4); cursor: pointer; transition: all 0.3s ease;
-        }
-        .lightbox-dot.active { background: #D4AF6A; transform: scale(1.3); }
-        .lightbox-dot:hover { background: rgba(255, 255, 255, 0.7); }
-        .lightbox-close {
-            position: absolute; top: 30px; right: 40px; color: #ffffff;
-            font-size: 3rem; cursor: pointer; font-weight: 300; line-height: 1; transition: color 0.3s;
-        }
-        .lightbox-close:hover { color: #D4AF6A; }
-        .lightbox-prev, .lightbox-next {
-            position: absolute; top: 50%; transform: translateY(-50%);
-            color: #ffffff; font-size: 5rem; cursor: pointer;
-            font-weight: 300; line-height: 1; padding: 20px;
-            user-select: none; transition: color 0.3s;
-        }
-        .lightbox-prev:hover, .lightbox-next:hover { color: #D4AF6A; }
-        .lightbox-prev { left: 40px; }
-        .lightbox-next { right: 40px; }
-        .lightbox-counter {
-            position: absolute; top: 40px; left: 50%; transform: translateX(-50%);
-            color: rgba(255,255,255,0.6); font-size: 0.95rem;
-            font-family: 'Work Sans', sans-serif; letter-spacing: 2px;
-        }
+    .lightbox-dots {
+        position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+        display: flex; gap: 10px; z-index: 2001;
+        flex-wrap: wrap; justify-content: center; max-width: 80%;
+    }
+    .lightbox-dot {
+        width: 10px; height: 10px; border-radius: 50%;
+        background: rgba(255, 255, 255, 0.4); cursor: pointer; transition: all 0.3s ease;
+    }
+    .lightbox-dot.active { background: #D4AF6A; transform: scale(1.3); }
+    .lightbox-dot:hover { background: rgba(255, 255, 255, 0.7); }
+    .lightbox-close {
+        position: absolute; top: 30px; right: 40px; color: #ffffff;
+        font-size: 3rem; cursor: pointer; font-weight: 300; line-height: 1; transition: color 0.3s;
+    }
+    .lightbox-close:hover { color: #D4AF6A; }
+    .lightbox-prev, .lightbox-next {
+        position: absolute; top: 50%; transform: translateY(-50%);
+        color: #ffffff; font-size: 5rem; cursor: pointer;
+        font-weight: 300; line-height: 1; padding: 20px;
+        user-select: none; transition: color 0.3s;
+    }
+    .lightbox-prev:hover, .lightbox-next:hover { color: #D4AF6A; }
+    .lightbox-prev { left: 40px; }
+    .lightbox-next { right: 40px; }
+    .lightbox-counter {
+        position: absolute; top: 40px; left: 50%; transform: translateX(-50%);
+        color: rgba(255,255,255,0.6); font-size: 0.95rem;
+        font-family: 'Work Sans', sans-serif; letter-spacing: 2px;
+    }
 
-        .album-modal {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9); z-index: 1500;
-            display: flex; align-items: center; justify-content: center;
-            opacity: 0; transition: opacity 0.3s ease;
-        }
-        .album-modal.active { opacity: 1; }
-        .album-modal-content {
-            background: #ffffff; border-radius: 20px;
-            max-width: 90%; max-height: 90%; overflow-y: auto; padding: 40px;
-        }
-        .album-modal-header {
-            display: flex; justify-content: space-between; align-items: center;
-            margin-bottom: 40px; padding-bottom: 20px; border-bottom: 2px solid #D4AF6A;
-        }
-        .album-modal-header h2 {
-            font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #0B1F33;
-        }
-        .album-close {
-            font-size: 3rem; cursor: pointer; color: #0B1F33;
-            font-weight: 300; line-height: 1; transition: color 0.3s;
-        }
-        .album-close:hover { color: #D4AF6A; }
-        .album-loading {
-            text-align: center; padding: 40px; color: #5F6C7B; font-size: 1.1rem;
-        }
-        .album-loading::after {
-            content: ''; display: inline-block; width: 20px; height: 20px;
-            border: 3px solid #E3E7EC; border-top-color: #D4AF6A;
-            border-radius: 50%; animation: spin 0.8s linear infinite;
-            margin-left: 10px; vertical-align: middle;
-        }
-        @keyframes spin { to { transform: rotate(360deg); } }
+    .album-modal {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0,0,0,0.9); z-index: 1500;
+        display: flex; align-items: center; justify-content: center;
+        opacity: 0; transition: opacity 0.3s ease;
+    }
+    .album-modal.active { opacity: 1; }
+    .album-modal-content {
+        background: #ffffff; border-radius: 20px;
+        max-width: 90%; max-height: 90%; overflow-y: auto; padding: 40px;
+    }
+    .album-modal-header {
+        display: flex; justify-content: space-between; align-items: center;
+        margin-bottom: 40px; padding-bottom: 20px; border-bottom: 2px solid #D4AF6A;
+    }
+    .album-modal-header h2 {
+        font-family: 'Playfair Display', serif; font-size: 2.5rem; color: #0B1F33;
+    }
+    .album-close {
+        font-size: 3rem; cursor: pointer; color: #0B1F33;
+        font-weight: 300; line-height: 1; transition: color 0.3s;
+    }
+    .album-close:hover { color: #D4AF6A; }
+    .album-loading {
+        text-align: center; padding: 40px; color: #5F6C7B; font-size: 1.1rem;
+    }
+    .album-loading::after {
+        content: ''; display: inline-block; width: 20px; height: 20px;
+        border: 3px solid #E3E7EC; border-top-color: #D4AF6A;
+        border-radius: 50%; animation: spin 0.8s linear infinite;
+        margin-left: 10px; vertical-align: middle;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
-        .cta-section {
-            padding: 50px 20px; text-align: center; background: #F6F5F2; color: #0B1F33;
-        }
-        .cta-section h2 {
-            font-family: 'Playfair Display', serif; font-size: 2.5rem;
-            margin-bottom: 20px; color: #0B1F33;
-        }
-        .cta-section p { color: #0E1726; font-size: 1.2rem; }
-        .cta-button {
-            display: inline-block; padding: 18px 45px; background: #D4AF6A;
-            color: #0B1F33; text-decoration: none; font-weight: 600;
-            border-radius: 50px; transition: all 0.3s; margin-top: 20px;
-        }
-        .cta-button:hover { background: #C19A54; transform: translateY(-3px); }
+    .cta-section {
+        padding: 50px 20px; text-align: center; background: #F6F5F2; color: #0B1F33;
+    }
+    .cta-section h2 {
+        font-family: 'Playfair Display', serif; font-size: 2.5rem;
+        margin-bottom: 20px; color: #0B1F33;
+    }
+    .cta-section p { color: #0E1726; font-size: 1.2rem; }
+    .cta-button {
+        display: inline-block; padding: 18px 45px; background: #D4AF6A;
+        color: #0B1F33; text-decoration: none; font-weight: 600;
+        border-radius: 50px; transition: all 0.3s; margin-top: 20px;
+    }
+    .cta-button:hover { background: #C19A54; transform: translateY(-3px); }
 
-        footer {
-            background: #1C2F4A; color: #E3E7EC; padding: 30px; text-align: center;
-        }
-        footer a { color: #E3E7EC; text-decoration: none; transition: color 0.3s; }
-        footer a:hover { color: #D4AF6A; }
+    footer {
+        background: #1C2F4A; color: #E3E7EC; padding: 30px; text-align: center;
+    }
+    footer a { color: #E3E7EC; text-decoration: none; transition: color 0.3s; }
+    footer a:hover { color: #D4AF6A; }
 
-        @media (max-width: 768px) {
-            .hamburger { display: flex; }
-            nav ul {
-                position: absolute; top: 90px; left: 0; right: 0; width: 100%;
-                max-height: 0; overflow: hidden; background: #1C2F4A;
-                flex-direction: column; align-items: flex-start; padding: 0 20px; gap: 0;
-                transition: max-height 0.3s ease, padding 0.3s ease;
-                box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-            }
-            nav ul.active { max-height: 400px; padding: 20px; }
-            nav ul li { width: 100%; border-bottom: 1px solid rgba(227, 231, 236, 0.1); }
-            nav ul li:last-child { border-bottom: none; }
-            nav a { font-size: 1rem; display: block; padding: 15px 0; }
-            .page-header h1 { font-size: 2.5rem; }
-            .photo-grid { grid-template-columns: 1fr; }
+    @media (max-width: 768px) {
+        .hamburger { display: flex; }
+        nav ul {
+            position: absolute; top: 90px; left: 0; right: 0; width: 100%;
+            max-height: 0; overflow: hidden; background: #1C2F4A;
+            flex-direction: column; align-items: flex-start; padding: 0 20px; gap: 0;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
         }
-    </style>
+        nav ul.active { max-height: 400px; padding: 20px; }
+        nav ul li { width: 100%; border-bottom: 1px solid rgba(227, 231, 236, 0.1); }
+        nav ul li:last-child { border-bottom: none; }
+        nav a { font-size: 1rem; display: block; padding: 15px 0; }
+        .page-header h1 { font-size: 2.5rem; }
+        .photo-grid { grid-template-columns: 1fr; }
+    }
+</style>
+```
+
 </head>
 <body>
 
-    <nav>
-        <div class="container">
-            <a href="index.html" class="logo-nav">
-                <img src="images/logo.png" alt="JBR Photos Logo">
-                <span>JBRphotos</span>
-            </a>
-            <div class="hamburger" onclick="toggleMenu()">
-                <span></span><span></span><span></span>
-            </div>
-            <ul id="nav-menu">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="index.html#about">About</a></li>
-                <li><a href="#portfolio-top">Portfolio</a></li>
-                <li><a href="index.html#gallery">Shop</a></li>
-                <li><a href="index.html#contact">Contact</a></li>
-                <li><a href="admin.html" style="opacity:0.3;font-size:0.75rem;">●</a></li>
-            </ul>
+```
+<nav>
+    <div class="container">
+        <a href="index.html" class="logo-nav">
+            <img src="images/logo.png" alt="JBR Photos Logo">
+            <span>JBRphotos</span>
+        </a>
+        <div class="hamburger" onclick="toggleMenu()">
+            <span></span><span></span><span></span>
         </div>
-    </nav>
-
-    <div class="page-header" id="portfolio-top">
-        <h1 id="t-portfolioPageTitle">Portfolio</h1>
-        <p id="t-portfolioPageSubtitle">Explore my work across sports, portraits, and creative photography</p>
+        <ul id="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="#portfolio-top">Portfolio</a></li>
+            <li><a href="index.html#gallery">Shop</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+            <li><a href="admin.html" style="opacity:0.3;font-size:0.75rem;">●</a></li>
+        </ul>
     </div>
+</nav>
 
-    <!-- Accordion sections are built automatically from photo-config.js -->
-    <section class="portfolio-section">
-        <div class="portfolio-container" id="accordion-container"></div>
-    </section>
+<div class="page-header" id="portfolio-top">
+    <h1 id="t-portfolioPageTitle">Portfolio</h1>
+    <p id="t-portfolioPageSubtitle">Explore my work across sports, portraits, and creative photography</p>
+</div>
 
-    <section class="cta-section">
-        <div>
-            <h2 id="t-ctaHeading">Ready to Book?</h2>
-            <p id="t-ctaSubheading">Let's create something amazing together</p>
-            <a href="booking.html" class="cta-button" id="t-ctaButton">Book a Session</a>
-        </div>
-    </section>
+<!-- Accordion sections are built automatically from photo-config.js -->
+<section class="portfolio-section">
+    <div class="portfolio-container" id="accordion-container"></div>
+</section>
 
-    <footer>
-        <p id="t-portfolioFooter">&copy; 2026 Jesse Reilly Photography. All rights reserved.</p>
-    </footer>
-
-    <!-- Lightbox -->
-    <div class="lightbox" id="lightbox">
-        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
-        <span class="lightbox-prev" onclick="navigateLightbox(-1)">&#8249;</span>
-        <span class="lightbox-next" onclick="navigateLightbox(1)">&#8250;</span>
-        <img src="" alt="" id="lightbox-img">
-        <div class="lightbox-counter" id="lightbox-counter"></div>
-        <div class="lightbox-dots" id="lightbox-dots"></div>
+<section class="cta-section">
+    <div>
+        <h2 id="t-ctaHeading">Ready to Book?</h2>
+        <p id="t-ctaSubheading">Let's create something amazing together</p>
+        <a href="booking.html" class="cta-button" id="t-ctaButton">Book a Session</a>
     </div>
+</section>
 
-    <script src="photo-config.js"></script>
-    <script src="site-text.js"></script>
-    <script>
-        function toggleMenu() {
-            var menu = document.getElementById('nav-menu');
-            var hamburger = document.querySelector('.hamburger');
-            menu.classList.toggle('active');
-            hamburger.classList.toggle('active');
-        }
+<footer>
+    <p id="t-portfolioFooter">&copy; 2026 Jesse Reilly Photography. All rights reserved.</p>
+</footer>
 
-        /* Load album photos by range */
-        function loadAlbumPhotos(folder, start, end) {
-            return new Promise(function(resolve) {
-                var found = [];
-                var checked = 0;
-                var total = end - start + 1;
-                for (var i = start; i <= end; i++) {
-                    (function(index) {
-                        var img = new Image();
-                        var src = folder + '/photo' + index + '.jpg';
-                        img.onload = function() {
-                            found.push({ src: src, index: index });
-                            checked++;
-                            if (checked === total) {
-                                found.sort(function(a, b) { return a.index - b.index; });
-                                resolve(found.map(function(f) { return f.src; }));
-                            }
-                        };
-                        img.onerror = function() {
-                            checked++;
-                            if (checked === total) {
-                                found.sort(function(a, b) { return a.index - b.index; });
-                                resolve(found.map(function(f) { return f.src; }));
-                            }
-                        };
-                        img.src = src;
-                    })(i);
-                }
-            });
-        }
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+    <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+    <span class="lightbox-prev" onclick="navigateLightbox(-1)">&#8249;</span>
+    <span class="lightbox-next" onclick="navigateLightbox(1)">&#8250;</span>
+    <img src="" alt="" id="lightbox-img">
+    <div class="lightbox-counter" id="lightbox-counter"></div>
+    <div class="lightbox-dots" id="lightbox-dots"></div>
+</div>
 
-        document.addEventListener('DOMContentLoaded', function() {
+<script src="photo-config.js"></script>
+<script src="site-text.js"></script>
+<script>
+    function toggleMenu() {
+        var menu = document.getElementById('nav-menu');
+        var hamburger = document.querySelector('.hamburger');
+        menu.classList.toggle('active');
+        hamburger.classList.toggle('active');
+    }
 
-            // Apply text from config (if loaded)
-            if (typeof siteText !== 'undefined' && siteText.portfolio) {
-                var pt = siteText.portfolio;
-                document.getElementById('t-portfolioPageTitle').textContent = pt.pageTitle;
-                document.getElementById('t-portfolioPageSubtitle').textContent = pt.pageSubtitle;
-                document.getElementById('t-ctaHeading').textContent = pt.ctaHeading;
-                document.getElementById('t-ctaSubheading').textContent = pt.ctaSubheading;
-                document.getElementById('t-ctaButton').textContent = pt.ctaButtonText;
-                document.getElementById('t-portfolioFooter').textContent = siteText.footer.copyrightText;
-            }
-
-            // Close mobile menu on link click
-            var navLinks = document.querySelectorAll('#nav-menu a');
-            navLinks.forEach(function(link) {
-                link.addEventListener('click', function() {
-                    document.getElementById('nav-menu').classList.remove('active');
-                    document.querySelector('.hamburger').classList.remove('active');
-                });
-            });
-
-            /* ── BUILD ACCORDION SECTIONS FROM CONFIG ── */
-            var container = document.getElementById('accordion-container');
-
-            sections.forEach(function(section) {
-                if (section.hidden) return;
-                // Create accordion item
-                var item = document.createElement('div');
-                item.className = 'accordion-item';
-                item.id = section.id;
-
-                // Header with banner
-                item.innerHTML =
-                    '<div class="accordion-header" style="--banner-img: url(\'' + section.banner + '\'); --banner-pos: ' + (section.bannerPosition || 'center') + '" onclick="toggleAccordion(\'' + section.id + '\')">' +
-                        '<div class="header-content">' +
-                            '<h2>' + section.title + '</h2>' +
-                            '<span class="expand-icon">+</span>' +
-                        '</div>' +
-                        '<div class="header-image-overlay"></div>' +
-                    '</div>' +
-                    '<div class="accordion-content">' +
-                        '<div class="albums" id="albums-' + section.id + '"></div>' +
-                    '</div>';
-
-                container.appendChild(item);
-
-                // Build album cards
-                var albumsGrid = document.getElementById('albums-' + section.id);
-                section.albums.forEach(function(album) {
-                    var card = document.createElement('div');
-                    card.className = 'album-card';
-                    card.onclick = function() { openAlbum(section.folder, album); };
-                    card.innerHTML =
-                        '<img src="' + album.cover + '" alt="' + album.title + '" loading="lazy" style="object-position:' + (album.coverPosition || 'center') + '" onerror="this.src=\'images/placeholder.jpg\'">' +
-                        '<h3>' + album.title + '</h3>';
-                    albumsGrid.appendChild(card);
-                });
-            });
-
-            /* ── ACCORDION TOGGLE ── */
-            window.toggleAccordion = function(sectionId) {
-                var item = document.getElementById(sectionId);
-                var allItems = document.querySelectorAll('.accordion-item');
-                allItems.forEach(function(i) {
-                    if (i !== item) i.classList.remove('active');
-                });
-                item.classList.toggle('active');
-            };
-
-            /* ── LIGHTBOX STATE ── */
-            var currentAlbumPhotos = [];
-            var currentPhotoIndex = 0;
-
-            /* ── OPEN ALBUM → straight to lightbox ── */
-            window.openAlbum = async function(folder, album) {
-                // Show lightbox immediately with loading state
-                var lightbox = document.getElementById('lightbox');
-                var img = document.getElementById('lightbox-img');
-                img.src = '';
-                lightbox.classList.add('active');
-                document.body.style.overflow = 'hidden';
-
-                var photos = await loadAlbumPhotos(folder, album.start, album.end);
-                if (photos.length === 0) {
-                    closeLightbox();
-                    return;
-                }
-                currentAlbumPhotos = photos;
-                currentPhotoIndex = 0;
-                img.src = photos[0];
-                updateProgressDots();
-                updateCounter();
-            };
-
-            /* ── LIGHTBOX ── */
-            window.openLightbox = function(src, index) {
-                currentPhotoIndex = index || 0;
-                var lightbox = document.getElementById('lightbox');
-                document.getElementById('lightbox-img').src = src;
-                lightbox.classList.add('active');
-                document.body.style.overflow = 'hidden';
-                updateProgressDots();
-                updateCounter();
-            };
-
-            window.closeLightbox = function() {
-                document.getElementById('lightbox').classList.remove('active');
-                document.body.style.overflow = '';
-                currentAlbumPhotos = [];
-            };
-
-            window.navigateLightbox = function(direction) {
-                if (currentAlbumPhotos.length === 0) return;
-                var img = document.getElementById('lightbox-img');
-                img.classList.remove('slide-left', 'slide-right');
-                currentPhotoIndex += direction;
-                if (currentPhotoIndex < 0) currentPhotoIndex = currentAlbumPhotos.length - 1;
-                else if (currentPhotoIndex >= currentAlbumPhotos.length) currentPhotoIndex = 0;
-                img.classList.add(direction > 0 ? 'slide-left' : 'slide-right');
-                img.src = currentAlbumPhotos[currentPhotoIndex];
-                updateProgressDots();
-                updateCounter();
-            };
-
-            function updateCounter() {
-                var counter = document.getElementById('lightbox-counter');
-                if (currentAlbumPhotos.length <= 1) { counter.textContent = ''; return; }
-                counter.textContent = (currentPhotoIndex + 1) + ' / ' + currentAlbumPhotos.length;
-            }
-
-            function updateProgressDots() {
-                var dots = document.getElementById('lightbox-dots');
-                dots.innerHTML = '';
-                if (currentAlbumPhotos.length <= 1 || currentAlbumPhotos.length > 20) return;
-                currentAlbumPhotos.forEach(function(p, i) {
-                    var dot = document.createElement('div');
-                    dot.className = 'lightbox-dot' + (i === currentPhotoIndex ? ' active' : '');
-                    dot.onclick = function() { jumpToPhoto(i); };
-                    dots.appendChild(dot);
-                });
-            }
-
-            function jumpToPhoto(index) {
-                var img = document.getElementById('lightbox-img');
-                img.classList.remove('slide-left', 'slide-right');
-                img.classList.add(index > currentPhotoIndex ? 'slide-left' : 'slide-right');
-                currentPhotoIndex = index;
-                img.src = currentAlbumPhotos[currentPhotoIndex];
-                updateProgressDots();
-                updateCounter();
-            }
-
-            document.getElementById('lightbox').addEventListener('click', function(e) {
-                if (e.target === this) closeLightbox();
-            });
-
-            document.addEventListener('keydown', function(e) {
-                if (!document.getElementById('lightbox').classList.contains('active')) return;
-                if (e.key === 'ArrowLeft') navigateLightbox(-1);
-                else if (e.key === 'ArrowRight') navigateLightbox(1);
-                else if (e.key === 'Escape') closeLightbox();
-            });
-
-            /* ── TOUCH SWIPE FOR LIGHTBOX ── */
-            var touchStartX = 0;
-            var touchStartY = 0;
-            var lightboxEl = document.getElementById('lightbox');
-
-            lightboxEl.addEventListener('touchstart', function(e) {
-                touchStartX = e.changedTouches[0].screenX;
-                touchStartY = e.changedTouches[0].screenY;
-            }, { passive: true });
-
-            lightboxEl.addEventListener('touchend', function(e) {
-                var diffX = touchStartX - e.changedTouches[0].screenX;
-                var diffY = Math.abs(touchStartY - e.changedTouches[0].screenY);
-                if (Math.abs(diffX) < 50 || diffY > Math.abs(diffX)) return;
-                if (diffX > 0) navigateLightbox(1);
-                else navigateLightbox(-1);
-            }, { passive: true });
-
-            // Open section from URL hash
-            if (window.location.hash) {
-                var hash = window.location.hash.substring(1);
-                var target = document.getElementById(hash);
-                if (target) {
-                    setTimeout(function() {
-                        toggleAccordion(hash);
-                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }, 500);
-                }
+    /* Load album photos by range */
+    function loadAlbumPhotos(folder, start, end) {
+        return new Promise(function(resolve) {
+            var found = [];
+            var checked = 0;
+            var total = end - start + 1;
+            for (var i = start; i <= end; i++) {
+                (function(index) {
+                    var img = new Image();
+                    var src = folder + '/photo' + index + '.jpg';
+                    img.onload = function() {
+                        found.push({ src: src, index: index });
+                        checked++;
+                        if (checked === total) {
+                            found.sort(function(a, b) { return a.index - b.index; });
+                            resolve(found.map(function(f) { return f.src; }));
+                        }
+                    };
+                    img.onerror = function() {
+                        checked++;
+                        if (checked === total) {
+                            found.sort(function(a, b) { return a.index - b.index; });
+                            resolve(found.map(function(f) { return f.src; }));
+                        }
+                    };
+                    img.src = src;
+                })(i);
             }
         });
-    </script>
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+
+        // Apply text from config (if loaded)
+        if (typeof siteText !== 'undefined' && siteText.portfolio) {
+            var pt = siteText.portfolio;
+            document.getElementById('t-portfolioPageTitle').textContent = pt.pageTitle;
+            document.getElementById('t-portfolioPageSubtitle').textContent = pt.pageSubtitle;
+            document.getElementById('t-ctaHeading').textContent = pt.ctaHeading;
+            document.getElementById('t-ctaSubheading').textContent = pt.ctaSubheading;
+            document.getElementById('t-ctaButton').textContent = pt.ctaButtonText;
+            document.getElementById('t-portfolioFooter').textContent = siteText.footer.copyrightText;
+        }
+
+        // Close mobile menu on link click
+        var navLinks = document.querySelectorAll('#nav-menu a');
+        navLinks.forEach(function(link) {
+            link.addEventListener('click', function() {
+                document.getElementById('nav-menu').classList.remove('active');
+                document.querySelector('.hamburger').classList.remove('active');
+            });
+        });
+
+        /* ── BUILD ACCORDION SECTIONS FROM CONFIG ── */
+        var container = document.getElementById('accordion-container');
+
+        sections.forEach(function(section) {
+            if (section.hidden) return;
+            // Create accordion item
+            var item = document.createElement('div');
+            item.className = 'accordion-item';
+            item.id = section.id;
+
+            // Header with banner
+            item.innerHTML =
+                '<div class="accordion-header" style="--banner-img: url(\'' + section.banner + '\'); --banner-pos: ' + (section.bannerPosition || 'center') + '" onclick="toggleAccordion(\'' + section.id + '\')">' +
+                    '<div class="header-content">' +
+                        '<h2>' + section.title + '</h2>' +
+                        '<span class="expand-icon">+</span>' +
+                    '</div>' +
+                    '<div class="header-image-overlay"></div>' +
+                '</div>' +
+                '<div class="accordion-content">' +
+                    '<div class="albums" id="albums-' + section.id + '"></div>' +
+                '</div>';
+
+            container.appendChild(item);
+
+            // Build album cards
+            var albumsGrid = document.getElementById('albums-' + section.id);
+            section.albums.forEach(function(album) {
+                if (album.hidden) return;
+                var card = document.createElement('div');
+                card.className = 'album-card';
+                card.onclick = function() { openAlbum(section.folder, album); };
+                card.innerHTML =
+                    '<img src="' + album.cover + '" alt="' + album.title + '" loading="lazy" style="object-position:' + (album.coverPosition || 'center') + '" onerror="this.src=\'images/placeholder.jpg\'">' +
+                    '<h3>' + album.title + '</h3>';
+                albumsGrid.appendChild(card);
+            });
+        });
+
+        /* ── ACCORDION TOGGLE ── */
+        window.toggleAccordion = function(sectionId) {
+            var item = document.getElementById(sectionId);
+            var allItems = document.querySelectorAll('.accordion-item');
+            allItems.forEach(function(i) {
+                if (i !== item) i.classList.remove('active');
+            });
+            item.classList.toggle('active');
+        };
+
+        /* ── LIGHTBOX STATE ── */
+        var currentAlbumPhotos = [];
+        var currentPhotoIndex = 0;
+
+        /* ── OPEN ALBUM → straight to lightbox ── */
+        window.openAlbum = async function(folder, album) {
+            // Show lightbox immediately with loading state
+            var lightbox = document.getElementById('lightbox');
+            var img = document.getElementById('lightbox-img');
+            img.src = '';
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+
+            var photos = await loadAlbumPhotos(folder, album.start, album.end);
+            if (photos.length === 0) {
+                closeLightbox();
+                return;
+            }
+            currentAlbumPhotos = photos;
+            currentPhotoIndex = 0;
+            img.src = photos[0];
+            updateProgressDots();
+            updateCounter();
+        };
+
+        /* ── LIGHTBOX ── */
+        window.openLightbox = function(src, index) {
+            currentPhotoIndex = index || 0;
+            var lightbox = document.getElementById('lightbox');
+            document.getElementById('lightbox-img').src = src;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            updateProgressDots();
+            updateCounter();
+        };
+
+        window.closeLightbox = function() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = '';
+            currentAlbumPhotos = [];
+        };
+
+        window.navigateLightbox = function(direction) {
+            if (currentAlbumPhotos.length === 0) return;
+            var img = document.getElementById('lightbox-img');
+            img.classList.remove('slide-left', 'slide-right');
+            currentPhotoIndex += direction;
+            if (currentPhotoIndex < 0) currentPhotoIndex = currentAlbumPhotos.length - 1;
+            else if (currentPhotoIndex >= currentAlbumPhotos.length) currentPhotoIndex = 0;
+            img.classList.add(direction > 0 ? 'slide-left' : 'slide-right');
+            img.src = currentAlbumPhotos[currentPhotoIndex];
+            updateProgressDots();
+            updateCounter();
+        };
+
+        function updateCounter() {
+            var counter = document.getElementById('lightbox-counter');
+            if (currentAlbumPhotos.length <= 1) { counter.textContent = ''; return; }
+            counter.textContent = (currentPhotoIndex + 1) + ' / ' + currentAlbumPhotos.length;
+        }
+
+        function updateProgressDots() {
+            var dots = document.getElementById('lightbox-dots');
+            dots.innerHTML = '';
+            if (currentAlbumPhotos.length <= 1 || currentAlbumPhotos.length > 20) return;
+            currentAlbumPhotos.forEach(function(p, i) {
+                var dot = document.createElement('div');
+                dot.className = 'lightbox-dot' + (i === currentPhotoIndex ? ' active' : '');
+                dot.onclick = function() { jumpToPhoto(i); };
+                dots.appendChild(dot);
+            });
+        }
+
+        function jumpToPhoto(index) {
+            var img = document.getElementById('lightbox-img');
+            img.classList.remove('slide-left', 'slide-right');
+            img.classList.add(index > currentPhotoIndex ? 'slide-left' : 'slide-right');
+            currentPhotoIndex = index;
+            img.src = currentAlbumPhotos[currentPhotoIndex];
+            updateProgressDots();
+            updateCounter();
+        }
+
+        document.getElementById('lightbox').addEventListener('click', function(e) {
+            if (e.target === this) closeLightbox();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (!document.getElementById('lightbox').classList.contains('active')) return;
+            if (e.key === 'ArrowLeft') navigateLightbox(-1);
+            else if (e.key === 'ArrowRight') navigateLightbox(1);
+            else if (e.key === 'Escape') closeLightbox();
+        });
+
+        /* ── TOUCH SWIPE FOR LIGHTBOX ── */
+        var touchStartX = 0;
+        var touchStartY = 0;
+        var lightboxEl = document.getElementById('lightbox');
+
+        lightboxEl.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+            touchStartY = e.changedTouches[0].screenY;
+        }, { passive: true });
+
+        lightboxEl.addEventListener('touchend', function(e) {
+            var diffX = touchStartX - e.changedTouches[0].screenX;
+            var diffY = Math.abs(touchStartY - e.changedTouches[0].screenY);
+            if (Math.abs(diffX) < 50 || diffY > Math.abs(diffX)) return;
+            if (diffX > 0) navigateLightbox(1);
+            else navigateLightbox(-1);
+        }, { passive: true });
+
+        // Open section from URL hash
+        if (window.location.hash) {
+            var hash = window.location.hash.substring(1);
+            var target = document.getElementById(hash);
+            if (target) {
+                setTimeout(function() {
+                    toggleAccordion(hash);
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 500);
+            }
+        }
+    });
+</script>
+```
+
 </body>
 </html>
