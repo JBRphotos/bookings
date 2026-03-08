@@ -15,7 +15,7 @@ var homepageConfig = {
 var sections = [
     {
         id: 'portraits', title: 'Portraits',
-        banner: 'images/portraits/photo1.jpg', bannerPosition: 'center 29%',
+        banner: 'images/portraits/photo2.jpg', bannerPosition: 'center 29%',
         folder: 'images/portraits',
         albums: [
             { id: 'portraits-album-1', title: 'Headshots', cover: 'images/portraits/photo1.jpg', coverPosition: 'center 27%', start: 1, end: 15 },
