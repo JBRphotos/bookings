@@ -4,16 +4,16 @@ var siteText = {
 
     homepage: {
         heroTitle:       'Jesse Reilly',
-        heroSubtitle:    'Sports & Portrait Photography | Capturing Moments That Matter',
+        heroSubtitle:    'Portrait & Sport Photography | Capturing Moments That Matter',
         heroButtonText:  'Book a Session',
         aboutHeading:    'About Me',
         aboutSubheading: 'Photographer based in the NYC area',
         aboutName:       'Hi, I\'m Jesse',
-        aboutParagraph1: 'I\'m a photographer specializing in sports and portraits, blending creativity with storytelling to capture moments as they naturally unfold.',
+        aboutParagraph1: 'I\'m a photographer specializing in portraits and sports, blending creativity with storytelling to capture moments as they naturally unfold.',
         aboutParagraph2: 'My work is driven by curiosity and observation, focusing on movement, emotion, and the small details that bring energy and authenticity to an image.',
         aboutParagraph3: 'I currently work with local sports leagues and offer graduation portrait sessions, creating work that feels thoughtful, expressive, and true to the moment.',
         portfolioHeading:    'Portfolio',
-        portfolioSubheading: 'Explore my work across sports, portraits, and creative photography',
+        portfolioSubheading: 'Explore my work across portraits, sports, and creative photography',
         portfolioButtonText: 'View Full Portfolio',
         shopHeading:     'Shop Prints',
         shopSubheading:  'Featured Photos',
@@ -28,7 +28,7 @@ var siteText = {
 
     portfolio: {
         pageTitle:     'Portfolio',
-        pageSubtitle:  'Explore my work across sports, portraits, and creative photography',
+        pageSubtitle:  'Explore my work across portraits, sports, and creative photography',
         ctaHeading:    'Ready to Book?',
         ctaSubheading: 'Let\'s create something amazing together',
         ctaButtonText: 'Book a Session'
@@ -37,7 +37,7 @@ var siteText = {
     booking: {
         pageTitle:    'Jesse Reilly Photography',
         pageSubtitle: 'Portrait Sessions',
-        bookingLogo:  'images/logo.png',
+        bookingLogo:  'images/logo2.png',
         labelName:    'Full Name',
         labelEmail:   'Email Address',
         labelPhone:   'Phone Number',
