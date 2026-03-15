@@ -1358,6 +1358,12 @@
                         '<span class="section-toggle">+</span>' +
                     '</div>' +
                     '<div class="section-card-body" style="display:none;">' +
+                        '<div class="field-group" style="margin-bottom:15px;"><label class="field-label">Client Gallery Link</label>' +
+                            '<div style="display:flex;gap:8px;">' +
+                                '<input class="field-input" id="cg-link-' + gi + '" type="text" readonly style="flex:1;background:var(--soft-navy);color:var(--light);cursor:text;" value="' + esc(window.location.origin + window.location.pathname.replace('admin.html', 'gallery.html') + '?client=' + encodeURIComponent(g.name || 'New Client')) + '">' +
+                                '<button class="btn-save" style="padding:8px 18px;font-size:0.85rem;white-space:nowrap;" onclick="event.stopPropagation();var el=document.getElementById(\'cg-link-' + gi + '\');el.select();document.execCommand(\'copy\');showToast(\'Client link copied!\',\'success\');">Copy</button>' +
+                            '</div>' +
+                        '</div>' +
                         '<div class="field-row">' +
                             '<div class="field-group"><label class="field-label">Client Name</label><input class="field-input" value="' + esc(g.name) + '" onchange="editClientGalleries[' + gi + '].name=this.value"></div>' +
                             '<div class="field-group"><label class="field-label">Access Password</label><input class="field-input" value="' + esc(g.password || '') + '" onchange="editClientGalleries[' + gi + '].password=this.value" placeholder="Enter plain text password"><span class="field-hint">Will be hashed on save</span></div>' +

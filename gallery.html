@@ -204,6 +204,15 @@
             galleries = siteText.clientGalleries.filter(function(g) { return !g.hidden; });
         }
 
+        /* ── Personalize from URL param ── */
+        var urlParams = new URLSearchParams(window.location.search);
+        var clientParam = urlParams.get('client');
+        if (clientParam) {
+            document.querySelector('header h1').textContent = clientParam + ' Gallery';
+            document.querySelector('header p').textContent = 'Enter your access code to view your photos';
+            document.querySelector('.password-screen h2').textContent = 'Welcome, ' + clientParam;
+        }
+
         /* ── SHA-256 hash ── */
         async function sha256(str) {
             var buf = new TextEncoder().encode(str);
@@ -239,8 +248,14 @@
             if (match.zipFile) {
                 var downloadBar = document.getElementById('download-bar');
                 var downloadLink = document.getElementById('download-link');
-                downloadLink.href = match.folder + '/' + match.zipFile;
-                downloadLink.setAttribute('download', match.zipFile);
+                // Check if it's an external URL (Google Drive, Dropbox, etc.)
+                if (match.zipFile.startsWith('http://') || match.zipFile.startsWith('https://')) {
+                    downloadLink.href = match.zipFile;
+                    downloadLink.setAttribute('target', '_blank');
+                } else {
+                    downloadLink.href = match.folder + '/' + match.zipFile;
+                    downloadLink.setAttribute('download', match.zipFile);
+                }
                 downloadBar.style.display = 'block';
             }
 
