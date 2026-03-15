@@ -100,8 +100,8 @@ var siteText = {
     ],
 
     gallery: {
-        bannerImage:      'images/gallery-banner.jpg',
-        bannerPosition:   'center 50%',
+        bannerImage:      'images/hero.jpg',
+        bannerPosition:   'center 87%',
         pageTitle:        'Client Gallery',
         pageSubtitle:     'Enter your access code to view your photos',
         galleryLogo:      'images/logo2.png',
@@ -111,7 +111,7 @@ var siteText = {
         watermarkPosition:'repeat',
         watermarkRotation:'-25',
         accessHeading:    'Access Your Photos',
-        accessSubtext:    'Enter the access code provided by your photographer',
+        accessSubtext:    'Thank you for choosing Jesse Reilly Photography',
         placeholder:      'Enter access code',
         buttonText:       'View Gallery',
         errorText:        'Invalid access code. Please try again.',
