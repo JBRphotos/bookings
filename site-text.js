@@ -94,6 +94,12 @@ var siteText = {
             folder: 'images/client/Vinny & Luca',
             start: 1, end: 50,
             zipFile: 'https://drive.google.com/file/d/1eCnMvgaKHtkbo6an4gnkhw__FKTEmAe4/view?usp=sharing',
+        },
+        {
+            name: 'Popowitz',
+            passwordHash: '99d115b8123b2ac0f7b2fcff3f82a4e4ee9af583a470893dfb364908d57c1446',
+            folder: 'images/client/Popowitz',
+            start: 1, end: 50,
         }
     ],
 
