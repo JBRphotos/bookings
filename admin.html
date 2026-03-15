@@ -776,6 +776,72 @@
                 <!-- CLIENT GALLERIES -->
                 <div class="text-page-section" id="text-galleries">
                     <div class="text-subsection">
+                        <h4>Gallery Page Text</h4>
+                        <div class="field-row">
+                            <div class="field-group">
+                                <label class="field-label">Page Title</label>
+                                <input class="field-input" id="txt-galleryPageTitle" type="text">
+                            </div>
+                            <div class="field-group">
+                                <label class="field-label">Page Subtitle</label>
+                                <input class="field-input" id="txt-galleryPageSubtitle" type="text">
+                            </div>
+                        </div>
+                        <div class="field-group">
+                            <label class="field-label">Gallery Logo</label>
+                            <input class="field-input" id="txt-galleryLogo" type="text">
+                            <span class="field-hint">Path to logo image, e.g. images/logo.png</span>
+                        </div>
+                        <div class="field-row">
+                            <div class="field-group">
+                                <label class="field-label">Access Heading</label>
+                                <input class="field-input" id="txt-galleryAccessHeading" type="text">
+                            </div>
+                            <div class="field-group">
+                                <label class="field-label">Access Subtext</label>
+                                <input class="field-input" id="txt-galleryAccessSubtext" type="text">
+                            </div>
+                        </div>
+                        <div class="field-row-3">
+                            <div class="field-group">
+                                <label class="field-label">Placeholder</label>
+                                <input class="field-input" id="txt-galleryPlaceholder" type="text">
+                            </div>
+                            <div class="field-group">
+                                <label class="field-label">Button Text</label>
+                                <input class="field-input" id="txt-galleryButtonText" type="text">
+                            </div>
+                            <div class="field-group">
+                                <label class="field-label">Error Text</label>
+                                <input class="field-input" id="txt-galleryErrorText" type="text">
+                            </div>
+                        </div>
+                        <div class="field-row">
+                            <div class="field-group">
+                                <label class="field-label">Photos Ready Text</label>
+                                <input class="field-input" id="txt-galleryPhotosReady" type="text">
+                            </div>
+                            <div class="field-group">
+                                <label class="field-label">No Photos Text</label>
+                                <input class="field-input" id="txt-galleryNoPhotos" type="text">
+                            </div>
+                        </div>
+                        <div class="field-row">
+                            <div class="field-group">
+                                <label class="field-label">Download Button Text</label>
+                                <input class="field-input" id="txt-galleryDownloadBtn" type="text">
+                            </div>
+                            <div class="field-group">
+                                <label class="field-label">Download Note</label>
+                                <input class="field-input" id="txt-galleryDownloadNote" type="text">
+                            </div>
+                        </div>
+                        <div class="field-group">
+                            <label class="field-label">Footer Text</label>
+                            <input class="field-input" id="txt-galleryFooter" type="text">
+                        </div>
+                    </div>
+                    <div class="text-subsection">
                         <h4>Client Galleries</h4>
                         <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:12px;">Password-protected galleries for client photo delivery. Passwords are hashed when saved.</p>
                         <div class="field-group" style="margin-bottom:15px;">
@@ -1265,6 +1331,22 @@
             renderAddons();
             editClientGalleries = JSON.parse(JSON.stringify(siteText.clientGalleries || []));
             renderClientGalleries();
+
+            // Gallery text
+            var gal = editText.gallery || {};
+            document.getElementById('txt-galleryPageTitle').value = gal.pageTitle || 'Client Gallery';
+            document.getElementById('txt-galleryPageSubtitle').value = gal.pageSubtitle || '';
+            document.getElementById('txt-galleryLogo').value = gal.galleryLogo || 'images/logo.png';
+            document.getElementById('txt-galleryAccessHeading').value = gal.accessHeading || '';
+            document.getElementById('txt-galleryAccessSubtext').value = gal.accessSubtext || '';
+            document.getElementById('txt-galleryPlaceholder').value = gal.placeholder || '';
+            document.getElementById('txt-galleryButtonText').value = gal.buttonText || '';
+            document.getElementById('txt-galleryErrorText').value = gal.errorText || '';
+            document.getElementById('txt-galleryPhotosReady').value = gal.photosReadyText || '';
+            document.getElementById('txt-galleryNoPhotos').value = gal.noPhotosText || '';
+            document.getElementById('txt-galleryDownloadBtn').value = gal.downloadBtnText || '';
+            document.getElementById('txt-galleryDownloadNote').value = gal.downloadNote || '';
+            document.getElementById('txt-galleryFooter').value = gal.footerText || '';
             // Set gallery link
             var baseUrl = window.location.origin + window.location.pathname.replace('admin.html', 'gallery.html');
             document.getElementById('gallery-link-display').value = baseUrl;
@@ -1452,7 +1534,22 @@
                 footer: {
                     copyrightText: document.getElementById('txt-copyrightText').value
                 },
-                clientGalleries: JSON.parse(JSON.stringify(editClientGalleries))
+                clientGalleries: JSON.parse(JSON.stringify(editClientGalleries)),
+                gallery: {
+                    pageTitle: document.getElementById('txt-galleryPageTitle').value,
+                    pageSubtitle: document.getElementById('txt-galleryPageSubtitle').value,
+                    galleryLogo: document.getElementById('txt-galleryLogo').value,
+                    accessHeading: document.getElementById('txt-galleryAccessHeading').value,
+                    accessSubtext: document.getElementById('txt-galleryAccessSubtext').value,
+                    placeholder: document.getElementById('txt-galleryPlaceholder').value,
+                    buttonText: document.getElementById('txt-galleryButtonText').value,
+                    errorText: document.getElementById('txt-galleryErrorText').value,
+                    photosReadyText: document.getElementById('txt-galleryPhotosReady').value,
+                    noPhotosText: document.getElementById('txt-galleryNoPhotos').value,
+                    downloadBtnText: document.getElementById('txt-galleryDownloadBtn').value,
+                    downloadNote: document.getElementById('txt-galleryDownloadNote').value,
+                    footerText: document.getElementById('txt-galleryFooter').value
+                }
             };
         }
 
@@ -1543,6 +1640,22 @@
                 c += '        }' + (gi < t.clientGalleries.length - 1 ? ',\n' : '\n');
             });
             c += '    ],\n\n';
+            // Gallery text
+            c += '    gallery: {\n';
+            c += "        pageTitle:        '" + e(t.gallery.pageTitle) + "',\n";
+            c += "        pageSubtitle:     '" + e(t.gallery.pageSubtitle) + "',\n";
+            c += "        galleryLogo:      '" + e(t.gallery.galleryLogo) + "',\n";
+            c += "        accessHeading:    '" + e(t.gallery.accessHeading) + "',\n";
+            c += "        accessSubtext:    '" + e(t.gallery.accessSubtext) + "',\n";
+            c += "        placeholder:      '" + e(t.gallery.placeholder) + "',\n";
+            c += "        buttonText:       '" + e(t.gallery.buttonText) + "',\n";
+            c += "        errorText:        '" + e(t.gallery.errorText) + "',\n";
+            c += "        photosReadyText:  '" + e(t.gallery.photosReadyText) + "',\n";
+            c += "        downloadBtnText:  '" + e(t.gallery.downloadBtnText) + "',\n";
+            c += "        downloadNote:     '" + e(t.gallery.downloadNote) + "',\n";
+            c += "        noPhotosText:     '" + e(t.gallery.noPhotosText) + "',\n";
+            c += "        footerText:       '" + e(t.gallery.footerText) + "'\n";
+            c += '    },\n\n';
             c += '    footer: {\n';
             c += "        copyrightText: '" + e(t.footer.copyrightText) + "'\n";
             c += '    }\n\n};\n';

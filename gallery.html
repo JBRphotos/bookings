@@ -148,20 +148,20 @@
     <header>
         <a href="index.html" class="back-btn">← Back</a>
         <div class="logo">
-            <img src="images/logo.png" alt="JBR Photos Logo">
+            <img id="g-logo" src="images/logo.png" alt="JBR Photos Logo">
         </div>
-        <h1>Client Gallery</h1>
-        <p>Enter your access code to view your photos</p>
+        <h1 id="g-pageTitle">Client Gallery</h1>
+        <p id="g-pageSubtitle">Enter your access code to view your photos</p>
     </header>
 
     <!-- Password Screen -->
     <div class="container">
         <div class="password-screen" id="password-screen">
-            <h2>Access Your Photos</h2>
-            <p>Enter the access code provided by your photographer</p>
+            <h2 id="g-accessHeading">Access Your Photos</h2>
+            <p id="g-accessSubtext">Enter the access code provided by your photographer</p>
             <div class="password-input-group">
                 <input type="password" id="access-code" placeholder="Enter access code" onkeydown="if(event.key==='Enter')checkAccess()">
-                <button onclick="checkAccess()">View Gallery</button>
+                <button id="g-buttonText" onclick="checkAccess()">View Gallery</button>
             </div>
             <p class="password-error" id="password-error">Invalid access code. Please try again.</p>
         </div>
@@ -173,8 +173,8 @@
                 <p id="client-subtitle">Your photos are ready to view</p>
             </div>
             <div class="download-bar" id="download-bar" style="display:none;">
-                <a href="#" class="download-btn" id="download-link">⬇ Download All Photos</a>
-                <p class="download-note">Click to download your full photo collection as a ZIP file</p>
+                <a href="#" class="download-btn" id="download-link">⬇ <span id="g-downloadBtnText">Download All Photos</span></a>
+                <p class="download-note" id="g-downloadNote">Click to download your full photo collection as a ZIP file</p>
             </div>
             <div class="gallery-loading" id="gallery-loading">Loading your photos</div>
             <div class="photo-grid" id="photo-grid" style="display:none;"></div>
@@ -204,12 +204,28 @@
             galleries = siteText.clientGalleries.filter(function(g) { return !g.hidden; });
         }
 
+        /* ── Apply gallery text from config ── */
+        if (typeof siteText !== 'undefined' && siteText.gallery) {
+            var gt = siteText.gallery;
+            var ge = function(id) { return document.getElementById(id); };
+            if (ge('g-pageTitle')) ge('g-pageTitle').textContent = gt.pageTitle;
+            if (ge('g-pageSubtitle')) ge('g-pageSubtitle').textContent = gt.pageSubtitle;
+            if (gt.galleryLogo && ge('g-logo')) ge('g-logo').src = gt.galleryLogo;
+            if (ge('g-accessHeading')) ge('g-accessHeading').textContent = gt.accessHeading;
+            if (ge('g-accessSubtext')) ge('g-accessSubtext').textContent = gt.accessSubtext;
+            if (ge('access-code')) ge('access-code').placeholder = gt.placeholder;
+            if (ge('g-buttonText')) ge('g-buttonText').textContent = gt.buttonText;
+            if (ge('password-error')) ge('password-error').textContent = gt.errorText;
+            if (ge('client-subtitle')) ge('client-subtitle').textContent = gt.photosReadyText;
+            if (ge('g-downloadBtnText')) ge('g-downloadBtnText').textContent = gt.downloadBtnText;
+            if (ge('g-downloadNote')) ge('g-downloadNote').textContent = gt.downloadNote;
+        }
+
         /* ── Personalize from URL param ── */
         var urlParams = new URLSearchParams(window.location.search);
         var clientParam = urlParams.get('client');
         if (clientParam) {
-            document.querySelector('header h1').textContent = clientParam + ' Gallery';
-            document.querySelector('header p').textContent = 'Enter your access code to view your photos';
+            document.getElementById('g-pageTitle').textContent = clientParam + ' Gallery';
             document.querySelector('.password-screen h2').textContent = 'Welcome, ' + clientParam;
         }
 
@@ -297,7 +313,7 @@
             grid.style.display = '';
 
             if (currentPhotos.length === 0) {
-                grid.innerHTML = '<p style="text-align:center; color:#5F6C7B; padding:40px; grid-column:1/-1;">No photos available yet. Check back soon!</p>';
+                grid.innerHTML = '<p style="text-align:center; color:#5F6C7B; padding:40px; grid-column:1/-1;">' + (typeof siteText !== 'undefined' && siteText.gallery ? siteText.gallery.noPhotosText : 'No photos available yet.') + '</p>';
                 return;
             }
 
