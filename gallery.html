@@ -103,7 +103,9 @@
         /* Grid watermark */
         .photo-item .watermark { inset: 0; overflow: hidden; display: flex; align-items: center; justify-content: center; }
         /* Lightbox watermark */
-        .lightbox .watermark-container { position: absolute; inset: 0; pointer-events: none; display: flex; align-items: center; justify-content: center; overflow: hidden; z-index: 2001; }
+        .lightbox-img-wrapper { position: relative; display: inline-block; max-width: 90%; max-height: 90%; }
+        .lightbox-img-wrapper img { max-width: 100%; max-height: 90vh; object-fit: contain; display: block; }
+        .lightbox .watermark-container { position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 2001; }
 
         /* Lightbox */
         .lightbox {
@@ -112,13 +114,12 @@
             align-items: center; justify-content: center;
         }
         .lightbox.active { display: flex; }
-        .lightbox img {
-            max-width: 90%; max-height: 90%; object-fit: contain;
+        .lightbox-img-wrapper img {
             -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; -webkit-user-drag: none;
             transition: opacity 0.3s ease, transform 0.3s ease;
         }
-        .lightbox img.slide-left { animation: slideLeft 0.4s ease; }
-        .lightbox img.slide-right { animation: slideRight 0.4s ease; }
+        .lightbox-img-wrapper img.slide-left { animation: slideLeft 0.4s ease; }
+        .lightbox-img-wrapper img.slide-right { animation: slideRight 0.4s ease; }
         @keyframes slideLeft { 0% { opacity: 0; transform: translateX(100px); } 100% { opacity: 1; transform: translateX(0); } }
         @keyframes slideRight { 0% { opacity: 0; transform: translateX(-100px); } 100% { opacity: 1; transform: translateX(0); } }
         .lightbox-close {
@@ -203,8 +204,10 @@
         <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
         <span class="lightbox-prev" onclick="navigateLightbox(-1)">&#8249;</span>
         <span class="lightbox-next" onclick="navigateLightbox(1)">&#8250;</span>
-        <img src="" alt="" id="lightbox-img">
-        <div class="watermark-container" id="lightbox-watermark"></div>
+        <div class="lightbox-img-wrapper" id="lightbox-img-wrapper">
+            <img src="" alt="" id="lightbox-img">
+            <div class="watermark-container" id="lightbox-watermark"></div>
+        </div>
         <div class="lightbox-counter" id="lightbox-counter"></div>
     </div>
 
@@ -262,6 +265,7 @@
 
         /* ── Watermark Config ── */
         var wmConfig = { text: '', size: '1.2rem', color: 'rgba(255,255,255,0.4)', position: 'repeat', rotation: '-25' };
+        var watermarkEnabled = false;
         if (typeof siteText !== 'undefined' && siteText.gallery) {
             var gt = siteText.gallery;
             wmConfig.text = gt.watermarkText || '';
@@ -269,12 +273,19 @@
             wmConfig.color = gt.watermarkColor || 'rgba(255,255,255,0.4)';
             wmConfig.position = gt.watermarkPosition || 'repeat';
             wmConfig.rotation = gt.watermarkRotation || '-25';
+        }
 
-            // Build lightbox watermark
+        function enableWatermarks() {
+            watermarkEnabled = true;
             if (wmConfig.text) {
                 var lbWm = document.getElementById('lightbox-watermark');
                 lbWm.innerHTML = buildWatermarkHTML(wmConfig, true);
             }
+        }
+
+        function disableWatermarks() {
+            watermarkEnabled = false;
+            document.getElementById('lightbox-watermark').innerHTML = '';
         }
 
         function buildWatermarkHTML(wm, isLightbox) {
@@ -305,7 +316,7 @@
         }
 
         function addWatermarkToItem(el) {
-            if (!wmConfig.text) return;
+            if (!watermarkEnabled || !wmConfig.text) return;
             el.style.position = 'relative';
             var wmDiv = document.createElement('div');
             wmDiv.style.cssText = 'position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:10;';
@@ -334,6 +345,20 @@
             document.getElementById('password-screen').style.display = 'none';
             document.getElementById('gallery-view').style.display = 'block';
             document.getElementById('client-name').textContent = match.name;
+
+            // Apply client-specific banner if set
+            if (match.bannerImage) {
+                var hdr = document.getElementById('gallery-header');
+                hdr.style.backgroundImage = "url('" + match.bannerImage + "')";
+                if (match.bannerPosition) hdr.style.backgroundPosition = match.bannerPosition;
+            }
+
+            // Watermark: only show if NOT paid
+            if (match.paid) {
+                disableWatermarks();
+            } else {
+                enableWatermarks();
+            }
 
             // Show download button if zip exists AND payment received
             if (match.zipFile) {
