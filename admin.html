@@ -222,6 +222,17 @@
         .hide-toggle:hover { border-color: var(--accent); color: var(--accent); }
         .hide-toggle.is-hidden { background: rgba(255,107,107,0.2); border-color: rgba(255,107,107,0.5); color: #ff6b6b; }
         .section-editor-card.is-hidden { opacity: 0.5; border-style: dashed; }
+        .paid-toggle { display: flex; align-items: center; gap: 8px; margin-top: 12px; padding: 12px; background: var(--soft-navy); border-radius: 10px; }
+        .paid-toggle label { color: var(--light); font-size: 0.9rem; font-weight: 500; cursor: pointer; }
+        .paid-switch { position: relative; width: 48px; height: 26px; }
+        .paid-switch input { opacity: 0; width: 0; height: 0; }
+        .paid-slider { position: absolute; inset: 0; background: #555; border-radius: 26px; cursor: pointer; transition: 0.3s; }
+        .paid-slider::before { content: ''; position: absolute; width: 20px; height: 20px; left: 3px; bottom: 3px; background: #fff; border-radius: 50%; transition: 0.3s; }
+        .paid-switch input:checked + .paid-slider { background: #2d8a4e; }
+        .paid-switch input:checked + .paid-slider::before { transform: translateX(22px); }
+        .paid-badge { font-size: 0.7rem; padding: 2px 8px; border-radius: 10px; margin-left: 8px; font-weight: 600; }
+        .paid-badge.yes { background: rgba(45,138,78,0.3); color: #4ade80; }
+        .paid-badge.no { background: rgba(255,107,107,0.2); color: #ff6b6b; }
         .section-card-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
         .section-editor-card.open .section-card-body { max-height: 8000px; }
         .section-card-inner { padding: 22px 20px; }
@@ -1435,11 +1446,15 @@
             editClientGalleries.forEach(function(g, gi) {
                 var cardHTML = '<div class="section-editor-card' + (g.hidden ? ' is-hidden' : '') + '" style="margin-bottom:12px;" id="cg-card-' + gi + '">' +
                     '<div class="section-card-header" onclick="toggleClientGalleryCard(' + gi + ')">' +
-                        '<div class="section-card-header-left"><h4 style="color:#fff;">' + esc(g.name || 'New Client') + (g.hidden ? ' <span style="font-size:0.75rem;color:var(--text-muted);">(hidden)</span>' : '') + '</h4></div>' +
+                        '<div class="section-card-header-left"><h4 style="color:#fff;">' + esc(g.name || 'New Client') + '<span class="paid-badge ' + (g.paid ? 'yes' : 'no') + '">' + (g.paid ? 'PAID' : 'UNPAID') + '</span>' + (g.hidden ? ' <span style="font-size:0.75rem;color:var(--text-muted);">(hidden)</span>' : '') + '</h4></div>' +
                         '<button class="hide-toggle' + (g.hidden ? ' is-hidden' : '') + '" onclick="event.stopPropagation();editClientGalleries[' + gi + '].hidden=!editClientGalleries[' + gi + '].hidden;renderClientGalleries();">' + (g.hidden ? 'Show' : 'Hide') + '</button>' +
                         '<span class="section-toggle">+</span>' +
                     '</div>' +
                     '<div class="section-card-body" style="display:none;">' +
+                        '<div class="paid-toggle">' +
+                            '<label class="paid-switch"><input type="checkbox" ' + (g.paid ? 'checked' : '') + ' onchange="editClientGalleries[' + gi + '].paid=this.checked;renderClientGalleries();"><span class="paid-slider"></span></label>' +
+                            '<label onclick="var cb=this.parentElement.querySelector(\'input\');cb.checked=!cb.checked;cb.dispatchEvent(new Event(\'change\'));">Payment Received — ' + (g.paid ? '<span style="color:#4ade80;">Download enabled for client</span>' : '<span style="color:#ff6b6b;">Download locked for client</span>') + '</label>' +
+                        '</div>' +
                         '<div class="field-group" style="margin-bottom:15px;"><label class="field-label">Client Gallery Link</label>' +
                             '<div style="display:flex;gap:8px;">' +
                                 '<input class="field-input" id="cg-link-' + gi + '" type="text" readonly style="flex:1;background:var(--soft-navy);color:var(--light);cursor:text;" value="' + esc(window.location.origin + window.location.pathname.replace('admin.html', 'gallery.html') + '?client=' + encodeURIComponent(g.name || 'New Client')) + '">' +
@@ -1637,6 +1652,7 @@
                 c += '            start: ' + (g.start || 1) + ', end: ' + (g.end || 50) + ',\n';
                 if (g.zipFile) c += "            zipFile: '" + e(g.zipFile) + "',\n";
                 if (g.hidden) c += '            hidden: true,\n';
+                if (g.paid) c += '            paid: true,\n';
                 c += '        }' + (gi < t.clientGalleries.length - 1 ? ',\n' : '\n');
             });
             c += '    ],\n\n';

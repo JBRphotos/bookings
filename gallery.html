@@ -260,19 +260,24 @@
             document.getElementById('gallery-view').style.display = 'block';
             document.getElementById('client-name').textContent = match.name;
 
-            // Show download button if zip exists
+            // Show download button if zip exists AND payment received
             if (match.zipFile) {
                 var downloadBar = document.getElementById('download-bar');
-                var downloadLink = document.getElementById('download-link');
-                // Check if it's an external URL (Google Drive, Dropbox, etc.)
-                if (match.zipFile.startsWith('http://') || match.zipFile.startsWith('https://')) {
-                    downloadLink.href = match.zipFile;
-                    downloadLink.setAttribute('target', '_blank');
+                if (match.paid) {
+                    var downloadLink = document.getElementById('download-link');
+                    if (match.zipFile.startsWith('http://') || match.zipFile.startsWith('https://')) {
+                        downloadLink.href = match.zipFile;
+                        downloadLink.setAttribute('target', '_blank');
+                    } else {
+                        downloadLink.href = match.folder + '/' + match.zipFile;
+                        downloadLink.setAttribute('download', match.zipFile);
+                    }
+                    downloadBar.style.display = 'block';
                 } else {
-                    downloadLink.href = match.folder + '/' + match.zipFile;
-                    downloadLink.setAttribute('download', match.zipFile);
+                    // Show locked message
+                    downloadBar.style.display = 'block';
+                    downloadBar.innerHTML = '<p style="color:#5F6C7B;font-size:1rem;margin:0;">🔒 Downloads will be available once final payment is received.</p><p style="color:#999;font-size:0.85rem;margin-top:8px;">Contact your photographer if you have any questions.</p>';
                 }
-                downloadBar.style.display = 'block';
             }
 
             // Load photos
