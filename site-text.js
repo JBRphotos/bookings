@@ -94,6 +94,7 @@ var siteText = {
             folder: 'images/client/Vinny & Luca',
             start: 1, end: 50,
             zipFile: 'https://drive.google.com/file/d/1eCnMvgaKHtkbo6an4gnkhw__FKTEmAe4/view?usp=drive_link',
+            paid: true,
         }
     ],
 
