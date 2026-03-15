@@ -37,7 +37,7 @@ var siteText = {
     booking: {
         pageTitle:    'Jesse Reilly Photography',
         pageSubtitle: 'Portrait Sessions',
-        bookingLogo:  'images/logo.png',
+        bookingLogo:  'images/logo2.png',
         labelName:    'Full Name',
         labelEmail:   'Email Address',
         labelPhone:   'Phone Number',
