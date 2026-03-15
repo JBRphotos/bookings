@@ -803,6 +803,42 @@
                             <input class="field-input" id="txt-galleryLogo" type="text">
                             <span class="field-hint">Path to logo image, e.g. images/logo.png</span>
                         </div>
+                        <h5 style="margin:20px 0 10px; color:var(--navy); border-top:1px solid var(--slate); padding-top:15px;">Photo Watermark</h5>
+                        <div class="field-row">
+                            <div class="field-group">
+                                <label class="field-label">Watermark Text</label>
+                                <input class="field-input" id="txt-galleryWatermark" type="text">
+                                <span class="field-hint">e.g. © Jesse Reilly Photography</span>
+                            </div>
+                            <div class="field-group">
+                                <label class="field-label">Font Size</label>
+                                <input class="field-input" id="txt-galleryWatermarkSize" type="text">
+                                <span class="field-hint">e.g. 1.2rem, 16px, 2vw</span>
+                            </div>
+                        </div>
+                        <div class="field-row-3">
+                            <div class="field-group">
+                                <label class="field-label">Text Color</label>
+                                <input class="field-input" id="txt-galleryWatermarkColor" type="text">
+                                <span class="field-hint">e.g. rgba(255,255,255,0.4)</span>
+                            </div>
+                            <div class="field-group">
+                                <label class="field-label">Position</label>
+                                <select class="field-input" id="txt-galleryWatermarkPosition">
+                                    <option value="center">Center</option>
+                                    <option value="bottom-right">Bottom Right</option>
+                                    <option value="bottom-left">Bottom Left</option>
+                                    <option value="top-right">Top Right</option>
+                                    <option value="top-left">Top Left</option>
+                                    <option value="repeat">Repeating Diagonal</option>
+                                </select>
+                            </div>
+                            <div class="field-group">
+                                <label class="field-label">Rotation</label>
+                                <input class="field-input" id="txt-galleryWatermarkRotation" type="text">
+                                <span class="field-hint">e.g. -25 (degrees)</span>
+                            </div>
+                        </div>
                         <div class="field-row">
                             <div class="field-group">
                                 <label class="field-label">Access Heading</label>
@@ -1348,6 +1384,11 @@
             document.getElementById('txt-galleryPageTitle').value = gal.pageTitle || 'Client Gallery';
             document.getElementById('txt-galleryPageSubtitle').value = gal.pageSubtitle || '';
             document.getElementById('txt-galleryLogo').value = gal.galleryLogo || 'images/logo.png';
+            document.getElementById('txt-galleryWatermark').value = gal.watermarkText || '';
+            document.getElementById('txt-galleryWatermarkSize').value = gal.watermarkSize || '1.2rem';
+            document.getElementById('txt-galleryWatermarkColor').value = gal.watermarkColor || 'rgba(255,255,255,0.4)';
+            document.getElementById('txt-galleryWatermarkPosition').value = gal.watermarkPosition || 'repeat';
+            document.getElementById('txt-galleryWatermarkRotation').value = gal.watermarkRotation || '-25';
             document.getElementById('txt-galleryAccessHeading').value = gal.accessHeading || '';
             document.getElementById('txt-galleryAccessSubtext').value = gal.accessSubtext || '';
             document.getElementById('txt-galleryPlaceholder').value = gal.placeholder || '';
@@ -1554,6 +1595,11 @@
                     pageTitle: document.getElementById('txt-galleryPageTitle').value,
                     pageSubtitle: document.getElementById('txt-galleryPageSubtitle').value,
                     galleryLogo: document.getElementById('txt-galleryLogo').value,
+                    watermarkText: document.getElementById('txt-galleryWatermark').value,
+                    watermarkSize: document.getElementById('txt-galleryWatermarkSize').value,
+                    watermarkColor: document.getElementById('txt-galleryWatermarkColor').value,
+                    watermarkPosition: document.getElementById('txt-galleryWatermarkPosition').value,
+                    watermarkRotation: document.getElementById('txt-galleryWatermarkRotation').value,
                     accessHeading: document.getElementById('txt-galleryAccessHeading').value,
                     accessSubtext: document.getElementById('txt-galleryAccessSubtext').value,
                     placeholder: document.getElementById('txt-galleryPlaceholder').value,
@@ -1661,6 +1707,11 @@
             c += "        pageTitle:        '" + e(t.gallery.pageTitle) + "',\n";
             c += "        pageSubtitle:     '" + e(t.gallery.pageSubtitle) + "',\n";
             c += "        galleryLogo:      '" + e(t.gallery.galleryLogo) + "',\n";
+            c += "        watermarkText:    '" + e(t.gallery.watermarkText) + "',\n";
+            c += "        watermarkSize:    '" + e(t.gallery.watermarkSize) + "',\n";
+            c += "        watermarkColor:   '" + e(t.gallery.watermarkColor) + "',\n";
+            c += "        watermarkPosition:'" + e(t.gallery.watermarkPosition) + "',\n";
+            c += "        watermarkRotation:'" + e(t.gallery.watermarkRotation) + "',\n";
             c += "        accessHeading:    '" + e(t.gallery.accessHeading) + "',\n";
             c += "        accessSubtext:    '" + e(t.gallery.accessSubtext) + "',\n";
             c += "        placeholder:      '" + e(t.gallery.placeholder) + "',\n";

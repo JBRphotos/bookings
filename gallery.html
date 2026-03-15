@@ -87,6 +87,17 @@
         }
         .photo-item:hover { transform: translateY(-5px); }
         .photo-item img { width: 100%; height: 100%; object-fit: cover; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; -webkit-user-drag: none; }
+        .photo-item .watermark, .lightbox .watermark {
+            position: absolute; pointer-events: none; user-select: none;
+            -webkit-user-select: none; z-index: 10;
+            font-family: 'Playfair Display', serif; font-weight: 600;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.3); letter-spacing: 1px;
+            white-space: nowrap;
+        }
+        /* Grid watermark */
+        .photo-item .watermark { inset: 0; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+        /* Lightbox watermark */
+        .lightbox .watermark-container { position: absolute; inset: 0; pointer-events: none; display: flex; align-items: center; justify-content: center; overflow: hidden; z-index: 2001; }
 
         /* Lightbox */
         .lightbox {
@@ -187,6 +198,7 @@
         <span class="lightbox-prev" onclick="navigateLightbox(-1)">&#8249;</span>
         <span class="lightbox-next" onclick="navigateLightbox(1)">&#8250;</span>
         <img src="" alt="" id="lightbox-img">
+        <div class="watermark-container" id="lightbox-watermark"></div>
         <div class="lightbox-counter" id="lightbox-counter"></div>
     </div>
 
@@ -236,7 +248,58 @@
             return Array.from(new Uint8Array(hash)).map(function(b) { return b.toString(16).padStart(2, '0'); }).join('');
         }
 
-        /* ── Check Access Code ── */
+        /* ── Watermark Config ── */
+        var wmConfig = { text: '', size: '1.2rem', color: 'rgba(255,255,255,0.4)', position: 'repeat', rotation: '-25' };
+        if (typeof siteText !== 'undefined' && siteText.gallery) {
+            var gt = siteText.gallery;
+            wmConfig.text = gt.watermarkText || '';
+            wmConfig.size = gt.watermarkSize || '1.2rem';
+            wmConfig.color = gt.watermarkColor || 'rgba(255,255,255,0.4)';
+            wmConfig.position = gt.watermarkPosition || 'repeat';
+            wmConfig.rotation = gt.watermarkRotation || '-25';
+
+            // Build lightbox watermark
+            if (wmConfig.text) {
+                var lbWm = document.getElementById('lightbox-watermark');
+                lbWm.innerHTML = buildWatermarkHTML(wmConfig, true);
+            }
+        }
+
+        function buildWatermarkHTML(wm, isLightbox) {
+            var style = 'font-size:' + wm.size + ';color:' + wm.color + ';';
+            var rot = 'transform:rotate(' + wm.rotation + 'deg);';
+
+            if (wm.position === 'repeat') {
+                var rows = '';
+                var count = isLightbox ? 7 : 5;
+                for (var r = 0; r < count; r++) {
+                    rows += '<div style="white-space:nowrap;' + style + rot + '">';
+                    for (var c = 0; c < 6; c++) {
+                        rows += '<span style="display:inline-block;padding:' + (isLightbox ? '40px 60px' : '15px 30px') + ';">' + wm.text + '</span>';
+                    }
+                    rows += '</div>';
+                }
+                return '<div class="watermark" style="display:flex;flex-direction:column;align-items:center;justify-content:center;inset:' + (isLightbox ? '-50%' : '-20%') + ';position:absolute;">' + rows + '</div>';
+            }
+
+            var posStyle = '';
+            if (wm.position === 'center') posStyle = 'top:50%;left:50%;transform:translate(-50%,-50%) rotate(' + wm.rotation + 'deg);';
+            else if (wm.position === 'bottom-right') posStyle = 'bottom:10px;right:15px;' + rot;
+            else if (wm.position === 'bottom-left') posStyle = 'bottom:10px;left:15px;' + rot;
+            else if (wm.position === 'top-right') posStyle = 'top:10px;right:15px;' + rot;
+            else if (wm.position === 'top-left') posStyle = 'top:10px;left:15px;' + rot;
+
+            return '<div class="watermark" style="' + style + posStyle + '">' + wm.text + '</div>';
+        }
+
+        function addWatermarkToItem(el) {
+            if (!wmConfig.text) return;
+            el.style.position = 'relative';
+            var wmDiv = document.createElement('div');
+            wmDiv.style.cssText = 'position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:10;';
+            wmDiv.innerHTML = buildWatermarkHTML(wmConfig, false);
+            el.appendChild(wmDiv);
+        }
         async function checkAccess() {
             var code = document.getElementById('access-code').value.trim();
             if (!code) return;
@@ -328,6 +391,7 @@
                 div.innerHTML = '<img src="' + src + '" alt="Photo ' + (index + 1) + '" loading="lazy">';
                 div.onclick = function() { openLightbox(index); };
                 grid.appendChild(div);
+                addWatermarkToItem(div);
             });
         }
 
