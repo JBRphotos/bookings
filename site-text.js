@@ -99,6 +99,8 @@ var siteText = {
     ],
 
     gallery: {
+        bannerImage:      'images/gallery-banner.jpg',
+        bannerPosition:   'center 50%',
         pageTitle:        'Client Gallery',
         pageSubtitle:     'Enter your access code to view your photos',
         galleryLogo:      'images/logo.png',

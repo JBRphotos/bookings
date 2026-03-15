@@ -455,6 +455,11 @@
                 <h3>Site Text Editor</h3>
                 <p>Change every heading, paragraph, button label, and form field across your entire site.</p>
             </div>
+            <div class="dash-card" onclick="openEditor('gallery-editor')">
+                <div class="dash-card-icon">🔐</div>
+                <h3>Client Galleries</h3>
+                <p>Manage password-protected client galleries, watermarks, payments, and downloads.</p>
+            </div>
         </div>
 
         <!-- ═══════════════════════════════════════════
@@ -554,7 +559,6 @@
                     <button class="page-tab active" onclick="switchTextPage('homepage')">Homepage</button>
                     <button class="page-tab" onclick="switchTextPage('portfolio')">Portfolio</button>
                     <button class="page-tab" onclick="switchTextPage('booking')">Booking</button>
-                    <button class="page-tab" onclick="switchTextPage('galleries')">Client Galleries</button>
                     <button class="page-tab" onclick="switchTextPage('footer')">Footer</button>
                 </div>
 
@@ -784,124 +788,6 @@
                     </div>
                 </div>
 
-                <!-- CLIENT GALLERIES -->
-                <div class="text-page-section" id="text-galleries">
-                    <div class="text-subsection">
-                        <h4>Gallery Page Text</h4>
-                        <div class="field-row">
-                            <div class="field-group">
-                                <label class="field-label">Page Title</label>
-                                <input class="field-input" id="txt-galleryPageTitle" type="text">
-                            </div>
-                            <div class="field-group">
-                                <label class="field-label">Page Subtitle</label>
-                                <input class="field-input" id="txt-galleryPageSubtitle" type="text">
-                            </div>
-                        </div>
-                        <div class="field-group">
-                            <label class="field-label">Gallery Logo</label>
-                            <input class="field-input" id="txt-galleryLogo" type="text">
-                            <span class="field-hint">Path to logo image, e.g. images/logo.png</span>
-                        </div>
-                        <h5 style="margin:20px 0 10px; color:var(--navy); border-top:1px solid var(--slate); padding-top:15px;">Photo Watermark</h5>
-                        <div class="field-row">
-                            <div class="field-group">
-                                <label class="field-label">Watermark Text</label>
-                                <input class="field-input" id="txt-galleryWatermark" type="text">
-                                <span class="field-hint">e.g. © Jesse Reilly Photography</span>
-                            </div>
-                            <div class="field-group">
-                                <label class="field-label">Font Size</label>
-                                <input class="field-input" id="txt-galleryWatermarkSize" type="text">
-                                <span class="field-hint">e.g. 1.2rem, 16px, 2vw</span>
-                            </div>
-                        </div>
-                        <div class="field-row-3">
-                            <div class="field-group">
-                                <label class="field-label">Text Color</label>
-                                <input class="field-input" id="txt-galleryWatermarkColor" type="text">
-                                <span class="field-hint">e.g. rgba(255,255,255,0.4)</span>
-                            </div>
-                            <div class="field-group">
-                                <label class="field-label">Position</label>
-                                <select class="field-input" id="txt-galleryWatermarkPosition">
-                                    <option value="center">Center</option>
-                                    <option value="bottom-right">Bottom Right</option>
-                                    <option value="bottom-left">Bottom Left</option>
-                                    <option value="top-right">Top Right</option>
-                                    <option value="top-left">Top Left</option>
-                                    <option value="repeat">Repeating Diagonal</option>
-                                </select>
-                            </div>
-                            <div class="field-group">
-                                <label class="field-label">Rotation</label>
-                                <input class="field-input" id="txt-galleryWatermarkRotation" type="text">
-                                <span class="field-hint">e.g. -25 (degrees)</span>
-                            </div>
-                        </div>
-                        <div class="field-row">
-                            <div class="field-group">
-                                <label class="field-label">Access Heading</label>
-                                <input class="field-input" id="txt-galleryAccessHeading" type="text">
-                            </div>
-                            <div class="field-group">
-                                <label class="field-label">Access Subtext</label>
-                                <input class="field-input" id="txt-galleryAccessSubtext" type="text">
-                            </div>
-                        </div>
-                        <div class="field-row-3">
-                            <div class="field-group">
-                                <label class="field-label">Placeholder</label>
-                                <input class="field-input" id="txt-galleryPlaceholder" type="text">
-                            </div>
-                            <div class="field-group">
-                                <label class="field-label">Button Text</label>
-                                <input class="field-input" id="txt-galleryButtonText" type="text">
-                            </div>
-                            <div class="field-group">
-                                <label class="field-label">Error Text</label>
-                                <input class="field-input" id="txt-galleryErrorText" type="text">
-                            </div>
-                        </div>
-                        <div class="field-row">
-                            <div class="field-group">
-                                <label class="field-label">Photos Ready Text</label>
-                                <input class="field-input" id="txt-galleryPhotosReady" type="text">
-                            </div>
-                            <div class="field-group">
-                                <label class="field-label">No Photos Text</label>
-                                <input class="field-input" id="txt-galleryNoPhotos" type="text">
-                            </div>
-                        </div>
-                        <div class="field-row">
-                            <div class="field-group">
-                                <label class="field-label">Download Button Text</label>
-                                <input class="field-input" id="txt-galleryDownloadBtn" type="text">
-                            </div>
-                            <div class="field-group">
-                                <label class="field-label">Download Note</label>
-                                <input class="field-input" id="txt-galleryDownloadNote" type="text">
-                            </div>
-                        </div>
-                        <div class="field-group">
-                            <label class="field-label">Footer Text</label>
-                            <input class="field-input" id="txt-galleryFooter" type="text">
-                        </div>
-                    </div>
-                    <div class="text-subsection">
-                        <h4>Client Galleries</h4>
-                        <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:12px;">Password-protected galleries for client photo delivery. Passwords are hashed when saved.</p>
-                        <div class="field-group" style="margin-bottom:15px;">
-                            <label class="field-label">Gallery Page Link</label>
-                            <div style="display:flex;gap:8px;">
-                                <input class="field-input" id="gallery-link-display" type="text" readonly style="flex:1;background:var(--soft-navy);color:var(--light);cursor:text;">
-                                <button class="btn-save" style="padding:8px 18px;font-size:0.85rem;" onclick="copyGalleryLink()">Copy Link</button>
-                            </div>
-                        </div>
-                        <div id="client-galleries-editor"></div>
-                        <button class="add-session-type-btn" onclick="addClientGallery()">+ Add Client Gallery</button>
-                    </div>
-                </div>
 
                 <!-- FOOTER TEXT -->
                 <div class="text-page-section" id="text-footer">
@@ -922,6 +808,190 @@
                 <div class="save-bar-btns">
                     <button class="btn-cancel" onclick="loadTextConfig()">Reset</button>
                     <button class="btn-save" onclick="saveTextConfig()">Save Changes</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════
+             CLIENT GALLERIES EDITOR
+             ═══════════════════════════════════════════ -->
+        <div class="editor-panel" id="gallery-editor">
+            <div class="editor-header">
+                <h3>Client Galleries</h3>
+                <button class="editor-close" onclick="closeEditor('gallery-editor')">&times;</button>
+            </div>
+            <div class="editor-body">
+
+                <!-- Save Mode -->
+                <div class="save-mode-toggle">
+                    <span class="save-mode-label">Save Mode:</span>
+                    <button class="save-mode-btn active" onclick="setGallerySaveMode('auto',this)">Auto-Save to GitHub</button>
+                    <button class="save-mode-btn" onclick="setGallerySaveMode('copy',this)">Copy & Paste</button>
+                </div>
+
+                <!-- Banner Image -->
+                <div class="text-subsection">
+                    <h4>Gallery Page Banner</h4>
+                    <div class="field-row">
+                        <div class="field-group">
+                            <label class="field-label">Banner Image</label>
+                            <input class="field-input" id="txt-galleryBanner" type="text" value="images/gallery-banner.jpg" oninput="document.getElementById('gal-bpos-preview').style.backgroundImage='url(\''+this.value+'\')'">
+                            <span class="field-hint">Path to gallery page header banner image</span>
+                        </div>
+                        <div class="field-group">
+                            <label class="field-label">Banner Position</label>
+                            <div class="banner-pos-picker" id="gal-bpos">
+                                <div class="banner-pos-preview" id="gal-bpos-preview" style="background-image:url('images/gallery-banner.jpg');background-position:center 50%"></div>
+                                <div class="banner-pos-slider">
+                                    <span>Top</span>
+                                    <input type="range" min="0" max="100" value="50" id="gal-bpos-slider" oninput="setGalleryBannerPos(100-this.value)">
+                                    <span>Bottom</span>
+                                </div>
+                            </div>
+                            <div class="banner-pos-val" id="gal-bpos-val">50%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page Text -->
+                <div class="text-subsection">
+                    <h4>Gallery Page Text</h4>
+                    <div class="field-row">
+                        <div class="field-group">
+                            <label class="field-label">Page Title</label>
+                            <input class="field-input" id="txt-galleryPageTitle" type="text">
+                        </div>
+                        <div class="field-group">
+                            <label class="field-label">Page Subtitle</label>
+                            <input class="field-input" id="txt-galleryPageSubtitle" type="text">
+                        </div>
+                    </div>
+                    <div class="field-group">
+                        <label class="field-label">Gallery Logo</label>
+                        <input class="field-input" id="txt-galleryLogo" type="text">
+                        <span class="field-hint">Path to logo image, e.g. images/logo.png</span>
+                    </div>
+                    <div class="field-row">
+                        <div class="field-group">
+                            <label class="field-label">Access Heading</label>
+                            <input class="field-input" id="txt-galleryAccessHeading" type="text">
+                        </div>
+                        <div class="field-group">
+                            <label class="field-label">Access Subtext</label>
+                            <input class="field-input" id="txt-galleryAccessSubtext" type="text">
+                        </div>
+                    </div>
+                    <div class="field-row-3">
+                        <div class="field-group">
+                            <label class="field-label">Placeholder</label>
+                            <input class="field-input" id="txt-galleryPlaceholder" type="text">
+                        </div>
+                        <div class="field-group">
+                            <label class="field-label">Button Text</label>
+                            <input class="field-input" id="txt-galleryButtonText" type="text">
+                        </div>
+                        <div class="field-group">
+                            <label class="field-label">Error Text</label>
+                            <input class="field-input" id="txt-galleryErrorText" type="text">
+                        </div>
+                    </div>
+                    <div class="field-row">
+                        <div class="field-group">
+                            <label class="field-label">Photos Ready Text</label>
+                            <input class="field-input" id="txt-galleryPhotosReady" type="text">
+                        </div>
+                        <div class="field-group">
+                            <label class="field-label">No Photos Text</label>
+                            <input class="field-input" id="txt-galleryNoPhotos" type="text">
+                        </div>
+                    </div>
+                    <div class="field-row">
+                        <div class="field-group">
+                            <label class="field-label">Download Button Text</label>
+                            <input class="field-input" id="txt-galleryDownloadBtn" type="text">
+                        </div>
+                        <div class="field-group">
+                            <label class="field-label">Download Note</label>
+                            <input class="field-input" id="txt-galleryDownloadNote" type="text">
+                        </div>
+                    </div>
+                    <div class="field-group">
+                        <label class="field-label">Footer Text</label>
+                        <input class="field-input" id="txt-galleryFooter" type="text">
+                    </div>
+                </div>
+
+                <!-- Watermark -->
+                <div class="text-subsection">
+                    <h4>Photo Watermark</h4>
+                    <div class="field-row">
+                        <div class="field-group">
+                            <label class="field-label">Watermark Text</label>
+                            <input class="field-input" id="txt-galleryWatermark" type="text">
+                            <span class="field-hint">e.g. © Jesse Reilly Photography</span>
+                        </div>
+                        <div class="field-group">
+                            <label class="field-label">Font Size</label>
+                            <input class="field-input" id="txt-galleryWatermarkSize" type="text">
+                            <span class="field-hint">e.g. 1.2rem, 16px, 2vw</span>
+                        </div>
+                    </div>
+                    <div class="field-row-3">
+                        <div class="field-group">
+                            <label class="field-label">Text Color</label>
+                            <div style="display:flex;gap:8px;align-items:center;">
+                                <input type="color" id="txt-galleryWatermarkColorPicker" value="#ffffff" style="width:45px;height:36px;border:2px solid var(--slate);border-radius:8px;cursor:pointer;background:none;padding:2px;" oninput="updateWatermarkColor()">
+                                <input class="field-input" id="txt-galleryWatermarkColor" type="text" style="flex:1;" oninput="syncColorPicker()">
+                            </div>
+                        </div>
+                        <div class="field-group">
+                            <label class="field-label">Opacity</label>
+                            <div style="display:flex;align-items:center;gap:10px;">
+                                <input type="range" min="0" max="100" id="txt-galleryWatermarkOpacity" value="40" style="flex:1;accent-color:var(--accent);" oninput="document.getElementById('wm-opacity-val').textContent=this.value+'%';updateWatermarkColor()">
+                                <span id="wm-opacity-val" style="font-size:0.85rem;color:var(--accent);font-weight:600;min-width:35px;">40%</span>
+                            </div>
+                        </div>
+                        <div class="field-group">
+                            <label class="field-label">Position</label>
+                            <select class="field-input" id="txt-galleryWatermarkPosition">
+                                <option value="center">Center</option>
+                                <option value="bottom-right">Bottom Right</option>
+                                <option value="bottom-left">Bottom Left</option>
+                                <option value="top-right">Top Right</option>
+                                <option value="top-left">Top Left</option>
+                                <option value="repeat">Repeating Diagonal</option>
+                            </select>
+                        </div>
+                        <div class="field-group">
+                            <label class="field-label">Rotation</label>
+                            <input class="field-input" id="txt-galleryWatermarkRotation" type="text">
+                            <span class="field-hint">e.g. -25 (degrees)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Client Galleries -->
+                <div class="text-subsection">
+                    <h4>Client Galleries</h4>
+                    <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:12px;">Password-protected galleries for client photo delivery. Passwords are hashed when saved.</p>
+                    <div class="field-group" style="margin-bottom:15px;">
+                        <label class="field-label">Gallery Page Link</label>
+                        <div style="display:flex;gap:8px;">
+                            <input class="field-input" id="gallery-link-display" type="text" readonly style="flex:1;background:var(--soft-navy);color:var(--light);cursor:text;">
+                            <button class="btn-save" style="padding:8px 18px;font-size:0.85rem;" onclick="copyGalleryLink()">Copy Link</button>
+                        </div>
+                    </div>
+                    <div id="client-galleries-editor"></div>
+                    <button class="add-session-type-btn" onclick="addClientGallery()">+ Add Client Gallery</button>
+                </div>
+
+            </div>
+
+            <div class="save-bar">
+                <span class="save-status" id="gallerySaveStatus">Ready</span>
+                <div class="save-bar-btns">
+                    <button class="btn-cancel" onclick="loadGalleryConfig()">Reset</button>
+                    <button class="btn-save" onclick="saveGalleryConfig()">Save Changes</button>
                 </div>
             </div>
         </div>
@@ -963,6 +1033,7 @@
                 document.getElementById('dashboardArea').style.display = '';
                 loadPhotoConfig();
                 loadTextConfig();
+                loadGalleryConfig();
             } else {
                 document.getElementById('loginError').classList.add('show');
                 setTimeout(function() { document.getElementById('loginError').classList.remove('show'); }, 2000);
@@ -1376,32 +1447,6 @@
             renderSessionTypes();
             renderSessionCards();
             renderAddons();
-            editClientGalleries = JSON.parse(JSON.stringify(siteText.clientGalleries || []));
-            renderClientGalleries();
-
-            // Gallery text
-            var gal = editText.gallery || {};
-            document.getElementById('txt-galleryPageTitle').value = gal.pageTitle || 'Client Gallery';
-            document.getElementById('txt-galleryPageSubtitle').value = gal.pageSubtitle || '';
-            document.getElementById('txt-galleryLogo').value = gal.galleryLogo || 'images/logo.png';
-            document.getElementById('txt-galleryWatermark').value = gal.watermarkText || '';
-            document.getElementById('txt-galleryWatermarkSize').value = gal.watermarkSize || '1.2rem';
-            document.getElementById('txt-galleryWatermarkColor').value = gal.watermarkColor || 'rgba(255,255,255,0.4)';
-            document.getElementById('txt-galleryWatermarkPosition').value = gal.watermarkPosition || 'repeat';
-            document.getElementById('txt-galleryWatermarkRotation').value = gal.watermarkRotation || '-25';
-            document.getElementById('txt-galleryAccessHeading').value = gal.accessHeading || '';
-            document.getElementById('txt-galleryAccessSubtext').value = gal.accessSubtext || '';
-            document.getElementById('txt-galleryPlaceholder').value = gal.placeholder || '';
-            document.getElementById('txt-galleryButtonText').value = gal.buttonText || '';
-            document.getElementById('txt-galleryErrorText').value = gal.errorText || '';
-            document.getElementById('txt-galleryPhotosReady').value = gal.photosReadyText || '';
-            document.getElementById('txt-galleryNoPhotos').value = gal.noPhotosText || '';
-            document.getElementById('txt-galleryDownloadBtn').value = gal.downloadBtnText || '';
-            document.getElementById('txt-galleryDownloadNote').value = gal.downloadNote || '';
-            document.getElementById('txt-galleryFooter').value = gal.footerText || '';
-            // Set gallery link
-            var baseUrl = window.location.origin + window.location.pathname.replace('admin.html', 'gallery.html');
-            document.getElementById('gallery-link-display').value = baseUrl;
         }
 
         function renderSessionTypes() {
@@ -1540,6 +1585,132 @@
             showToast('Gallery link copied!', 'success');
         }
 
+        function updateWatermarkColor() {
+            var hex = document.getElementById('txt-galleryWatermarkColorPicker').value;
+            var opacity = document.getElementById('txt-galleryWatermarkOpacity').value / 100;
+            var r = parseInt(hex.substring(1,3), 16);
+            var g = parseInt(hex.substring(3,5), 16);
+            var b = parseInt(hex.substring(5,7), 16);
+            document.getElementById('txt-galleryWatermarkColor').value = 'rgba(' + r + ',' + g + ',' + b + ',' + opacity + ')';
+        }
+
+        function syncColorPicker() {
+            var val = document.getElementById('txt-galleryWatermarkColor').value;
+            var m = val.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+            if (m) {
+                var hex = '#' + [m[1],m[2],m[3]].map(function(c){return parseInt(c).toString(16).padStart(2,'0')}).join('');
+                document.getElementById('txt-galleryWatermarkColorPicker').value = hex;
+            }
+            var om = val.match(/,\s*([\d.]+)\s*\)/);
+            if (om) {
+                var pct = Math.round(parseFloat(om[1]) * 100);
+                document.getElementById('txt-galleryWatermarkOpacity').value = pct;
+                document.getElementById('wm-opacity-val').textContent = pct + '%';
+            }
+        }
+
+        /* ═══════════════════════════════════════
+           GALLERY EDITOR
+           ═══════════════════════════════════════ */
+        var gallerySaveMode = 'auto';
+
+        function setGallerySaveMode(mode, btn) {
+            gallerySaveMode = mode;
+            btn.parentElement.querySelectorAll('.save-mode-btn').forEach(function(b){b.classList.remove('active')});
+            btn.classList.add('active');
+        }
+
+        function setGalleryBannerPos(pct) {
+            document.getElementById('gal-bpos-preview').style.backgroundPosition = 'center ' + pct + '%';
+            document.getElementById('gal-bpos-val').textContent = pct + '%';
+        }
+
+        function loadGalleryConfig() {
+            var gal = (typeof siteText !== 'undefined' && siteText.gallery) ? siteText.gallery : {};
+            editClientGalleries = JSON.parse(JSON.stringify((typeof siteText !== 'undefined' && siteText.clientGalleries) ? siteText.clientGalleries : []));
+
+            // Banner
+            document.getElementById('txt-galleryBanner').value = gal.bannerImage || 'images/gallery-banner.jpg';
+            var bpos = parseBannerPos(gal.bannerPosition);
+            document.getElementById('gal-bpos-slider').value = 100 - bpos;
+            document.getElementById('gal-bpos-preview').style.backgroundImage = "url('" + (gal.bannerImage || 'images/gallery-banner.jpg') + "')";
+            document.getElementById('gal-bpos-preview').style.backgroundPosition = 'center ' + bpos + '%';
+            document.getElementById('gal-bpos-val').textContent = bpos + '%';
+
+            // Text
+            document.getElementById('txt-galleryPageTitle').value = gal.pageTitle || 'Client Gallery';
+            document.getElementById('txt-galleryPageSubtitle').value = gal.pageSubtitle || '';
+            document.getElementById('txt-galleryLogo').value = gal.galleryLogo || 'images/logo.png';
+            document.getElementById('txt-galleryAccessHeading').value = gal.accessHeading || '';
+            document.getElementById('txt-galleryAccessSubtext').value = gal.accessSubtext || '';
+            document.getElementById('txt-galleryPlaceholder').value = gal.placeholder || '';
+            document.getElementById('txt-galleryButtonText').value = gal.buttonText || '';
+            document.getElementById('txt-galleryErrorText').value = gal.errorText || '';
+            document.getElementById('txt-galleryPhotosReady').value = gal.photosReadyText || '';
+            document.getElementById('txt-galleryNoPhotos').value = gal.noPhotosText || '';
+            document.getElementById('txt-galleryDownloadBtn').value = gal.downloadBtnText || '';
+            document.getElementById('txt-galleryDownloadNote').value = gal.downloadNote || '';
+            document.getElementById('txt-galleryFooter').value = gal.footerText || '';
+
+            // Watermark
+            document.getElementById('txt-galleryWatermark').value = gal.watermarkText || '';
+            document.getElementById('txt-galleryWatermarkSize').value = gal.watermarkSize || '1.2rem';
+            document.getElementById('txt-galleryWatermarkColor').value = gal.watermarkColor || 'rgba(255,255,255,0.4)';
+            syncColorPicker();
+            document.getElementById('txt-galleryWatermarkPosition').value = gal.watermarkPosition || 'repeat';
+            document.getElementById('txt-galleryWatermarkRotation').value = gal.watermarkRotation || '-25';
+
+            renderClientGalleries();
+
+            var baseUrl = window.location.origin + window.location.pathname.replace('admin.html', 'gallery.html');
+            document.getElementById('gallery-link-display').value = baseUrl;
+        }
+
+        function gatherGalleryEdits() {
+            return {
+                gallery: {
+                    bannerImage: document.getElementById('txt-galleryBanner').value,
+                    bannerPosition: 'center ' + (100 - document.getElementById('gal-bpos-slider').value) + '%',
+                    pageTitle: document.getElementById('txt-galleryPageTitle').value,
+                    pageSubtitle: document.getElementById('txt-galleryPageSubtitle').value,
+                    galleryLogo: document.getElementById('txt-galleryLogo').value,
+                    accessHeading: document.getElementById('txt-galleryAccessHeading').value,
+                    accessSubtext: document.getElementById('txt-galleryAccessSubtext').value,
+                    placeholder: document.getElementById('txt-galleryPlaceholder').value,
+                    buttonText: document.getElementById('txt-galleryButtonText').value,
+                    errorText: document.getElementById('txt-galleryErrorText').value,
+                    photosReadyText: document.getElementById('txt-galleryPhotosReady').value,
+                    noPhotosText: document.getElementById('txt-galleryNoPhotos').value,
+                    downloadBtnText: document.getElementById('txt-galleryDownloadBtn').value,
+                    downloadNote: document.getElementById('txt-galleryDownloadNote').value,
+                    footerText: document.getElementById('txt-galleryFooter').value,
+                    watermarkText: document.getElementById('txt-galleryWatermark').value,
+                    watermarkSize: document.getElementById('txt-galleryWatermarkSize').value,
+                    watermarkColor: document.getElementById('txt-galleryWatermarkColor').value,
+                    watermarkPosition: document.getElementById('txt-galleryWatermarkPosition').value,
+                    watermarkRotation: document.getElementById('txt-galleryWatermarkRotation').value
+                },
+                clientGalleries: JSON.parse(JSON.stringify(editClientGalleries))
+            };
+        }
+
+        async function saveGalleryConfig() {
+            await hashClientPasswords(editClientGalleries);
+            // We need to update the gallery + clientGalleries sections in site-text.js
+            // Re-gather the full text config and merge gallery data into it
+            var textData = gatherTextEdits();
+            var galData = gatherGalleryEdits();
+            textData.gallery = galData.gallery;
+            textData.clientGalleries = galData.clientGalleries;
+            var code = generateFullTextCode(textData);
+            if (gallerySaveMode === 'copy') {
+                document.getElementById('codeModalTitle').textContent = 'Updated site-text.js';
+                document.getElementById('codeInstructions').textContent = 'Copy → Open site-text.js on GitHub → Replace all → Commit';
+                document.getElementById('codeOutput').value = code;
+                document.getElementById('codeModal').classList.add('active');
+            } else { pushToGitHub('site-text.js', code, 'gallerySaveStatus'); }
+        }
+
         function gatherTextEdits() {
             return {
                 homepage: {
@@ -1589,33 +1760,20 @@
                 },
                 footer: {
                     copyrightText: document.getElementById('txt-copyrightText').value
-                },
-                clientGalleries: JSON.parse(JSON.stringify(editClientGalleries)),
-                gallery: {
-                    pageTitle: document.getElementById('txt-galleryPageTitle').value,
-                    pageSubtitle: document.getElementById('txt-galleryPageSubtitle').value,
-                    galleryLogo: document.getElementById('txt-galleryLogo').value,
-                    watermarkText: document.getElementById('txt-galleryWatermark').value,
-                    watermarkSize: document.getElementById('txt-galleryWatermarkSize').value,
-                    watermarkColor: document.getElementById('txt-galleryWatermarkColor').value,
-                    watermarkPosition: document.getElementById('txt-galleryWatermarkPosition').value,
-                    watermarkRotation: document.getElementById('txt-galleryWatermarkRotation').value,
-                    accessHeading: document.getElementById('txt-galleryAccessHeading').value,
-                    accessSubtext: document.getElementById('txt-galleryAccessSubtext').value,
-                    placeholder: document.getElementById('txt-galleryPlaceholder').value,
-                    buttonText: document.getElementById('txt-galleryButtonText').value,
-                    errorText: document.getElementById('txt-galleryErrorText').value,
-                    photosReadyText: document.getElementById('txt-galleryPhotosReady').value,
-                    noPhotosText: document.getElementById('txt-galleryNoPhotos').value,
-                    downloadBtnText: document.getElementById('txt-galleryDownloadBtn').value,
-                    downloadNote: document.getElementById('txt-galleryDownloadNote').value,
-                    footerText: document.getElementById('txt-galleryFooter').value
                 }
             };
         }
 
         function generateTextCode() {
             var t = gatherTextEdits();
+            // Merge gallery data from gallery editor
+            var galData = gatherGalleryEdits();
+            t.gallery = galData.gallery;
+            t.clientGalleries = galData.clientGalleries;
+            return generateFullTextCode(t);
+        }
+
+        function generateFullTextCode(t) {
             var e = function(s) { return String(s).replace(/\\/g,'\\\\').replace(/'/g,"\\'"); };
             var c = '/* Site Text — Generated by JBR Admin */\n\nvar siteText = {\n\n';
             c += '    homepage: {\n';
@@ -1704,6 +1862,8 @@
             c += '    ],\n\n';
             // Gallery text
             c += '    gallery: {\n';
+            c += "        bannerImage:      '" + e(t.gallery.bannerImage) + "',\n";
+            c += "        bannerPosition:   '" + e(t.gallery.bannerPosition) + "',\n";
             c += "        pageTitle:        '" + e(t.gallery.pageTitle) + "',\n";
             c += "        pageSubtitle:     '" + e(t.gallery.pageSubtitle) + "',\n";
             c += "        galleryLogo:      '" + e(t.gallery.galleryLogo) + "',\n";
