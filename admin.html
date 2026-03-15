@@ -1553,6 +1553,20 @@
                         '</div>' +
                         '<div class="field-group"><label class="field-label">Folder Path</label><input class="field-input" value="' + esc(g.folder) + '" onchange="editClientGalleries[' + gi + '].folder=this.value"><span class="field-hint">e.g. images/clients/smith-graduation</span></div>' +
                         '<div class="field-row">' +
+                            '<div class="field-group"><label class="field-label">Client Banner Image</label><input class="field-input" value="' + esc(g.bannerImage || '') + '" onchange="editClientGalleries[' + gi + '].bannerImage=this.value;document.getElementById(\'cg-bpos-preview-' + gi + '\').style.backgroundImage=\'url(\\\'\'+this.value+\'\\\')\';" placeholder="Leave blank to use default gallery banner"><span class="field-hint">e.g. images/clients/smith-graduation/banner.jpg</span></div>' +
+                            '<div class="field-group"><label class="field-label">Banner Position</label>' +
+                                '<div class="banner-pos-picker" id="cg-bpos-' + gi + '">' +
+                                    '<div class="banner-pos-preview" id="cg-bpos-preview-' + gi + '" style="background-image:url(\'' + esc(g.bannerImage || g.folder + '/photo1.jpg') + '\');background-position:center ' + parseBannerPos(g.bannerPosition) + '%"></div>' +
+                                    '<div class="banner-pos-slider">' +
+                                        '<span>Top</span>' +
+                                        '<input type="range" min="0" max="100" value="' + (100 - parseBannerPos(g.bannerPosition)) + '" oninput="setClientBannerPos(' + gi + ',100-this.value)">' +
+                                        '<span>Bottom</span>' +
+                                    '</div>' +
+                                '</div>' +
+                                '<div class="banner-pos-val" id="cg-bpos-val-' + gi + '">' + parseBannerPos(g.bannerPosition) + '%</div>' +
+                            '</div>' +
+                        '</div>' +
+                        '<div class="field-row">' +
                             '<div class="field-group"><label class="field-label">Start Photo #</label><input class="field-input" type="number" value="' + (g.start || 1) + '" onchange="editClientGalleries[' + gi + '].start=parseInt(this.value)"></div>' +
                             '<div class="field-group"><label class="field-label">End Photo #</label><input class="field-input" type="number" value="' + (g.end || 50) + '" onchange="editClientGalleries[' + gi + '].end=parseInt(this.value)"></div>' +
                         '</div>' +
@@ -1562,6 +1576,12 @@
                 '</div>';
                 ctr.innerHTML += cardHTML;
             });
+        }
+
+        function setClientBannerPos(gi, pct) {
+            editClientGalleries[gi].bannerPosition = 'center ' + pct + '%';
+            document.getElementById('cg-bpos-preview-' + gi).style.backgroundPosition = 'center ' + pct + '%';
+            document.getElementById('cg-bpos-val-' + gi).textContent = pct + '%';
         }
 
         function toggleClientGalleryCard(gi) {
@@ -1853,6 +1873,8 @@
                 c += "            name: '" + e(g.name) + "',\n";
                 c += "            passwordHash: '" + (g.passwordHash || '') + "',\n";
                 c += "            folder: '" + e(g.folder) + "',\n";
+                if (g.bannerImage) c += "            bannerImage: '" + e(g.bannerImage) + "',\n";
+                if (g.bannerPosition) c += "            bannerPosition: '" + e(g.bannerPosition) + "',\n";
                 c += '            start: ' + (g.start || 1) + ', end: ' + (g.end || 50) + ',\n';
                 if (g.zipFile) c += "            zipFile: '" + e(g.zipFile) + "',\n";
                 if (g.hidden) c += '            hidden: true,\n';
