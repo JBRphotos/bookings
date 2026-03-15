@@ -95,6 +95,7 @@ var siteText = {
             bannerPosition: 'center 25%',
             start: 1, end: 50,
             zipFile: 'https://drive.google.com/file/d/1eCnMvgaKHtkbo6an4gnkhw__FKTEmAe4/view?usp=drive_link',
+            paid: true,
         }
     ],
 
@@ -103,7 +104,7 @@ var siteText = {
         bannerPosition:   'center 50%',
         pageTitle:        'Client Gallery',
         pageSubtitle:     'Enter your access code to view your photos',
-        galleryLogo:      'images/logo.png',
+        galleryLogo:      'images/logo2.png',
         watermarkText:    '© Jesse Reilly Photography',
         watermarkSize:    '1.2rem',
         watermarkColor:   'rgba(255,255,255,0.4)',
